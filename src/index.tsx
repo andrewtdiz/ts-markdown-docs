@@ -15,6 +15,14 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/*": index,
 
+    "/health": {
+      async GET(req) {
+        return Response.json({
+          message: "OK",
+        });
+      },
+    },
+
     "/api/hello": {
       async GET(req) {
         return Response.json({
