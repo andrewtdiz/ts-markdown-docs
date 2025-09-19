@@ -1,43 +1,138 @@
-# Mintlify Starter Kit
+# Markdoc + Bun + React + shadcn/ui Template
 
-Use the starter kit to get your docs deployed and ready to customize.
+A modern full-stack template combining Markdoc for content authoring, Bun for fast development, React for the frontend, and shadcn/ui for beautiful components.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Features
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- **Markdoc Integration**: Parse and render Markdoc content with custom components
+- **Bun Runtime**: Fast JavaScript runtime for both server and build processes
+- **React 19**: Latest React with modern features
+- **shadcn/ui Components**: Beautiful, accessible UI components
+- **Tailwind CSS**: Utility-first CSS framework with typography plugin
+- **TypeScript**: Full TypeScript support
+- **Hot Reload**: Fast development with HMR
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Quick Start
 
-## Development
+### Install Dependencies
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
+```bash
+bun install
 ```
 
-View your local preview at `http://localhost:3000`.
+### Start Development Server
 
-## Publishing changes
+```bash
+bun dev
+```
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+The server will start at `http://localhost:3000` with hot reload enabled.
 
-## Need help?
+### Production Build
 
-### Troubleshooting
+```bash
+bun run build
+```
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+### Run Production Server
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+```bash
+bun start
+```
+
+## Project Structure
+
+```
+├── content/                 # Markdoc content files
+│   ├── welcome.md
+│   └── about.md
+├── schema/                  # Markdoc schema definitions
+│   ├── Callout.markdoc.js
+│   └── heading.markdoc.js
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # shadcn/ui components
+│   │   └── Callout.tsx     # Markdoc component
+│   ├── lib/                # Utility functions
+│   │   ├── utils.ts
+│   │   └── content-manifest.ts
+│   ├── App.tsx             # Main React app
+│   └── index.tsx           # Bun server
+└── package.json
+```
+
+## Markdoc Integration
+
+### Content Files
+
+Create `.md` files in the `content/` directory. Use Markdoc syntax with custom tags:
+
+```markdown
+# Welcome to Markdoc
+
+{% callout type="note" %}
+This is a note callout with custom styling.
+{% /callout %}
+
+{% callout type="warning" %}
+This is a warning callout.
+{% /callout %}
+```
+
+### Custom Components
+
+Add new Markdoc components by:
+
+1. Creating a schema file in `schema/`
+2. Creating a React component in `src/components/`
+3. Adding the component to the server config
+4. Registering it in the client renderer
+
+### API Endpoints
+
+- `GET /api/markdoc?path=/welcome` - Get transformed Markdoc content
+- `GET /api/hello` - Example API endpoint
+
+## Available Scripts
+
+- `bun dev` - Start development server with hot reload
+- `bun start` - Start production server
+- `bun run build` - Build for production
+- `bun run type-check` - Run TypeScript type checking
+- `bun run clean` - Clean build artifacts
+
+## Customization
+
+### Adding New Content
+
+1. Add `.md` files to the `content/` directory
+2. Update `src/lib/content-manifest.ts` to include new files
+3. Add navigation buttons in `App.tsx`
+
+### Styling
+
+The project uses Tailwind CSS with the typography plugin for prose styling. Customize styles in:
+
+- `src/index.css` - Global styles
+- `styles/globals.css` - Additional global styles
+- Component files - Component-specific styles
+
+### Adding New Markdoc Tags
+
+1. Create schema file in `schema/`
+2. Create React component
+3. Update server config in `src/index.tsx`
+4. Register component in `App.tsx`
+
+## Technologies Used
+
+- [Bun](https://bun.com) - JavaScript runtime and package manager
+- [React](https://react.dev) - UI library
+- [Markdoc](https://markdoc.dev) - Content authoring framework
+- [shadcn/ui](https://ui.shadcn.com) - UI component library
+- [Tailwind CSS](https://tailwindcss.com) - CSS framework
+- [TypeScript](https://www.typescriptlang.org) - Type safety
+
+## License
+
+MIT
