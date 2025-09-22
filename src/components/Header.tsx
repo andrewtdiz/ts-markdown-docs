@@ -37,7 +37,7 @@ export function Header({ showNavigation = true }: HeaderProps) {
                         </Button>
                     </div>
                     {showNavigation && (
-                        <div className="flex items-center space-x-4">
+                        <div className="hidden md:flex items-center space-x-4">
                             <Button
                                 variant="ghost"
                                 className='text-md text-foreground/80 font-normal'

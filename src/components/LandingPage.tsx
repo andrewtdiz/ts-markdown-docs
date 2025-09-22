@@ -45,7 +45,7 @@ export function LandingPage() {
             <Header />
 
             <div className="flex flex-col items-center max-w-7xl">
-                <div className="w-full pl-8 py-16">
+                <div className="w-full pl-2 md:pl-8 py-16">
                     <div className="grid lg:grid-cols-5 gap-6 items-center">
                         {/* Left side - Title and buttons */}
                         <div className="lg:col-span-2 space-y-8">
@@ -177,7 +177,7 @@ export function LandingPage() {
                 </div>
 
                 {/* Features Section */}
-                <div className="container mx-auto px-4 py-16">
+                <div className="container mx-auto px-0.5 md:px-4 py-16">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
                         <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
