@@ -97,15 +97,15 @@ export function LandingPage() {
                                                 <span className="text-[#DCDCAA]"> HelloWorld</span><span className="text-[#d4d4d4]">(</span><span className="text-[#d4d4d4]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#d4d4d4]">{`}`}</span><span className="text-[#569CD6]">:</span><span className="text-[#4EC9B0]"> Props</span></span><span className="text-[#d4d4d4]">)</span>
                                             <span className="text-[#d4d4d4]"> {`{`}</span>
                                             <br />
-                                            <span className="line"><span className="text-[#569CD6]">  const</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> =</span><span className="text-[#CE9178]"> "Hello from TS Markdown!"</span><span className="text-[#d4d4d4]">;</span></span>
+                                            <span className="line"><span className="text-[#569CD6]">  const</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> =</span><span className="text-[#CE9178]"> "Hello"</span><span className="text-[#d4d4d4]">;</span></span>
                                             <br />
                                             <br />
                                             <span className="line"><span className="text-[#569CD6]">  return</span><span className="text-[#d4d4d4]"> (</span></span>
                                             <br />
-                                            <span className="line text-[#d4d4d4]">    # </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span>
+                                            <span className="line font-bold text-[#569CD6]">    ## </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span><span className="font-bold text-[#569CD6]">from TS Markdown!</span>
                                             <br />
                                             <br />
-                                            <span className="line"><span className="text-[#d4d4d4]">    Render markdown with</span><span className="text-[#569CD6]">:</span></span>
+                                            <span className="line"><span className="text-[#d4d4d4]">    Render components like this:</span><span className="text-[#569CD6]">:</span></span>
                                             <br />
                                             <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
                                                 <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
@@ -128,7 +128,7 @@ export function LandingPage() {
                                                 <span className="text-[#267f99]"> HelloWorld</span><span className="text-[#333333]">(</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span><span className="text-[#0000ff]">:</span><span className="text-[#0451a5]"> Props</span></span><span className="text-[#333333]">)</span>
                                             <span className="text-[#333333]"> {`{`}</span>
                                             <br />
-                                            <span className="line"><span className="text-[#0000ff]">  const</span><span className="text-[#001080]"> greeting</span><span className="text-[#0000ff]"> =</span><span className="text-[#a31515]"> "Hello from TS Markdown!"</span><span className="text-[#333333]">;</span></span>
+                                            <span className="line"><span className="text-[#0000ff]">  const</span><span className="text-[#001080]"> greeting</span><span className="text-[#0000ff]"> =</span><span className="text-[#a31515]"> "Hello"</span><span className="text-[#333333]">;</span></span>
                                             <br />
                                             <br />
                                             <span className="line"><span className="text-[#0000ff]">  return</span><span className="text-[#333333]"> (</span></span>
@@ -136,7 +136,7 @@ export function LandingPage() {
                                             <span className="line text-[#333333]">    # </span><span className="text-[#333333]">{`{{`}</span><span className="text-[#001080]"> greeting</span><span className="text-[#333333]"> {`}} `}</span>
                                             <br />
                                             <br />
-                                            <span className="line"><span className="text-[#333333]">    Render markdown with</span><span className="text-[#0000ff]">:</span></span>
+                                            <span className="line"><span className="text-[#333333]">    Render components like this:</span><span className="text-[#0000ff]">:</span></span>
                                             <br />
                                             <span className="line"><span className="text-[#800000]">    &lt;@</span><span className="text-[#267f99]">List</span>
                                                 <span className="text-[#001080]"> items</span><span className="text-[#0000ff]">=</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span>
@@ -161,9 +161,9 @@ export function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-900 dark:text-gray-100 overflow-x-auto leading-relaxed prose prose-sm dark:prose-invert max-w-none">
-                                        <p># Hello from TS Markdown!</p>
+                                        <p>## Hello from TS Markdown!</p>
                                         <br />
-                                        <p>Render markdown with:</p>
+                                        <p>Render components like this:</p>
                                         <ul>
                                             <li>- Type-safety</li>
                                             <li>- Reusable components</li>

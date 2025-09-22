@@ -20,7 +20,6 @@ export function Header({ showNavigation = true }: HeaderProps) {
 
     const { theme, setTheme } = useTheme();
     const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
-    console.log(currentTheme);
 
     return (
         <header className="flex-shrink-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
