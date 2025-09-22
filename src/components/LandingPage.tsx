@@ -12,12 +12,12 @@ export function LandingPage() {
         {
             icon: Zap,
             title: "Dynamic Content",
-            description: "Create dynamic, interactive content with template interpolation and conditional rendering."
+            description: "Create dynamic content with variable interpolation and conditional rendering."
         },
         {
             icon: FileText,
             title: "Markdown Made Better",
-            description: "Enhances markdown generation with better syntax and seamless integration."
+            description: "Syntax highlighting for a premier development experience."
         },
         {
             icon: Component,
