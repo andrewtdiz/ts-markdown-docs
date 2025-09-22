@@ -13,28 +13,9 @@ export function PageActions({ title, description, content, frontmatter }: PageAc
     const [copied, setCopied] = useState(false);
 
     const generateMarkdown = () => {
-        // Create a clean markdown version of the content
-        const frontmatterLines = ['---'];
-        frontmatterLines.push(`title: ${title}`);
+        const frontmatterLines = [];
+        frontmatterLines.push(`# ${title}`);
         frontmatterLines.push(`description: ${description}`);
-
-        if (frontmatter.date) {
-            frontmatterLines.push(`date: ${frontmatter.date}`);
-        }
-        if (frontmatter.author) {
-            frontmatterLines.push(`author: ${frontmatter.author}`);
-        }
-        if (frontmatter.tags && Array.isArray(frontmatter.tags)) {
-            frontmatterLines.push(`tags: [${frontmatter.tags.join(', ')}]`);
-        }
-        if (frontmatter.version) {
-            frontmatterLines.push(`version: ${frontmatter.version}`);
-        }
-        if (frontmatter.published !== undefined) {
-            frontmatterLines.push(`published: ${frontmatter.published}`);
-        }
-
-        frontmatterLines.push('---');
         frontmatterLines.push('');
         frontmatterLines.push(`# ${title}`);
         frontmatterLines.push('');
