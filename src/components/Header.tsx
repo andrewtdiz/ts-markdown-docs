@@ -18,7 +18,9 @@ interface HeaderProps {
 export function Header({ showNavigation = true }: HeaderProps) {
     const navigate = useNavigate();
 
-    const themeToggle = useTheme();
+    const { theme, setTheme } = useTheme();
+    const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
+    console.log(currentTheme);
 
     return (
         <header className="flex-shrink-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -53,9 +55,9 @@ export function Header({ showNavigation = true }: HeaderProps) {
                             <Button
                                 variant="ghost"
                                 className='text-lg rounded-full text-foreground/80 font-normal h-10 w-10'
-                                onClick={() => themeToggle.setTheme(themeToggle.theme === 'dark' ? 'light' : 'dark')}
+                                onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
                             >
-                                {themeToggle.theme === 'dark' ? <SunIcon className='w-6! h-6!' /> : <MoonIcon className='w-6! h-6!' />}
+                                {currentTheme === 'dark' ? <SunIcon className='w-6! h-6!' /> : <MoonIcon className='w-6! h-6!' />}
                             </Button>
                             <Button
                                 variant="ghost"
