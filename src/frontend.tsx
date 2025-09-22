@@ -13,7 +13,7 @@ import { initializeContentCache } from "./lib/content-loader";
 // Initialize content cache before rendering the app
 async function initializeApp() {
   try {
-    await initializeContentCache();
+    initializeContentCache();
   } catch (error) {
     console.error('Failed to initialize content cache:', error);
   }
