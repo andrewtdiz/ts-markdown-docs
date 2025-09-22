@@ -72,7 +72,7 @@ export function LandingPage() {
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold mb-4">Why TS Markdown?</h2>
                         <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            What if writing markdown felt more like TypeScript? <br />
+                            What if making dynamic markdown felt more like writing Typescript, <br />
                         </p>
                         <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
                             And less like <code>f"""</code>, <code>$&#123;&#125;</code>, and <code>"\n\n"</code>?
