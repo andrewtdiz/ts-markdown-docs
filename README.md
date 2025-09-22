@@ -70,13 +70,9 @@ Create `.md` files in the `content/` directory. Use Markdoc syntax with custom t
 ```markdown
 # Welcome to Markdoc
 
-{% callout type="note" %}
 This is a note callout with custom styling.
-{% /callout %}
 
-{% callout type="warning" %}
 This is a warning callout.
-{% /callout %}
 ```
 
 ### Custom Components

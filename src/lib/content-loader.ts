@@ -1,12 +1,15 @@
 import about from "../content/about.ts";
-import componentExamples from "../content/component-examples.ts";
 import firstTsm from "../content/first-tsm.ts";
-import frontmatterExamples from "../content/frontmatter-examples.ts";
 import installation from "../content/installation.ts";
 import overview from "../content/overview.ts";
 import quickStart from "../content/quick-start.ts";
-import testMarkdocRendering from "../content/test-markdoc-rendering.ts";
 import welcome from "../content/welcome.ts";
+import markdownBlocks from "../content/markdown-blocks.ts";
+import dynamicContent from "../content/dynamic-content.ts";
+import conditionalRendering from "../content/conditional-rendering.ts";
+import syntaxGuide from "../content/syntax-guide.ts";
+import bestPractices from "../content/best-practices.ts";
+import components from "../content/components.ts";
 import * as yaml from 'js-yaml';
 
 export interface ContentData {
@@ -17,13 +20,16 @@ export interface ContentData {
 const contentMap: Record<string, string> = {
     '/welcome': welcome,
     '/about': about,
-    '/component-examples': componentExamples,
     '/first-tsm': firstTsm,
-    '/frontmatter-examples': frontmatterExamples,
     '/installation': installation,
     '/overview': overview,
     '/quick-start': quickStart,
-    '/test-markdoc-rendering': testMarkdocRendering
+    '/markdown-blocks': markdownBlocks,
+    '/dynamic-content': dynamicContent,
+    '/conditional-rendering': conditionalRendering,
+    '/syntax-guide': syntaxGuide,
+    '/best-practices': bestPractices,
+    '/components': components,
 };
 
 function parseFrontmatter(content: string): { content: string; frontmatter: any } {

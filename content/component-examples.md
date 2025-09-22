@@ -1,182 +1,532 @@
 # Component Examples
 
-This page demonstrates all the available markdown components with TailwindCSS and shadcn/ui styling.
+This page demonstrates TS Markdown components with practical examples that save you time by keeping everything in TypeScript.
 
-## Basic Text Elements
+## Basic Components
 
-This is a regular paragraph with some **bold text** and *italic text*. You can also use `inline code` for technical terms.
-
-### Blockquotes
-
-> This is a blockquote with some important information. It has a nice left border and italic styling.
-
-### Code Blocks
+### Alert Components
 
 ```typescript
-// Example TypeScript code
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+// Define alert component
+function Alert({ type, title, children }: {
+  type: 'info' | 'warning' | 'error' | 'success';
+  title: string;
+  children: any;
+}) {
+  const colors = {
+    info: '#e3f2fd',
+    warning: '#fff3e0',
+    error: '#ffebee',
+    success: '#e8f5e8'
+  }
 
-const user: User = {
-  id: "1",
-  name: "John Doe",
-  email: "john@example.com"
-};
-```
-
-## Lists
-
-### Unordered List
-- First item
-- Second item with **bold text**
-- Third item with `inline code`
-  - Nested item
-  - Another nested item
-
-### Ordered List
-1. First step
-2. Second step with a [link](https://example.com)
-3. Third step
-   1. Sub-step A
-   2. Sub-step B
-
-## Tables
-
-| Component | Type | Description |
-|-----------|------|-------------|
-| Button | Interactive | Primary action component |
-| Card | Layout | Container for related content |
-| Badge | Display | Small status or label indicator |
-| Alert | Feedback | Important message display |
-
-## Custom Components
-
-### Enhanced Callouts
-
-<EnhancedCallout type="tip" title="Pro Tip">
-This is an enhanced callout with an icon and better styling. It's perfect for highlighting important information.
-</EnhancedCallout>
-
-<EnhancedCallout type="warning">
-Always remember to test your components before deploying to production.
-</EnhancedCallout>
-
-<EnhancedCallout type="check" title="Success!">
-Your setup is complete and ready to use.
-</EnhancedCallout>
-
-### Feature Cards
-
-<FeatureCard 
-  title="Type Safety" 
-  description="Built with TypeScript for better development experience"
-  badge="New"
->
-This card demonstrates how to showcase features with icons and badges.
-</FeatureCard>
-
-### Code Examples
-
-<CodeExample 
-  title="React Component"
-  description="A simple React component example"
-  language="tsx"
->
-```tsx
-import React from 'react';
-import { Button } from '@/components/ui/button';
-
-export function MyComponent() {
   return (
-    <Button onClick={() => console.log('Clicked!')}>
-      Click me
-    </Button>
-  );
+    <div style="border-left: 4px solid {{ colors[type] }}; padding: 16px; background: {{ colors[type] }}20; margin: 16px 0;">
+      ## {{ title }}
+
+      {{ children }}
+    </div>
+  )
+}
+
+// Use the component
+function page() {
+  return (
+    # Component Examples
+
+    <@Alert type="info" title="Information">
+      This is an informational alert with important details.
+    </@Alert>
+
+    <@Alert type="success" title="Success!">
+      Your setup is complete and ready to use.
+    </@Alert>
+
+    <@Alert type="warning" title="Warning">
+      Always backup your data before making major changes.
+    </@Alert>
+
+    <@Alert type="error" title="Error">
+      Something went wrong. Please check your configuration.
+    </@Alert>
+  )
 }
 ```
-</CodeExample>
 
-### Action Cards
+### Card Components
 
-<ActionCard
-  title="Get Started"
-  description="Begin building your documentation site with our comprehensive components"
-  action={{
-    label: "View Documentation",
-    href: "/quick-start",
-    icon: "📚"
-  }}
-/>
+```typescript
+function Card({ title, children }: { title: string; children: any }) {
+  return (
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 16px 0; background: white;">
+      ## {{ title }}
 
-### Steps
+      {{ children }}
+    </div>
+  )
+}
 
-<Step number={1} title="Install Dependencies">
-Run the following command to install all required dependencies:
+function FeatureCard({ feature }: { feature: { name: string; description: string; icon: string } }) {
+  return (
+    <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin: 12px 0;">
+      ### {{ feature.icon }} {{ feature.name }}
 
-```bash
-bun install
+      {{ feature.description }}
+    </div>
+  )
+}
+
+function layout() {
+  return (
+    # Features
+
+    <@Card title="Getting Started">
+      Welcome to TS Markdown! Here's how to get started:
+      - Install the package
+      - Create your first template
+      - Start building
+    </@Card>
+
+    <@FeatureCard feature={{
+      name: "Type Safety",
+      description: "Built with TypeScript for better development experience",
+      icon: "🔒"
+    }} />
+
+    <@FeatureCard feature={{
+      name: "Dynamic Content",
+      description: "Insert variables and logic directly in your markdown",
+      icon: "⚡"
+    }} />
+  )
+}
 ```
-</Step>
 
-<Step number={2} title="Configure Components">
-Import the markdown components in your layout file:
+## Interactive Components
 
-```tsx
-import markdownComponents from './components/markdown';
+### Button Components
+
+```typescript
+function Button({ label, onClick, variant }: {
+  label: string;
+  onClick: string;
+  variant?: 'primary' | 'secondary';
+}) {
+  const colors = {
+    primary: '#007bff',
+    secondary: '#6c757d'
+  }
+
+  return (
+    <button
+      style="background: {{ colors[variant || 'primary'] }}; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 4px;"
+      onClick="{{ onClick }}"
+    >
+      {{ label }}
+    </button>
+  )
+}
+
+function toolbar() {
+  return (
+    # Actions
+
+    <@Button label="Save" onClick="handleSave()" variant="primary" />
+    <@Button label="Cancel" onClick="handleCancel()" variant="secondary" />
+    <@Button label="Delete" onClick="handleDelete()" />
+  )
+}
 ```
-</Step>
 
-<Step number={3} title="Start Development">
-Start the development server:
+### Form Components
 
-```bash
-bun run dev
+```typescript
+function Input({ label, type, value, onChange }: {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: string;
+}) {
+  return (
+    <div style="margin: 12px 0;">
+      <label style="display: block; margin-bottom: 4px; font-weight: bold;">
+        {{ label }}
+      </label>
+      <input
+        type="{{ type || 'text' }}"
+        value="{{ value }}"
+        onChange="{{ onChange }}"
+        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
+      />
+    </div>
+  )
+}
+
+function contactForm() {
+  return (
+    # Contact Form
+
+    <@Input label="Name" value={formData.name} onChange="updateName()" />
+    <@Input label="Email" type="email" value={formData.email} onChange="updateEmail()" />
+    <@Input label="Message" value={formData.message} onChange="updateMessage()" />
+
+    <div style="margin-top: 16px;">
+      <@Button label="Submit" onClick="handleSubmit()" variant="primary" />
+      <@Button label="Cancel" onClick="handleCancel()" variant="secondary" />
+    </div>
+  )
+}
 ```
-</Step>
 
-## Alerts
+## Data Display Components
 
-<Alert>
-<AlertTitle>Information</AlertTitle>
-This is a standard alert component with title and description.
-</Alert>
+### Badge Components
 
-<Alert variant="destructive">
-<AlertTitle>Error</AlertTitle>
-Something went wrong. Please check your configuration and try again.
-</Alert>
+```typescript
+function Badge({ children, variant }: { children: any; variant?: 'default' | 'secondary' | 'outline' }) {
+  const styles = {
+    default: 'background: #007bff; color: white;',
+    secondary: 'background: #6c757d; color: white;',
+    outline: 'background: transparent; border: 1px solid #007bff; color: #007bff;'
+  }
 
-## Info Cards
+  return (
+    <span style="display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin: 2px; {{ styles[variant || 'default'] }}">
+      {{ children }}
+    </span>
+  )
+}
 
-<InfoCard title="Did you know?">
-This info card provides additional context or helpful tips to your readers.
-</InfoCard>
+function statusDisplay() {
+  return (
+    # Status
 
-<WarningCard title="Important">
-Always backup your data before making major changes.
-</WarningCard>
+    User status: <@Badge variant="default">Active</@Badge>
+    Plan: <@Badge variant="secondary">Premium</@Badge>
+    Tags: <@Badge variant="outline">New</@Badge> <@Badge variant="outline">Featured</@Badge>
+  )
+}
+```
 
-<ErrorCard title="Caution">
-This action cannot be undone. Please proceed with caution.
-</ErrorCard>
+### Table Components
 
-<SuccessCard title="Great job!">
-You've successfully completed the setup process.
-</SuccessCard>
+```typescript
+function Table({ headers, rows }: { headers: string[]; rows: any[] }) {
+  return (
+    | {{ headers.join(' | ') }} |
+    | {{ headers.map(() => '---').join(' | ') }} |
+    {{ rows.map(row => (
+      | {{ headers.map(header => row[header] || '').join(' | ') }} |
+    )) }}
+  )
+}
 
-## Badges
+function userTable(users: User[]) {
+  return (
+    # Users
 
-Here are some inline badges: <Badge>Default</Badge> <Badge variant="secondary">Secondary</Badge> <Badge variant="outline">Outline</Badge> <Badge variant="destructive">Destructive</Badge>
+    <@Table
+      headers={['Name', 'Email', 'Status', 'Role']}
+      rows={users.map(user => ({
+        Name: user.name,
+        Email: user.email,
+        Status: user.isActive ? 'Active' : 'Inactive',
+        Role: user.role
+      }))}
+    />
+  )
+}
+```
 
-## Horizontal Rule
+## Layout Components
 
----
+### Grid Components
 
-This content appears after a horizontal rule separator.
+```typescript
+function Grid({ columns, children }: { columns: number; children: any }) {
+  return (
+    <div style="display: grid; grid-template-columns: repeat({{ columns }}, 1fr); gap: 20px; margin: 20px 0;">
+      {{ children }}
+    </div>
+  )
+}
 
-## Conclusion
+function dashboard() {
+  return (
+    # Dashboard
 
-These components provide a comprehensive set of tools for creating rich, interactive documentation with beautiful styling powered by TailwindCSS and shadcn/ui components.
+    <@Grid columns={3}>
+      <@Card title="Users">
+        1,234 active users
+      </@Card>
+
+      <@Card title="Revenue">
+        $12,345 this month
+      </@Card>
+
+      <@Card title="Growth">
+        +15% from last month
+      </@Card>
+    </@Grid>
+  )
+}
+```
+
+### Tabs Components
+
+```typescript
+function Tabs({ tabs, activeTab, onTabChange }: {
+  tabs: Array<{ id: string; label: string; content: any }>;
+  activeTab: string;
+  onTabChange: (id: string) => void;
+}) {
+  return (
+    <div>
+      <div style="display: flex; border-bottom: 1px solid #ddd; margin-bottom: 16px;">
+        {{ tabs.map(tab => (
+          <button
+            style="padding: 8px 16px; border: none; background: {{ activeTab === tab.id ? '#007bff' : 'transparent' }}; color: {{ activeTab === tab.id ? 'white' : '#333' }}; cursor: pointer;"
+            onClick={() => onTabChange(tab.id)}
+          >
+            {{ tab.label }}
+          </button>
+        )) }}
+      </div>
+
+      {{ tabs.find(tab => tab.id === activeTab)?.content }}
+    </div>
+  )
+}
+
+function settingsPage() {
+  return (
+    # Settings
+
+    <@Tabs
+      activeTab="profile"
+      onTabChange={(id) => console.log('Tab changed to:', id)}
+      tabs={[
+        {
+          id: 'profile',
+          label: 'Profile',
+          content: 'Profile settings content...'
+        },
+        {
+          id: 'security',
+          label: 'Security',
+          content: 'Security settings content...'
+        },
+        {
+          id: 'billing',
+          label: 'Billing',
+          content: 'Billing settings content...'
+        }
+      ]}
+    />
+  )
+}
+```
+
+## Advanced Components
+
+### Modal Components
+
+```typescript
+function Modal({ isOpen, title, children, onClose }: {
+  isOpen: boolean;
+  title: string;
+  children: any;
+  onClose: string;
+}) {
+  return (
+    {{ isOpen ? (
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 20px; border-radius: 8px; max-width: 500px; width: 90%;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            ## {{ title }}
+
+            <button style="background: none; border: none; font-size: 20px; cursor: pointer;" onClick="{{ onClose }}">
+              ×
+            </button>
+          </div>
+
+          {{ children }}
+        </div>
+      </div>
+    ) : null }}
+  )
+}
+
+function confirmDialog() {
+  return (
+    # Confirm Action
+
+    <button onClick={() => setShowModal(true)}>
+      Delete Account
+    </button>
+
+    <@Modal
+      isOpen={showModal}
+      title="Confirm Deletion"
+      onClose={() => setShowModal(false)}
+    >
+      Are you sure you want to delete your account? This action cannot be undone.
+
+      <div style="margin-top: 16px; display: flex; gap: 12px;">
+        <@Button label="Cancel" onClick={() => setShowModal(false)} variant="secondary" />
+        <@Button label="Delete" onClick="handleDelete()" variant="primary" />
+      </div>
+    </@Modal>
+  )
+}
+```
+
+### Chart Components
+
+```typescript
+function Chart({ data, type }: { data: any[]; type: 'bar' | 'line' | 'pie' }) {
+  return (
+    <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px; margin: 16px 0;">
+      ## {{ type === 'bar' ? '📊' : type === 'line' ? '📈' : '🥧' }} {{ type.charAt(0).toUpperCase() + type.slice(1) }} Chart
+
+      {{ type === 'bar' ? (
+        <div style="display: flex; align-items: end; height: 200px; padding: 16px;">
+          {{ data.map((item, index) => (
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; margin: 0 4px;">
+              <div style="background: #007bff; width: 20px; height: {{ (item.value / Math.max(...data.map(d => d.value))) * 150 }}px; margin-bottom: 8px;"></div>
+              <span style="font-size: 12px;">{{ item.label }}</span>
+            </div>
+          )) }}
+        </div>
+      ) : (
+        <div style="padding: 20px; text-align: center; color: #666;">
+          Chart visualization for {{ type }} type
+        </div>
+      ) }}
+    </div>
+  )
+}
+
+function analytics() {
+  return (
+    # Analytics
+
+    <@Chart
+      type="bar"
+      data={[
+        { label: 'Jan', value: 100 },
+        { label: 'Feb', value: 150 },
+        { label: 'Mar', value: 200 },
+        { label: 'Apr', value: 175 }
+      ]}
+    />
+
+    <@Chart
+      type="line"
+      data={[
+        { label: 'Week 1', value: 80 },
+        { label: 'Week 2', value: 120 },
+        { label: 'Week 3', value: 100 },
+        { label: 'Week 4', value: 140 }
+      ]}
+    />
+  )
+}
+```
+
+## Component Composition
+
+```typescript
+function Header({ user }: { user: User }) {
+  return (
+    <div style="background: #f8f9fa; padding: 20px; border-bottom: 1px solid #ddd;">
+      # Welcome {{ user.name }}!
+
+      <div style="float: right;">
+        <@UserMenu user={user} />
+      </div>
+    </div>
+  )
+}
+
+function UserMenu({ user }: { user: User }) {
+  return (
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <@Badge variant="outline">{{ user.role }}</@Badge>
+      <@Button label="Profile" onClick="showProfile()" variant="secondary" />
+      <@Button label="Logout" onClick="handleLogout()" variant="primary" />
+    </div>
+  )
+}
+
+function pageLayout(user: User, content: any) {
+  return (
+    <@Header user={user} />
+
+    <div style="padding: 20px;">
+      {{ content }}
+    </div>
+
+    <div style="background: #f8f9fa; padding: 16px; text-align: center; border-top: 1px solid #ddd;">
+      © {{ new Date().getFullYear() }} MyApp
+    </div>
+  )
+}
+```
+
+## Performance Tips
+
+### Compile Components Once
+
+```typescript
+// Good - compile once
+const parser = new TSMParser()
+const compiledCard = compileTSM(parser.parse(Card.toString()))
+
+function renderCards(items: Item[]) {
+  return (
+    # Items
+
+    {{ items.map(item => (
+      {{ executeTSMTemplate(compiledCard, { title: item.name, children: item.description }) }}
+    )) }}
+  )
+}
+
+// Avoid - compiling every time
+function badRenderCards(items: Item[]) {
+  return (
+    # Items
+
+    {{ items.map(item => (
+      <@Card title={item.name}>
+        {{ item.description }}
+      </@Card>
+    )) }}
+  )
+}
+```
+
+### Lazy Loading
+
+```typescript
+function LazyComponent({ name, data }: { name: string; data: any }) {
+  const component = loadComponent(name)
+
+  return (
+    <@DynamicComponent component={component} data={data} />
+  )
+}
+```
+
+## Summary
+
+Components in TS Markdown let you:
+
+- **Create reusable UI elements** with the `<@ComponentName />` syntax
+- **Pass props** using standard JavaScript object syntax
+- **Compose complex layouts** by nesting components
+- **Handle interactivity** with event handlers
+- **Maintain type safety** with TypeScript interfaces
+
+**Pro Tip**: Start with simple components and gradually build more complex ones. This approach keeps your code maintainable and your content consistent.

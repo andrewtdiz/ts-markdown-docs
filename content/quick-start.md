@@ -6,254 +6,188 @@ author: TS Markdown Team
 tags: [quick-start, tutorial, getting-started]
 ---
 
-## 5-Minute Setup
+Get started with TS Markdown in 3 simple steps.
 
-### Step 1: Create a New Project
+## Step 1: Create Your First TSM File
 
-```bash
-mkdir my-ts-markdown-app
-cd my-ts-markdown-app
-bun init -y
-```
-
-### Step 2: Install TS Markdown
-
-```bash
-bun add tsm
-```
-
-### Step 3: Create Your First File
-
-Create `index.tsd`:
+Create a file called `welcome.tsm.ts`:
 
 ```typescript
-import { TSMParser, compileTSM, executeTSMTemplate } from 'tsm'
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+// welcome.tsm.ts
+import { getUser } from './api.js'
 
-// Your dynamic content template
-const template = `
-# Welcome to TS Markdown!
+async function WelcomeMessage(userId: string) {
+  const user = await getUser(userId)
 
-Hello {name}! Today is {currentDate}.
+  return (
+    # Welcome {{ user.isNew ? 'back' : 'aboard' }}, {{ user.name }}! 👋
 
-## Your Profile
-- **Name**: {user.name}
-- **Email**: {user.email}
-- **Status**: {user.isActive ? 'Active' : 'Inactive'}
+    {{ user.isNew ? (
+      Thanks for joining us! Let's get you started:
+    ) : (
+      Great to see you again! Here's what's new:
+    ) }}
 
-## Quick Actions
-{user.isActive ? (
-  <div>
-    <button onClick={() => alert('Hello {user.name}!')}>
-      Say Hello
-    </button>
-    <button onClick={() => console.log('User clicked!')}>
-      Log Action
-    </button>
-  </div>
-) : (
-  <p>Please activate your account to see actions.</p>
-)}
-`
+    - Check out our latest features
+    - Update your profile settings
+    {{ user.isNew ? '- Complete your onboarding' : '- Review recent changes' }}
 
-// Sample data
-const data = {
-  name: 'Developer',
-  currentDate: new Date().toLocaleDateString(),
-  user: {
-    name: 'John Doe',
-    email: 'john@example.com',
-    isActive: true
-  }
+    <@UserStatus user={user} />
+  )
 }
 
-// Parse and compile
-const parser = new MDXParser()
-const parsed = parser.parse(template)
-const compiled = compileMDX(parsed)
-
-// Execute with data
-const result = executeMDXTemplate(compiled, data)
-
-// Render to DOM
-const container = document.getElementById('root')
-const root = createRoot(container!)
-root.render(<div>{result}</div>)
+export default WelcomeMessage
 ```
 
-### Step 4: Create HTML Template
+## Step 2: Transpile Your Code
 
+Run the TSMD transpiler:
 
 ```bash
-bun run --bun index.tsx
+bun run tsmd welcome.tsm.ts
 ```
 
-🎉 **Congratulations!** You've created your first Better-MDX application!
+This creates `welcome.ts` that produces markdown strings:
 
-## Understanding the Code
+```typescript
+// welcome.ts (generated)
+import { getUser } from './api.js'
+import { UserStatus } from './UserStatus.js'
 
-Let's break down what happened:
+async function WelcomeMessage(userId: string): Promise<string> {
+  const user = await getUser(userId)
 
-### Template Interpolation
+  return __tsm([
+    "# Welcome ", (user.isNew ? "back" : "aboard"), ", ", user.name, "! 👋\n",
+    (user.isNew ? __tsm([
+      "Thanks for joining us! Let's get you started:\n"
+    ]) : __tsm([
+      "Great to see you again! Here's what's new:\n"
+    ])),
+    "- Check out our latest features\n",
+    "- Update your profile settings\n",
+    (user.isNew ? "- Complete your onboarding\n" : "- Review recent changes\n"),
+    await UserStatus({ user })
+  ])
+}
 
-```jsx
-Hello {name}! Today is {currentDate}.
+export default WelcomeMessage
 ```
 
-This creates dynamic text that changes based on your data.
+## Step 3: Use Your Generated Function
+
+Now use it like any TypeScript function:
+
+```typescript
+// app.ts
+import WelcomeMessage from './welcome.js'
+
+const markdown = await WelcomeMessage('user123')
+console.log(markdown)
+
+// Output:
+// # Welcome back, Alice! 👋
+// Great to see you again! Here's what's new:
+// - Check out our latest features
+// - Update your profile settings
+// - Review recent changes
+// [User status rendered by UserStatus component]
+```
+
+## Core Syntax
+
+### Dynamic Content
+
+```typescript
+function UserProfile(user: User) {
+  return (
+    # {{ user.name }}'s Profile
+    **Role:** {{ user.role }}
+    **Location:** {{ user.city }}, {{ user.country }}
+  )
+}
+```
 
 ### Conditional Rendering
 
-```jsx
-{user.isActive ? (
-  <div>Active user content</div>
-) : (
-  <p>Inactive user content</p>
-)}
-```
-
-This shows different content based on conditions.
-
-### Interactive Components
-
-```jsx
-<button onClick={() => alert('Hello {user.name}!')}>
-  Say Hello
-</button>
-```
-
-This creates interactive buttons that respond to user clicks.
-
-## Next Steps
-
-Now that you have a working example, try these enhancements:
-
-### 1. Add More Data
-
 ```typescript
-const data = {
-  name: 'Developer',
-  currentDate: new Date().toLocaleDateString(),
-  user: {
-    name: 'John Doe',
-    email: 'john@example.com',
-    isActive: true,
-    preferences: {
-      theme: 'dark',
-      language: 'en'
-    }
-  },
-  todos: [
-    { id: 1, text: 'Learn Better-MDX', completed: true },
-    { id: 2, text: 'Build something cool', completed: false }
-  ]
+function StatusMessage(user: User) {
+  return (
+    {{ user.isActive ? (
+      You're all set! ✅
+    ) : (
+      Please activate your account first.
+    ) }}
+  )
 }
 ```
 
-### 2. Create Dynamic Lists
-
-```jsx
-## Your Todos
-{todos.map(todo => (
-  <div key={todo.id} style={{
-    textDecoration: todo.completed ? 'line-through' : 'none'
-  }}>
-    {todo.completed ? '✅' : '⭕'} {todo.text}
-  </div>
-))}
-```
-
-### 3. Add Styling
-
-```jsx
-<div style={{
-  padding: '20px',
-  border: '1px solid #ccc',
-  borderRadius: '8px',
-  backgroundColor: user.preferences.theme === 'dark' ? '#333' : '#fff',
-  color: user.preferences.theme === 'dark' ? '#fff' : '#333'
-}}>
-  <h2>Styled Content</h2>
-  <p>This content adapts to user preferences!</p>
-</div>
-```
-
-## Common Patterns
-
-### Data Fetching
+### Components
 
 ```typescript
-// Fetch data from an API
-const fetchUserData = async () => {
-  const response = await fetch('/api/user')
-  return response.json()
+function Dashboard(data: Data) {
+  return (
+    <@UserProfile user={data.user} />
+    <@RecentActivity items={data.activity} />
+  )
 }
+```
 
-// Use in your template
-const userData = await fetchUserData()
-const result = executeMDXTemplate(compiled, userData)
+## Simple Examples
+
+### Basic Template
+
+```typescript
+function Hello(name: string) {
+  return (
+    # Hello {{ name }}!
+    How are you today?
+  )
+}
+```
+
+### With Data
+
+```typescript
+function Report(user: User, posts: Post[]) {
+  return (
+    # Report for {{ user.name }}
+
+    **Posts:** {{ posts.length }}
+    **Last Active:** {{ user.lastActive }}
+
+    {{ posts.length > 0 ? (
+      ## Recent Posts:
+      {{ posts.slice(0, 5).map(post => (
+        - {{ post.title }} ({{ post.date }})
+      )) }}
+    ) : (
+      No posts yet.
+    ) }}
+  )
+}
 ```
 
 ### Error Handling
 
 ```typescript
-try {
-  const result = executeMDXTemplate(compiled, data)
-  return result
-} catch (error) {
-  console.error('Template execution failed:', error)
-  return <div>Error: {error.message}</div>
+function SafeTemplate(data: Data | null) {
+  return (
+    {{ data ? (
+      # Welcome {{ data.user.name }}!
+      Content based on data...
+    ) : (
+      # Error
+      Unable to load user data. Please try again.
+    ) }}
+  )
 }
 ```
 
-### Loading States
+## Next Steps
 
-```jsx
-{isLoading ? (
-  <div>Loading...</div>
-) : (
-  <div>
-    <h1>Welcome, {user.name}!</h1>
-    <p>Your data is ready.</p>
-  </div>
-)}
-```
+1. **[Syntax Guide](syntax-guide)** - Learn all TSMD features
+2. **[Components](components)** - Create reusable components
+3. **[Best Practices](best-practices)** - Write clean TSM code
 
-## What You've Learned
-
-✅ **Template Interpolation**: Using `{variable}` syntax  
-✅ **Conditional Rendering**: Using ternary operators  
-✅ **Interactive Components**: Adding click handlers  
-✅ **Data Integration**: Passing data to templates  
-✅ **Basic Setup**: Getting Better-MDX running  
-
-## Ready for More?
-
-Now that you understand the basics, you're ready to:
-
-1. **Create Your First File** - Build a complete application
-2. **Explore Syntax** - Learn advanced features
-3. **Build Real Projects** - Apply Better-MDX to your use cases
-
-{% callout type="check" %}
-**Quick Start Complete!** You now have a working Better-MDX application and understand the core concepts.
-{% /callout %}
-
-## Troubleshooting
-
-### Common Issues
-
-**Template not updating?**
-- Make sure you're passing fresh data to `executeMDXTemplate`
-- Check that your data structure matches what the template expects
-
-**Components not rendering?**
-- Ensure React is properly imported
-- Check that your JSX syntax is correct
-
-**Build errors?**
-- Verify all dependencies are installed
-- Check your TypeScript configuration
-
-Need help? Check out our [troubleshooting guide](/troubleshooting) or join our [community Discord](https://discord.gg/better-mdx).
+**Quick Start Complete!** You can now write markdown in TypeScript functions.

@@ -1,60 +1,76 @@
 ---
 title: What is TS Markdown?
-description: 
+description: Write markdown directly in TypeScript with type safety and dynamic content
 date: 2024-01-15
-author: TypeScript Markdown Team
+author: TS Markdown Team
 tags: [overview, introduction, typescript, markdown, beginner]
 ---
 
-TS Markdown is a file format and runtime for writing type-safe, component-based markdown.
+TS Markdown (TSM) lets you write **markdown directly in TypeScript** without complex template systems or string concatenation. It saves you time by allowing you to embed markdown blocks right in your TypeScript functions, with full type safety and dynamic content interpolation.
 
-Instead of writing messy string concatenation or template literals, write **Reusable**, **type-safe** React-style markdown components.
+Instead of juggling template strings, JSX, or separate markdown files, write your documentation, emails, reports, and content directly in your TypeScript code using familiar markdown syntax with powerful dynamic features.
 
-The output is clean Markdown, but writing it feels like JSX.
+## Why TS Markdown?
 
-### Example:
+- **Saves Time**: Write markdown content directly in TypeScript
+- **Type Safe**: Full TypeScript integration with autocomplete
+- **Dynamic Content**: Insert variables, conditionally render sections, and use components
+- **No Build Step**: Works at runtime, perfect for dynamic content generation, APIs, and backend services.
+
+## Basic Example
 
 ```typescript
-function UserProfile({ user }: UserProfileProps) {
-  const { name, role, yearsOfExperience, skills } = user;
-
+function Profile(user: User) {
   return (
-    # {{ name }}'s Profile
+    # {{ user.name }}'s Profile
 
-    **Role:** {{ role }}
-    **Experience:** {{ yearsOfExperience }} years
+    <@ProfileDetailView user={user} />
 
-    **Top Skills:**
-    {{ skills.map(skill => (
-      - {{skill}}
+    **Skills:**
+    {{ user.skills.map(skill => (
+      - {{ skill }}
     ))}}
   )
 }
 ```
 
-### Generated markdown:
+This generates clean markdown like:
 
 ```md
 # Alice's Profile
 
 **Role:** Senior Developer
 **Experience:** 8 years
+**Status:** Active ✅
 
-**Top Skills:**
+**Skills:**
 - React
-- Typescript
-- Bun
+- TypeScript
+- Node.js
 ```
 
-Since there's no render cycle, components are just pure functions.
+## Key Features
 
-TS Markdown also includes a complete toolkit with a component parser, type system, runtime engine, and Markdown generator, all designed to make your development experience faster, and more intuitive than dealing with strings.
+- **Markdown Blocks**: Write multi-line markdown directly in TypeScript with `return ( ... )`
+- **Dynamic Interpolation**: Use `{{ variable }}` for dynamic content
+- **Conditional Rendering**: `{{ condition ? (content) : (alternative) }}`
+- **Component Integration**: `<@ComponentName props={...} />` for reusable components
+- **Type Safety**: Full TypeScript integration with autocomplete and error checking
 
-Get started with one of the quick links below, or read on to learn more about TS Markdown.
+## Use Cases
 
-**Quick Start:**
-- [Install TypeScript Markdown](installation)
-- [Create your first component](quick-start)
-- [Use a project template](first-tsm)
-- [Build dynamic content](component-examples)
-- [Structure complex documents](frontmatter-examples)
+TS Markdown can be used for for:
+- **LLM API calls** with dynamic content
+- **MCP Servers** 
+- **Tool call responses**
+- **llms.txt** formatting
+
+## Quick Start
+
+Get up and running in minutes:
+
+1. [Install TS Markdown](installation)
+2. [Quick Start Guide](quick-start)
+3. [Build your first component](markdown-blocks)
+
+Start writing markdown in TypeScript today - it's faster, cleaner, and more maintainable than traditional approaches!

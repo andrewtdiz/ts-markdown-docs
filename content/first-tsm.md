@@ -6,40 +6,18 @@ author: TS Markdown Team
 tags: [tutorial, first-file, complete-example]
 ---
 
-## Project Structure
+Let's build a complete TS Markdown application that demonstrates all the core features: dynamic content, conditional rendering, components, and real-time updates.
 
-First, let's set up our project structure:
-
-```
-my-dashboard/
-├── src/
-│   ├── components/
-│   │   ├── Dashboard.tsx
-│   │   ├── UserCard.tsx
-│   │   └── TodoList.tsx
-│   ├── templates/
-│   │   └── dashboard.tsm
-│   ├── data/
-│   │   └── sample-data.ts
-│   └── index.tsx
-├── index.html
-├── package.json
-└── tsconfig.json
-```
-
-## Step 1: Project Setup
-
-Create your project:
+## Project Setup
 
 ```bash
-mkdir my-dashboard
-cd my-dashboard
+mkdir my-tsm-dashboard
+cd my-tsm-dashboard
 bun init -y
-bun add tsm react react-dom
-bun add -D @types/react @types/react-dom typescript
+bun add tsm
 ```
 
-## Step 2: Create Sample Data
+## Sample Data
 
 Create `src/data/sample-data.ts`:
 
@@ -130,333 +108,175 @@ export const sampleData: DashboardData = {
 }
 ```
 
-## Step 3: Create React Components
-
-Create `src/components/UserCard.tsx`:
-
-```typescript
-import React from 'react'
-
-interface UserCardProps {
-  user: {
-    name: string
-    email: string
-    avatar: string
-    isOnline: boolean
-  }
-}
-
-export const UserCard: React.FC<UserCardProps> = ({ user }) => {
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      padding: '16px',
-      backgroundColor: '#f5f5f5',
-      borderRadius: '8px',
-      marginBottom: '16px'
-    }}>
-      <img
-        src={user.avatar}
-        alt={user.name}
-        style={{
-          width: '50px',
-          height: '50px',
-          borderRadius: '50%',
-          marginRight: '12px'
-        }}
-      />
-      <div>
-        <h3 style={{ margin: '0 0 4px 0' }}>{user.name}</h3>
-        <p style={{ margin: '0 0 4px 0', color: '#666' }}>{user.email}</p>
-        <span style={{
-          color: user.isOnline ? '#4CAF50' : '#999',
-          fontSize: '14px'
-        }}>
-          {user.isOnline ? '🟢 Online' : '🔴 Offline'}
-        </span>
-      </div>
-    </div>
-  )
-}
-```
-
-Create `src/components/TodoList.tsx`:
-
-```typescript
-import React from 'react'
-
-interface Todo {
-  id: string
-  text: string
-  completed: boolean
-  priority: 'low' | 'medium' | 'high'
-  dueDate?: string
-}
-
-interface TodoListProps {
-  todos: Todo[]
-  onToggleTodo: (id: string) => void
-}
-
-export const TodoList: React.FC<TodoListProps> = ({ todos, onToggleTodo }) => {
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high': return '#ff4444'
-      case 'medium': return '#ffaa00'
-      case 'low': return '#44ff44'
-      default: return '#666'
-    }
-  }
-
-  return (
-    <div>
-      <h3>Your Todos</h3>
-      {todos.map(todo => (
-        <div
-          key={todo.id}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '8px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            marginBottom: '8px',
-            backgroundColor: todo.completed ? '#f0f8f0' : '#fff'
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => onToggleTodo(todo.id)}
-            style={{ marginRight: '12px' }}
-          />
-          <div style={{ flex: 1 }}>
-            <span style={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              color: todo.completed ? '#666' : '#000'
-            }}>
-              {todo.text}
-            </span>
-            {todo.dueDate && (
-              <span style={{ marginLeft: '8px', fontSize: '12px', color: '#666' }}>
-                Due: {todo.dueDate}
-              </span>
-            )}
-          </div>
-          <span style={{
-            color: getPriorityColor(todo.priority),
-            fontSize: '12px',
-            fontWeight: 'bold'
-          }}>
-            {todo.priority.toUpperCase()}
-          </span>
-        </div>
-      ))}
-    </div>
-  )
-}
-```
-
-## Step 4: Create the Dashboard Template
+## Dashboard Template
 
 Create `src/templates/dashboard.tsm`:
 
-```tsm
----
-title: Personal Dashboard
-description: A dynamic dashboard built with TS Markdown
----
-
-# Welcome back, {user.name}! 👋
-
-## Today's Overview
-
-<div style={{
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '20px',
-  marginBottom: '20px'
-}}>
-  
-  <!-- Weather Card -->
-  <div style={{
-    padding: '16px',
-    backgroundColor: '#e3f2fd',
-    borderRadius: '8px',
-    border: '1px solid #bbdefb'
-  }}>
-    <h3>🌤️ Weather</h3>
-    <p><strong>{weather.location}</strong></p>
-    <p>{weather.temperature}°C - {weather.condition}</p>
-  </div>
-
-  <!-- Stats Card -->
-  <div style={{
-    padding: '16px',
-    backgroundColor: '#f3e5f5',
-    borderRadius: '8px',
-    border: '1px solid #ce93d8'
-  }}>
-    <h3>📊 Progress</h3>
-    <p>{stats.completedTodos} of {stats.totalTodos} todos completed</p>
-    <p>Completion rate: {stats.completionRate}%</p>
-  </div>
-</div>
-
-## Your Profile
-
-<UserCard user={user} />
-
-## Quick Actions
-
-<div style={{
-  display: 'flex',
-  gap: '12px',
-  marginBottom: '20px'
-}}>
-  <button 
-    onClick={() => alert('Hello {user.name}!')}
-    style={{
-      padding: '8px 16px',
-      backgroundColor: '#2196F3',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer'
-    }}
-  >
-    Say Hello
-  </button>
-  
-  <button 
-    onClick={() => console.log('Theme toggled!')}
-    style={{
-      padding: '8px 16px',
-      backgroundColor: user.preferences.theme === 'dark' ? '#FFC107' : '#424242',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer'
-    }}
-  >
-    Toggle Theme
-  </button>
-</div>
-
-## Your Todos
-
-<TodoList 
-  todos={todos} 
-  onToggleTodo={(id) => {
-    console.log('Toggle todo:', id);
-    // In a real app, this would update the data
-  }}
-/>
-
-## Recent Activity
-
-{user.isOnline ? (
-  <div style={{
-    padding: '16px',
-    backgroundColor: '#e8f5e8',
-    borderRadius: '8px',
-    border: '1px solid #4caf50'
-  }}>
-    <p>✅ You're currently online and active</p>
-    <p>Last seen: {new Date(user.lastSeen).toLocaleString()}</p>
-  </div>
-) : (
-  <div style={{
-    padding: '16px',
-    backgroundColor: '#fff3e0',
-    borderRadius: '8px',
-    border: '1px solid #ff9800'
-  }}>
-    <p>⏰ You were last online at {new Date(user.lastSeen).toLocaleString()}</p>
-  </div>
-)}
-
-## Settings
-
-<div style={{
-  padding: '16px',
-  backgroundColor: '#f5f5f5',
-  borderRadius: '8px',
-  marginTop: '20px'
-}}>
-  <h3>Preferences</h3>
-  <ul>
-    <li>Theme: {user.preferences.theme}</li>
-    <li>Language: {user.preferences.language}</li>
-    <li>Notifications: {user.preferences.notifications ? 'Enabled' : 'Disabled'}</li>
-  </ul>
-</div>
-```
-
-## Step 5: Create the Main Application
-
-Create `src/index.tsx`:
-
 ```typescript
-import React, { useState } from 'react'
-import { createRoot } from 'react-dom/client'
 import { TSMParser, compileTSM, executeTSMTemplate } from 'tsm'
-import { sampleData, DashboardData } from './data/sample-data'
-import { UserCard } from './components/UserCard'
-import { TodoList } from './components/TodoList'
-import dashboardTemplate from './templates/dashboard.tsm?raw'
 
-function App() {
-  const [data, setData] = useState<DashboardData>(sampleData)
-
-  // Parse and compile the template
-  const parser = new TSMParser()
-  const parsed = parser.parse(dashboardTemplate)
-  const compiled = compileTSM(parsed)
-
-  const handleToggleTodo = (id: string) => {
-    setData(prevData => ({
-      ...prevData,
-      todos: prevData.todos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      ),
-      stats: {
-        ...prevData.stats,
-        completedTodos: prevData.todos.filter(t => t.id === id ? !t.completed : t.completed).length,
-        completionRate: (prevData.todos.filter(t => t.id === id ? !t.completed : t.completed).length / prevData.todos.length) * 100
-      }
-    }))
-  }
-
-  // Execute the template with data and components
-  const result = executeTSMTemplate(compiled, {
-    ...data,
-    onToggleTodo: handleToggleTodo
-  }, {
-    UserCard,
-    TodoList
-  })
-
+// Weather Card Component
+function WeatherCard({ weather }: { weather: { temperature: number; condition: string; location: string } }) {
   return (
-    <div style={{
-      maxWidth: '800px',
-      margin: '0 auto',
-      padding: '20px',
-      fontFamily: 'system-ui, sans-serif'
-    }}>
-      {result}
+    <div style="padding: 16px; background: #e3f2fd; border-radius: 8px; border: 1px solid #bbdefb;">
+      ## 🌤️ Weather
+
+      **{{ weather.location }}**
+      {{ weather.temperature }}°C - {{ weather.condition }}
     </div>
   )
 }
 
-// Render the app
-const container = document.getElementById('root')
-const root = createRoot(container!)
-root.render(<App />)
+// Stats Card Component
+function StatsCard({ stats }: { stats: { completedTodos: number; totalTodos: number; completionRate: number } }) {
+  return (
+    <div style="padding: 16px; background: #f3e5f5; border-radius: 8px; border: 1px solid #ce93d8;">
+      ## 📊 Progress
+
+      {{ stats.completedTodos }} of {{ stats.totalTodos }} todos completed
+      **Completion rate:** {{ stats.completionRate.toFixed(1) }}%
+    </div>
+  )
+}
+
+// Todo Item Component
+function TodoItem({ todo, onToggle }: { todo: Todo; onToggle: (id: string) => void }) {
+  return (
+    <div style="display: flex; align-items: center; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin: 4px 0; background: {{ todo.completed ? '#f0f8f0' : '#fff' }};">
+      <input type="checkbox" checked={todo.completed} onChange={() => onToggle(todo.id)} style="margin-right: 12px;" />
+      <span style="flex: 1; text-decoration: {{ todo.completed ? 'line-through' : 'none' }};">
+        {{ todo.text }}
+      </span>
+      <span style="font-size: 12px; color: {{ todo.priority === 'high' ? '#ff4444' : todo.priority === 'medium' ? '#ffaa00' : '#44ff44' }};">
+        {{ todo.priority.toUpperCase() }}
+      </span>
+    </div>
+  )
+}
+
+// Todo List Component
+function TodoList({ todos, onToggleTodo }: { todos: Todo[]; onToggleTodo: (id: string) => void }) {
+  return (
+    <div>
+      ## Your Todos
+
+      {{ todos.map(todo => (
+        <@TodoItem todo={todo} onToggle={onToggleTodo} />
+      )) }}
+    </div>
+  )
+}
+
+// Main Dashboard Function
+function createDashboard(data: DashboardData) {
+  return (
+    # Welcome {{ data.user.isOnline ? 'back' : 'aboard' }}, {{ data.user.name }}! 👋
+
+    ## Today's Overview
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+      <@WeatherCard weather={data.weather} />
+      <@StatsCard stats={data.stats} />
+    </div>
+
+    ## Your Profile
+
+    <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px; margin: 10px 0;">
+      **Name:** {{ data.user.name }}
+      **Email:** {{ data.user.email }}
+      **Status:** {{ data.user.isOnline ? '🟢 Online' : '🔴 Offline' }}
+      **Theme:** {{ data.user.preferences.theme }}
+    </div>
+
+    ## Quick Actions
+
+    <div style="display: flex; gap: 12px; margin: 20px 0;">
+      <button
+        style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
+        onClick={() => alert('Hello {{ data.user.name }}!')}
+      >
+        Say Hello
+      </button>
+
+      <button
+        style="padding: 8px 16px; background: {{ data.user.preferences.theme === 'dark' ? '#FFC107' : '#424242' }}; color: white; border: none; border-radius: 4px; cursor: pointer;"
+        onClick={() => console.log('Theme toggled!')}
+      >
+        Toggle Theme
+      </button>
+    </div>
+
+    <@TodoList todos={data.todos} onToggleTodo={(id) => console.log('Toggle todo:', id)} />
+
+    ## Recent Activity
+
+    {{ data.user.isOnline ? (
+      <div style="padding: 16px; background: #e8f5e8; border-radius: 8px; border: 1px solid #4caf50;">
+        ✅ You're currently online and active
+        **Last seen:** {{ new Date(data.user.lastSeen).toLocaleString() }}
+      </div>
+    ) : (
+      <div style="padding: 16px; background: #fff3e0; border-radius: 8px; border: 1px solid #ff9800;">
+        ⏰ You were last online at {{ new Date(data.user.lastSeen).toLocaleString() }}
+      </div>
+    ) }}
+
+    ## Settings
+
+    <div style="padding: 16px; background: #f5f5f5; border-radius: 8px; margin-top: 20px;">
+      ### Preferences
+
+      - **Theme:** {{ data.user.preferences.theme }}
+      - **Language:** {{ data.user.preferences.language }}
+      - **Notifications:** {{ data.user.preferences.notifications ? 'Enabled' : 'Disabled' }}
+    </div>
+  )
+}
+
+// Compile the template
+const parser = new TSMParser()
+const compiledDashboard = compileTSM(parser.parse(createDashboard.toString()))
 ```
 
-## Step 6: Create HTML Template
+## Main Application
+
+Create `src/index.ts`:
+
+```typescript
+import { executeTSMTemplate } from 'tsm'
+import { sampleData, DashboardData } from './data/sample-data'
+import { compiledDashboard } from './templates/dashboard'
+
+function main() {
+  console.log('=== TSM Dashboard Demo ===\n')
+
+  // Render initial dashboard
+  const initialResult = executeTSMTemplate(compiledDashboard, sampleData)
+  console.log(initialResult)
+
+  console.log('\n=== Updated Data Demo ===\n')
+
+  // Demonstrate dynamic updates
+  const updatedData: DashboardData = {
+    ...sampleData,
+    todos: sampleData.todos.map(todo =>
+      todo.id === '2' ? { ...todo, completed: true } : todo
+    ),
+    stats: {
+      completedTodos: 2,
+      totalTodos: 3,
+      completionRate: 66.7
+    }
+  }
+
+  const updatedResult = executeTSMTemplate(compiledDashboard, updatedData)
+  console.log(updatedResult)
+}
+
+main()
+```
+
+## HTML Output
 
 Create `index.html`:
 
@@ -469,23 +289,60 @@ Create `index.html`:
     <title>TS Markdown Dashboard</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
             background-color: #f5f5f5;
+        }
+        /* Add some basic styling for buttons and interactive elements */
+        button {
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module" src="./src/index.tsx"></script>
+    <div id="dashboard"></div>
+    <script type="module" src="./src/index.ts"></script>
 </body>
 </html>
 ```
 
-## Step 7: Run Your Application
+## Run Your Application
 
 ```bash
-bun run --bun src/index.tsx
+bun run index.ts
+```
+
+You'll see output like:
+
+```
+=== TSM Dashboard Demo ===
+
+# Welcome back, Sarah Johnson! 👋
+
+## Today's Overview
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+  <div style="padding: 16px; background: #e3f2fd; border-radius: 8px; border: 1px solid #bbdefb;">
+    ## 🌤️ Weather
+
+    **San Francisco**
+    22°C - Sunny
+  </div>
+  <div style="padding: 16px; background: #f3e5f5; border-radius: 8px; border: 1px solid #ce93d8;">
+    ## 📊 Progress
+
+    1 of 3 todos completed
+    **Completion rate:** 33.3%
+  </div>
+</div>
+
+... (more content)
 ```
 
 🎉 **Congratulations!** You've built a complete TS Markdown application!
@@ -494,45 +351,51 @@ bun run --bun src/index.tsx
 
 Your dashboard includes:
 
-✅ **Dynamic Content**: User name, weather, and stats update based on data  
-✅ **Interactive Components**: Clickable buttons and todo checkboxes  
-✅ **Conditional Rendering**: Different content based on user status  
-✅ **Real-time Updates**: Todo completion updates the stats  
-✅ **Component Integration**: Custom React components in TS Markdown  
-✅ **Responsive Design**: Clean, modern interface  
+✅ **Dynamic Content**: User name, weather, and stats update based on data
+✅ **Interactive Components**: Clickable buttons and todo checkboxes
+✅ **Conditional Rendering**: Different content based on user status
+✅ **Real-time Updates**: Todo completion updates the stats
+✅ **Component Reusability**: Modular, maintainable components
+✅ **Type Safety**: Full TypeScript integration
 
 ## Key Features Demonstrated
 
-### 1. **Template Interpolation**
-```jsx
-Welcome back, {user.name}! 👋
+### 1. **Markdown Blocks**
+```typescript
+function createDashboard(data: DashboardData) {
+  return (
+    # Welcome {{ data.user.name }}!
+
+    Regular markdown content here...
+  )
+}
 ```
 
-### 2. **Conditional Rendering**
-```jsx
-{user.isOnline ? (
-  <div>Online status</div>
+### 2. **Dynamic Interpolation**
+```typescript
+**Name:** {{ data.user.name }}
+**Status:** {{ data.user.isOnline ? '🟢 Online' : '🔴 Offline' }}
+**Completion rate:** {{ data.stats.completionRate.toFixed(1) }}%
+```
+
+### 3. **Conditional Rendering**
+```typescript
+{{ data.user.isOnline ? (
+  <div>Online content</div>
 ) : (
-  <div>Offline status</div>
-)}
+  <div>Offline content</div>
+)}}
 ```
 
-### 3. **Component Integration**
-```jsx
-<UserCard user={user} />
-<TodoList todos={todos} onToggleTodo={handleToggleTodo} />
-```
-
-### 4. **Interactive Elements**
-```jsx
-<button onClick={() => alert('Hello {user.name}!')}>
-  Say Hello
-</button>
+### 4. **Component Usage**
+```typescript
+<@WeatherCard weather={data.weather} />
+<@TodoList todos={data.todos} onToggleTodo={handleToggle} />
 ```
 
 ### 5. **Dynamic Styling**
-```jsx
-backgroundColor: user.preferences.theme === 'dark' ? '#424242' : '#fff'
+```typescript
+<div style="background: {{ data.user.isOnline ? '#e8f5e8' : '#fff3e0' }};">
 ```
 
 ## Next Steps
@@ -541,7 +404,7 @@ Now that you have a working application, try these enhancements:
 
 1. **Add More Components**: Create charts, calendars, or forms
 2. **Data Persistence**: Save todos to localStorage or an API
-3. **Real-time Updates**: Add WebSocket integration
+3. **Real-time Updates**: Add WebSocket integration for live data
 4. **Theming**: Implement a full theme system
 5. **Responsive Design**: Make it work on mobile devices
 
@@ -549,26 +412,42 @@ Now that you have a working application, try these enhancements:
 
 ### Data Fetching
 ```typescript
-const fetchData = async () => {
-  const response = await fetch('/api/dashboard')
-  return response.json()
+async function generateReport(userId: string) {
+  const user = await fetchUser(userId)
+  const todos = await fetchTodos(userId)
+
+  return (
+    # Report for {{ user.name }}
+
+    <@TodoList todos={todos} onToggleTodo={handleToggle} />
+  )
 }
 ```
 
-### Error Boundaries
+### Error Handling
 ```typescript
-const ErrorBoundary = ({ children }) => {
-  // Error handling logic
+function safeTemplate(data: DashboardData | null) {
+  return (
+    {{ data ? (
+      {{ createDashboard(data) }}
+    ) : (
+      # Error
+      Unable to load dashboard data.
+    ) }}
+  )
 }
 ```
 
 ### Performance Optimization
 ```typescript
-const MemoizedComponent = React.memo(MyComponent)
+// Compile once, use many times
+const compiledDashboard = compileTSM(parser.parse(createDashboard.toString()))
+
+function renderDashboard(data: DashboardData) {
+  return executeTSMTemplate(compiledDashboard, data)
+}
 ```
 
-{% callout type="check" %}
 **Complete Application Built!** You now have a fully functional TS Markdown dashboard with dynamic content, interactivity, and real-time updates.
-{% /callout %}
 
-Ready to explore more features? Check out the [Syntax Guide](/syntax-guide) to learn about advanced TS Markdown capabilities!
+Ready to explore more features? Check out the [Syntax Guide](syntax-guide) to learn about advanced TS Markdown capabilities!

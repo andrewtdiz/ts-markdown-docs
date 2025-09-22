@@ -1,10 +1,6 @@
 import { serve } from "bun";
 import index from "./index.html";
 import Markdoc from '@markdoc/markdoc';
-import { initializeContentManifest, getContent, getContentAST, getContentFrontmatter, getAllContentMetadata } from './lib/content-manifest';
-
-// Initialize content manifest on server startup
-initializeContentManifest();
 
 const server = serve({
   routes: {

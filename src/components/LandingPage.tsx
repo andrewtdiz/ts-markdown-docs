@@ -84,28 +84,28 @@ export function LandingPage() {
                                     </div>
                                     <pre className="text-xs overflow-x-auto leading-relaxed text-purple-600" tabIndex={0}><code>
                                         <span className="line"><span className="dark:text-red-400 text-red-700">import</span>
-                                            <span className="dark:text-purple-400 text-purple-600"> {`{`}</span><span className="dark:text-amber-400 text-amber-600 font-bold"> List </span><span className="dark:text-purple-400 text-purple-600">{`}`}</span>
+                                            <span className="dark:text-purple-400 text-purple-600"> {`{`}</span><span className="dark:text-amber-400 text-amber-600"> List </span><span className="dark:text-purple-400 text-purple-600">{`}`}</span>
                                             <span className="dark:text-red-400 text-red-700"> from</span><span className="dark:text-pink-300 text-pink-600"> './List'</span>
                                             <span className="dark:text-purple-400 text-purple-600">;</span></span>
                                         <br />
                                         <br />
-                                        <span className="line"><span className="dark:text-emerald-500 text-emerald-700">export</span><span className="dark:text-emerald-500 text-emerald-700"> function</span>
-                                            <span className="dark:text-amber-400 text-amber-600 font-bold"> HelloWorld</span><span className="dark:text-purple-400 text-purple-600">(</span><span className="dark:text-purple-400 text-purple-600">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-purple-400 text-purple-600">{`}`}</span><span className="dark:text-red-400 text-red-700">:</span><span className="dark:text-purple-400 text-purple-600"> Props</span></span><span className="dark:text-purple-400 text-purple-600">)</span>
+                                        <span className="line"><span className="dark:text-red-400 text-red-700">export</span><span className="dark:text-red-400 text-red-700"> function</span>
+                                            <span className="dark:text-amber-400 text-amber-600"> HelloWorld</span><span className="dark:text-purple-400 text-purple-600">(</span><span className="dark:text-purple-400 text-purple-600">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-purple-400 text-purple-600">{`}`}</span><span className="dark:text-red-400 text-red-700">:</span><span className="dark:text-purple-400/85 text-purple-600"> Props</span></span><span className="dark:text-purple-400 text-purple-600">)</span>
                                         <span className="dark:text-yellow-400 text-yellow-700"> {`{`}</span>
                                         <br />
-                                        <span className="line"><span className="dark:text-red-400 text-red-700">  const</span><span className="dark:text-purple-400 text-purple-600"> greeting</span><span className="dark:text-red-400 text-red-700"> =</span><span className="dark:text-pink-300 text-pink-600"> "Hello from TS Markdown!"</span><span className="dark:text-purple-400 text-purple-600">;</span></span>
+                                        <span className="line"><span className="dark:text-red-400 text-red-700">  const</span><span className="text-blue-700 dark:text-blue-300"> greeting</span><span className="dark:text-red-400 text-red-700"> =</span><span className="dark:text-pink-300 text-pink-600"> "Hello from TS Markdown!"</span><span className="dark:text-purple-400 text-purple-600">;</span></span>
                                         <br />
                                         <br />
                                         <span className="line"><span className="dark:text-red-400 text-red-700">  return</span><span className="dark:text-purple-400 text-purple-600"> (</span></span>
                                         <br />
-                                        <span className="line text-foreground font-bold">    # </span><span className="dark:text-blue-400 text-blue-700">{`{{`}</span><span className="dark:text-purple-400 text-purple-600"> greeting</span><span className="dark:text-blue-400 text-blue-700"> {`}} `}</span>
+                                        <span className="line text-foreground">    # </span><span className="dark:text-blue-400 text-blue-700">{`{{`}</span><span className="dark:text-blue-300 text-blue-700"> greeting</span><span className="dark:text-blue-400 text-blue-700"> {`}} `}</span>
                                         <br />
                                         <br />
                                         <span className="line"><span className='text-foreground'>    Render markdown with</span><span className="dark:text-red-400 text-red-700">:</span></span>
                                         <br />
-                                        <span className="line"><span className="dark:text-amber-400/75 text-amber-600/75">    &lt;@</span><span className="dark:text-amber-400 text-amber-600 font-bold">List</span>
-                                        <span className="italic dark:text-purple-400 text-purple-600"> items</span><span className="dark:text-red-400 text-red-700">=</span><span className="dark:text-blue-400 text-blue-700">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-blue-400 text-blue-700">{`}`}</span>
-                                        <span className="dark:text-amber-400/75 font-light! text-amber-600/75"> /&gt;</span></span>
+                                        <span className="line"><span className="dark:text-amber-400/75 text-amber-600/75">    &lt;@</span><span className="dark:text-amber-400 text-amber-600">List</span>
+                                        <span className="italic dark:text-purple-400/85 text-purple-600"> items</span><span className="dark:text-red-400 text-red-700">=</span><span className="dark:text-blue-400 text-blue-700">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-blue-400 text-blue-700">{`}`}</span>
+                                        <span className="dark:text-amber-400/75 text-amber-600/75"> /&gt;</span></span>
                                         <br />
                                         <span className="line"><span className="dark:text-purple-400 text-purple-600">  )</span></span>
                                         <br />
@@ -148,7 +148,7 @@ export function LandingPage() {
                             What if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
                         </p>
                         <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">$&#123;&#125;</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
+                            And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">`$&#123;&#125;`</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
                         </p>
                     </div>
 
