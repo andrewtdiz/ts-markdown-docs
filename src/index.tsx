@@ -6,10 +6,6 @@ import { initializeContentManifest, getContent, getContentAST, getContentFrontma
 // Initialize content manifest on server startup
 initializeContentManifest();
 
-// Import schema files
-import callout from '../schema/Callout.markdoc.js';
-import heading from '../schema/heading.markdoc.js';
-
 const server = serve({
   routes: {
     // Serve index.html for all unmatched routes.
