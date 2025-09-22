@@ -19,12 +19,12 @@ export function LandingPage() {
         },
         {
             icon: Component,
-            title: "Component-style Architecture",
-            description: "Import TS Markdown files as components, with type-safe props and children."
+            title: "Component-based",
+            description: "Import TS Markdown files as type-safe components."
         },
         {
             icon: Rocket,
-            title: "Fast & Modern",
+            title: "Accelerated Development",
             description: "Built with Bun for blazingly fast iterative development and deployment."
         }
     ];
@@ -43,26 +43,99 @@ export function LandingPage() {
 
             <div className="flex flex-col items-center max-w-7xl">
                 <div className="px-4 py-16">
-                    <div className="text-center max-w-4xl mx-auto">
-                        <h1 className="text-5xl font-bold tracking-tight mb-6">
-                            TS Markdown
-                        </h1>
-                        <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                            A type-safe, component based markdown engine. <br />
+                    <div className="grid lg:grid-cols-5 gap-6 items-center">
+                        {/* Left side - Title and buttons */}
+                        <div className="lg:col-span-2 space-y-8">
+                            <div>
+                                <h1 className="text-5xl font-bold tracking-tight mb-6">
+                                    TS Markdown
+                                </h1>
+                                <p className="text-xl text-foreground/90 mb-8 font-light leading-relaxed">
+                                    A type-safe, component based markdown engine. <br />
+                                </p>
+                            </div>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Button asChild size="lg" className="text-lg px-8">
+                                    <Link to="/quick-start" className="flex items-center justify-center">
+                                        Get Started
+                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                    </Link>
+                                </Button>
+                                <Button asChild variant="outline" size="lg" className="text-lg px-8">
+                                    <Link to="/overview" className="bg-white dark:bg-black">
+                                        Learn More
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
 
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button asChild size="lg" className="text-lg px-8">
-                                <Link to="/quick-start">
-                                    Get Started
-                                    <ArrowRight className="ml-2 h-5 w-5" />
-                                </Link>
-                            </Button>
-                            <Button asChild variant="outline" size="lg" className="text-lg px-8">
-                                <Link to="/overview">
-                                    Learn More
-                                </Link>
-                            </Button>
+                        {/* Right side - Code blocks */}
+                        <div className="lg:col-span-3 lg:pl-2">
+                            <div className="grid grid-cols-5 gap-4">
+                                {/* TS Markdown Source */}
+                                <div className="col-span-3 bg-gray-100/25 dark:bg-gray-900 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-gray-700">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.tsmd</span>
+                                        <div className="flex space-x-1">
+                                            <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        </div>
+                                    </div>
+                                    <pre className="text-xs overflow-x-auto leading-relaxed text-purple-600" tabIndex={0}><code>
+                                        <span className="line"><span className="dark:text-red-400 text-red-700">import</span>
+                                            <span className="dark:text-purple-400 text-purple-600"> {`{`}</span><span className="dark:text-amber-400 text-amber-600 font-bold"> List </span><span className="dark:text-purple-400 text-purple-600">{`}`}</span>
+                                            <span className="dark:text-red-400 text-red-700"> from</span><span className="dark:text-pink-300 text-pink-600"> './List'</span>
+                                            <span className="dark:text-purple-400 text-purple-600">;</span></span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className="dark:text-emerald-500 text-emerald-700">export</span><span className="dark:text-emerald-500 text-emerald-700"> function</span>
+                                            <span className="dark:text-amber-400 text-amber-600 font-bold"> HelloWorld</span><span className="dark:text-purple-400 text-purple-600">(</span><span className="dark:text-purple-400 text-purple-600">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-purple-400 text-purple-600">{`}`}</span><span className="dark:text-red-400 text-red-700">:</span><span className="dark:text-purple-400 text-purple-600"> Props</span></span><span className="dark:text-purple-400 text-purple-600">)</span>
+                                        <span className="dark:text-yellow-400 text-yellow-700"> {`{`}</span>
+                                        <br />
+                                        <span className="line"><span className="dark:text-red-400 text-red-700">  const</span><span className="dark:text-purple-400 text-purple-600"> greeting</span><span className="dark:text-red-400 text-red-700"> =</span><span className="dark:text-pink-300 text-pink-600"> "Hello from TS Markdown!"</span><span className="dark:text-purple-400 text-purple-600">;</span></span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className="dark:text-red-400 text-red-700">  return</span><span className="dark:text-purple-400 text-purple-600"> (</span></span>
+                                        <br />
+                                        <span className="line text-foreground font-bold">    # </span><span className="dark:text-blue-400 text-blue-700">{`{{`}</span><span className="dark:text-purple-400 text-purple-600"> greeting</span><span className="dark:text-blue-400 text-blue-700"> {`}} `}</span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className='text-foreground'>    Render markdown with</span><span className="dark:text-red-400 text-red-700">:</span></span>
+                                        <br />
+                                        <span className="line"><span className="dark:text-amber-400/75 text-amber-600/75">    &lt;@</span><span className="dark:text-amber-400 text-amber-600 font-bold">List</span>
+                                        <span className="italic dark:text-purple-400 text-purple-600"> items</span><span className="dark:text-red-400 text-red-700">=</span><span className="dark:text-blue-400 text-blue-700">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-blue-400 text-blue-700">{`}`}</span>
+                                        <span className="dark:text-amber-400/75 font-light! text-amber-600/75"> /&gt;</span></span>
+                                        <br />
+                                        <span className="line"><span className="dark:text-purple-400 text-purple-600">  )</span></span>
+                                        <br />
+                                        <span className="line"><span className="dark:text-yellow-400 text-yellow-700">{`}`}</span></span>
+                                        <br /></code>
+                                    </pre>
+                                </div>
+
+                                {/* Compiled Output */}
+                                <div className="col-span-2 bg-white dark:bg-gray-800/90 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-gray-700">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.md</span>
+                                        <div className="flex space-x-1">
+                                            <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                            <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                        </div>
+                                    </div>
+                                    <div className="text-sm text-gray-900 dark:text-gray-100 overflow-x-auto leading-relaxed prose prose-sm dark:prose-invert max-w-none">
+                                        <h1>Hello from TS Markdown!</h1>
+                                        <br />
+                                        <p>Render markdown with:</p>
+                                        <ul>
+                                            <li>- Type-safety</li>
+                                            <li>- Reusable components</li>
+                                            <li>- Fast development</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,12 +143,12 @@ export function LandingPage() {
                 {/* Features Section */}
                 <div className="container mx-auto px-4 py-16">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold mb-4">Why TS Markdown?</h2>
+                        <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
                         <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            What if making dynamic markdown felt more like writing Typescript, <br />
+                            What if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
                         </p>
                         <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            And less like <code>f"""</code>, <code>$&#123;&#125;</code>, and <code>"\n\n"</code>?
+                            And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">$&#123;&#125;</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
                         </p>
                     </div>
 

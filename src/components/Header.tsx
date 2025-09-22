@@ -52,14 +52,14 @@ export function Header({ showNavigation = true }: HeaderProps) {
                             </Button>
                             <Button
                                 variant="ghost"
-                                className='text-lg text-foreground/80 font-normal h-10 w-10 rounded-md'
+                                className='text-lg rounded-full text-foreground/80 font-normal h-10 w-10'
                                 onClick={() => themeToggle.setTheme(themeToggle.theme === 'dark' ? 'light' : 'dark')}
                             >
                                 {themeToggle.theme === 'dark' ? <SunIcon className='w-6! h-6!' /> : <MoonIcon className='w-6! h-6!' />}
                             </Button>
                             <Button
                                 variant="ghost"
-                                className='text-foreground/80 font-normal h-10 w-10 rounded-sm'
+                                className='text-foreground/80 rounded-full font-normal h-10 w-10'
                                 onClick={() => window.open('https://github.com', '_blank')}
                             >
                                 <GithubIcon className='w-6! h-6!' />
