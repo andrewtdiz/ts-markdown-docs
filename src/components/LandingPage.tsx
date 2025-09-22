@@ -161,7 +161,7 @@ export function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-900 dark:text-gray-100 overflow-x-auto leading-relaxed prose prose-sm dark:prose-invert max-w-none">
-                                        <h1>Hello from TS Markdown!</h1>
+                                        <p># Hello from TS Markdown!</p>
                                         <br />
                                         <p>Render markdown with:</p>
                                         <ul>
@@ -243,11 +243,13 @@ export function LandingPage() {
                     </div>
                 </div>
 
-                {/* Footer */}
-                <div className="container mx-auto px-4 py-8 border-t">
-                    <div className="text-center text-muted-foreground">
-                        <p className="text-sm">Built with TS Markdown • Powered by Bun • Enhanced with React</p>
-                    </div>
+
+            </div>
+
+            {/* Footer */}
+            <div className="w-full px-4 py-6 border-t">
+                <div className="text-center text-muted-foreground">
+                    <p className="text-sm">Made with ❤️ by Andrew</p>
                 </div>
             </div>
         </div>
