@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, FileText, Component, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
+import { useTheme } from './ThemeProvider';
 
 export function LandingPage() {
+    const { theme } = useTheme();
     const features = [
         {
             icon: Zap,
@@ -62,7 +64,7 @@ export function LandingPage() {
                                     </Link>
                                 </Button>
                                 <Button asChild variant="outline" size="lg" className="text-lg px-8">
-                                    <Link to="/overview" className="bg-white dark:bg-black">
+                                    <Link to="/overview" className="">
                                         Learn More
                                     </Link>
                                 </Button>
@@ -73,7 +75,7 @@ export function LandingPage() {
                         <div className="lg:col-span-3 lg:pl-2">
                             <div className="grid grid-cols-5 gap-4">
                                 {/* TS Markdown Source */}
-                                <div className="col-span-3 bg-gray-100/25 dark:bg-gray-900 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-gray-700">
+                                <div className="col-span-3 bg-gray-100/25 dark:bg-[#1e1e1e] rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-900">
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.tsmd</span>
                                         <div className="flex space-x-1">
@@ -82,40 +84,73 @@ export function LandingPage() {
                                             <div className="w-2 h-2 rounded-full bg-green-500"></div>
                                         </div>
                                     </div>
-                                    <pre className="text-xs overflow-x-auto leading-relaxed text-purple-600" tabIndex={0}><code>
-                                        <span className="line"><span className="dark:text-red-400 text-red-700">import</span>
-                                            <span className="dark:text-purple-400 text-purple-600"> {`{`}</span><span className="dark:text-amber-400 text-amber-600"> List </span><span className="dark:text-purple-400 text-purple-600">{`}`}</span>
-                                            <span className="dark:text-red-400 text-red-700"> from</span><span className="dark:text-pink-300 text-pink-600"> './List'</span>
-                                            <span className="dark:text-purple-400 text-purple-600">;</span></span>
-                                        <br />
-                                        <br />
-                                        <span className="line"><span className="dark:text-red-400 text-red-700">export</span><span className="dark:text-red-400 text-red-700"> function</span>
-                                            <span className="dark:text-amber-400 text-amber-600"> HelloWorld</span><span className="dark:text-purple-400 text-purple-600">(</span><span className="dark:text-purple-400 text-purple-600">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-purple-400 text-purple-600">{`}`}</span><span className="dark:text-red-400 text-red-700">:</span><span className="dark:text-purple-400/85 text-purple-600"> Props</span></span><span className="dark:text-purple-400 text-purple-600">)</span>
-                                        <span className="dark:text-yellow-400 text-yellow-700"> {`{`}</span>
-                                        <br />
-                                        <span className="line"><span className="dark:text-red-400 text-red-700">  const</span><span className="text-blue-700 dark:text-blue-300"> greeting</span><span className="dark:text-red-400 text-red-700"> =</span><span className="dark:text-pink-300 text-pink-600"> "Hello from TS Markdown!"</span><span className="dark:text-purple-400 text-purple-600">;</span></span>
-                                        <br />
-                                        <br />
-                                        <span className="line"><span className="dark:text-red-400 text-red-700">  return</span><span className="dark:text-purple-400 text-purple-600"> (</span></span>
-                                        <br />
-                                        <span className="line text-foreground">    # </span><span className="dark:text-blue-400 text-blue-700">{`{{`}</span><span className="dark:text-blue-300 text-blue-700"> greeting</span><span className="dark:text-blue-400 text-blue-700"> {`}} `}</span>
-                                        <br />
-                                        <br />
-                                        <span className="line"><span className='text-foreground'>    Render markdown with</span><span className="dark:text-red-400 text-red-700">:</span></span>
-                                        <br />
-                                        <span className="line"><span className="dark:text-amber-400/75 text-amber-600/75">    &lt;@</span><span className="dark:text-amber-400 text-amber-600">List</span>
-                                        <span className="italic dark:text-purple-400/85 text-purple-600"> items</span><span className="dark:text-red-400 text-red-700">=</span><span className="dark:text-blue-400 text-blue-700">{`{`}</span><span className="dark:text-foreground text-foreground">features</span><span className="dark:text-blue-400 text-blue-700">{`}`}</span>
-                                        <span className="dark:text-amber-400/75 text-amber-600/75"> /&gt;</span></span>
-                                        <br />
-                                        <span className="line"><span className="dark:text-purple-400 text-purple-600">  )</span></span>
-                                        <br />
-                                        <span className="line"><span className="dark:text-yellow-400 text-yellow-700">{`}`}</span></span>
-                                        <br /></code>
-                                    </pre>
+                                    {theme === 'dark' ? (
+                                        <pre className="text-xs overflow-x-auto leading-relaxed text-[#d4d4d4]" tabIndex={0}><code>
+                                            <span className="line"><span className="text-[#569CD6]">import</span>
+                                                <span className="text-[#d4d4d4]"> {`{`}</span><span className="text-[#DCDCAA]"> List </span><span className="text-[#d4d4d4]">{`}`}</span>
+                                                <span className="text-[#569CD6]"> from</span><span className="text-[#CE9178]"> './List'</span>
+                                                <span className="text-[#d4d4d4]">;</span></span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#569CD6]">export</span><span className="text-[#569CD6]"> function</span>
+                                                <span className="text-[#DCDCAA]"> HelloWorld</span><span className="text-[#d4d4d4]">(</span><span className="text-[#d4d4d4]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#d4d4d4]">{`}`}</span><span className="text-[#569CD6]">:</span><span className="text-[#4EC9B0]"> Props</span></span><span className="text-[#d4d4d4]">)</span>
+                                            <span className="text-[#d4d4d4]"> {`{`}</span>
+                                            <br />
+                                            <span className="line"><span className="text-[#569CD6]">  const</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> =</span><span className="text-[#CE9178]"> "Hello from TS Markdown!"</span><span className="text-[#d4d4d4]">;</span></span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#569CD6]">  return</span><span className="text-[#d4d4d4]"> (</span></span>
+                                            <br />
+                                            <span className="line text-[#d4d4d4]">    # </span><span className="text-[#d4d4d4]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#d4d4d4]"> {`}} `}</span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#d4d4d4]">    Render markdown with</span><span className="text-[#569CD6]">:</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
+                                                <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
+                                                <span className="text-[#808080]"> /&gt;</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#d4d4d4]">  )</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#d4d4d4]">{`}`}</span></span>
+                                            <br /></code>
+                                        </pre>
+                                    ) : (
+                                        <pre className="text-xs overflow-x-auto leading-relaxed text-[#333333]" tabIndex={0}><code>
+                                            <span className="line"><span className="text-[#0000ff]">import</span>
+                                                <span className="text-[#333333]"> {`{`}</span><span className="text-[#267f99]"> List </span><span className="text-[#333333]">{`}`}</span>
+                                                <span className="text-[#0000ff]"> from</span><span className="text-[#a31515]"> './List'</span>
+                                                <span className="text-[#333333]">;</span></span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#0000ff]">export</span><span className="text-[#0000ff]"> function</span>
+                                                <span className="text-[#267f99]"> HelloWorld</span><span className="text-[#333333]">(</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span><span className="text-[#0000ff]">:</span><span className="text-[#0451a5]"> Props</span></span><span className="text-[#333333]">)</span>
+                                            <span className="text-[#333333]"> {`{`}</span>
+                                            <br />
+                                            <span className="line"><span className="text-[#0000ff]">  const</span><span className="text-[#001080]"> greeting</span><span className="text-[#0000ff]"> =</span><span className="text-[#a31515]"> "Hello from TS Markdown!"</span><span className="text-[#333333]">;</span></span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#0000ff]">  return</span><span className="text-[#333333]"> (</span></span>
+                                            <br />
+                                            <span className="line text-[#333333]">    # </span><span className="text-[#333333]">{`{{`}</span><span className="text-[#001080]"> greeting</span><span className="text-[#333333]"> {`}} `}</span>
+                                            <br />
+                                            <br />
+                                            <span className="line"><span className="text-[#333333]">    Render markdown with</span><span className="text-[#0000ff]">:</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#800000]">    &lt;@</span><span className="text-[#267f99]">List</span>
+                                                <span className="text-[#001080]"> items</span><span className="text-[#0000ff]">=</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span>
+                                                <span className="text-[#800000]"> /&gt;</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#333333]">  )</span></span>
+                                            <br />
+                                            <span className="line"><span className="text-[#333333]">{`}`}</span></span>
+                                            <br /></code>
+                                        </pre>
+                                    )}
                                 </div>
 
                                 {/* Compiled Output */}
-                                <div className="col-span-2 bg-white dark:bg-gray-800/90 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-gray-700">
+                                <div className="col-span-2 bg-white dark:bg-neutral-800/90 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-700 animate-float">
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.md</span>
                                         <div className="flex space-x-1">

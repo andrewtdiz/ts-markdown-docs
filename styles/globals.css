@@ -3,6 +3,7 @@
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
+
 :root {
   --background: rgb(248, 248, 248);
   --foreground: rgb(51, 51, 51);
@@ -160,4 +161,20 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
