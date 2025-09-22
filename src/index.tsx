@@ -1,9 +1,9 @@
-import { serve } from "bun";
+import { file, serve } from "bun";
 import index from "./index.html";
-import Markdoc from '@markdoc/markdoc';
 
 const server = serve({
   routes: {
+    "/embed.png": file("./public/embedImage.png"),
     "/*": index,
 
     "/health": {
