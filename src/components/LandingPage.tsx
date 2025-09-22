@@ -161,7 +161,7 @@ export function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-900 dark:text-gray-100 overflow-x-auto leading-relaxed prose prose-sm dark:prose-invert max-w-none">
-                                        <p>## Hello from TS Markdown!</p>
+                                        <p className="font-bold text-lg">Hello from TS Markdown!</p>
                                         <br />
                                         <p>Render components with:</p>
                                         <ul>
