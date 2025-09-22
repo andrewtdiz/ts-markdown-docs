@@ -30,6 +30,7 @@ export function LandingPage() {
             description: "Built with Bun for blazingly fast iterative development and deployment."
         }
     ];
+    const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
 
     const quickLinks = [
         { href: '/overview', title: 'What is TS Markdown?', description: 'Learn about the enhanced TS Markdown experience' },
@@ -84,7 +85,7 @@ export function LandingPage() {
                                             <div className="w-2 h-2 rounded-full bg-green-500"></div>
                                         </div>
                                     </div>
-                                    {theme === 'dark' ? (
+                                    {currentTheme === 'dark' ? (
                                         <pre className="text-xs overflow-x-auto leading-relaxed text-[#d4d4d4]" tabIndex={0}><code>
                                             <span className="line"><span className="text-[#569CD6]">import</span>
                                                 <span className="text-[#d4d4d4]"> {`{`}</span><span className="text-[#DCDCAA]"> List </span><span className="text-[#d4d4d4]">{`}`}</span>
