@@ -181,7 +181,7 @@ export function LandingPage() {
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
                         <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            What if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
+                            Imagine if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
                         </p>
                         <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
                             And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">`$&#123;&#125;`</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
