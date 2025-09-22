@@ -1,111 +1,66 @@
-import matter from 'gray-matter';
+import about from "../content/about.ts";
+import componentExamples from "../content/component-examples.ts";
+import firstTsm from "../content/first-tsm.ts";
+import frontmatterExamples from "../content/frontmatter-examples.ts";
+import installation from "../content/installation.ts";
+import overview from "../content/overview.ts";
+import quickStart from "../content/quick-start.ts";
+import testMarkdocRendering from "../content/test-markdoc-rendering.ts";
+import welcome from "../content/welcome.ts";
+import * as yaml from 'js-yaml';
 
 export interface ContentData {
     frontmatter: any;
     rawContent: string;
 }
 
-// Global content cache
-let contentCache: Record<string, ContentData> = {};
-let cacheInitialized = false;
+const contentMap: Record<string, string> = {
+    '/welcome': welcome,
+    '/about': about,
+    '/component-examples': componentExamples,
+    '/first-tsm': firstTsm,
+    '/frontmatter-examples': frontmatterExamples,
+    '/installation': installation,
+    '/overview': overview,
+    '/quick-start': quickStart,
+    '/test-markdoc-rendering': testMarkdocRendering
+};
 
-// Initialize content cache by loading all content
-async function initializeContentCache() {
-    if (cacheInitialized) return;
+function parseFrontmatter(content: string): { content: string; frontmatter: any } {
+    const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+    const match = content.match(frontmatterRegex);
 
-    const paths = [
-        '/welcome',
-        '/about',
-        '/component-examples',
-        '/first-tsm',
-        '/frontmatter-examples',
-        '/installation',
-        '/overview',
-        '/quick-start',
-        '/test-markdoc-rendering'
-    ];
+    if (!match) {
+        return { content, frontmatter: {} };
+    }
+
+    const frontmatterText = match[1] ?? '';
+    const contentWithoutFrontmatter = match[2] ?? '';
 
     try {
-        const promises = paths.map(async (path) => {
-            const url = typeof window !== 'undefined'
-                ? `/api/content?path=${encodeURIComponent(path)}`
-                : `http://localhost:3000/api/content?path=${encodeURIComponent(path)}`;
-            const response = await fetch(url);
-            if (response.ok) {
-                const data = await response.json();
-
-                // Just store the raw content - ReactMarkdown will handle the parsing
-                contentCache[path] = {
-                    frontmatter: data.frontmatter,
-                    rawContent: data.rawContent
-                };
-            }
-        });
-
-        await Promise.all(promises);
-        cacheInitialized = true;
-        console.log('✅ Content cache initialized with', Object.keys(contentCache).length, 'documents');
+        const frontmatter = yaml.load(frontmatterText) || {};
+        return { content: contentWithoutFrontmatter, frontmatter };
     } catch (error) {
-        console.error('❌ Error initializing content cache:', error);
+        console.warn('Failed to parse frontmatter:', error);
+        return { content, frontmatter: {} };
     }
 }
 
-// Synchronous version using pre-loaded content cache
-export function loadMarkdownContentSync(path: string): ContentData {
-    // Handle root path
+export function loadMarkdownContent(path: string): ContentData {
     const contentPath = path === '/' ? '/welcome' : path;
+    const rawContent = contentMap[contentPath];
+    const { content, frontmatter } = parseFrontmatter(rawContent ?? '');
 
-    if (!cacheInitialized) {
-        throw new Error('Content cache not initialized. Call initializeContentCache() first.');
-    }
-
-    const content = contentCache[contentPath];
     if (!content) {
         throw new Error(`Content not found: ${path}`);
     }
 
-    return content;
-}
-
-// Export the initialization function
-export { initializeContentCache };
-
-// Keep the async version for backward compatibility
-export async function loadMarkdownContent(path: string): Promise<ContentData> {
-    try {
-        // Remove leading slash and convert to file path
-        const filePath = path === '/' ? 'welcome.md' : path.slice(1) + '.md';
-
-        // Fetch the raw markdown content
-        const response = await fetch(`/content/${filePath}`);
-        if (!response.ok) {
-            throw new Error(`Content not found: ${path}`);
-        }
-
-        const fileContent = await response.text();
-        const { data: frontmatter, content: markdownContent } = matter(fileContent);
-
-        return {
-            frontmatter,
-            rawContent: markdownContent
-        };
-    } catch (error) {
-        throw new Error(`Failed to load content for path: ${path}`);
-    }
+    return {
+        frontmatter,
+        rawContent: content
+    };
 }
 
 export function getAvailableContentPaths(): string[] {
-    // Return list of available content paths
-    return [
-        '/',
-        '/welcome',
-        '/about',
-        '/component-examples',
-        '/first-tsm',
-        '/frontmatter-examples',
-        '/installation',
-        '/overview',
-        '/quick-start',
-        '/test-markdoc-rendering'
-    ];
+    return ['/', ...Object.keys(contentMap)];
 }

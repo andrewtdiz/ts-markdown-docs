@@ -5,7 +5,7 @@ import { DynamicSidebar } from './DynamicSidebar';
 import { PageActions } from './PageActions';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { sidebar } from '../sidebar';
-import { loadMarkdownContentSync } from '../lib/content-loader';
+import { loadMarkdownContent } from '../lib/content-loader';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { ArrowRight } from 'lucide-react';
 import { Separator } from './ui/separator';
@@ -36,7 +36,7 @@ export function DocumentationLayout() {
 
         try {
             // Load content synchronously
-            const { frontmatter, rawContent } = loadMarkdownContentSync(currentPath);
+            const { frontmatter, rawContent } = loadMarkdownContent(currentPath);
 
             // Update document title
             if (frontmatter?.title) {
