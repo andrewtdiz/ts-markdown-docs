@@ -105,7 +105,7 @@ export function LandingPage() {
                                             <span className="line font-bold text-[#569CD6]">    ## </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span><span className="font-bold text-[#569CD6]">from TS Markdown!</span>
                                             <br />
                                             <br />
-                                            <span className="line"><span className="text-[#d4d4d4]">    Render components with:</span><span className="text-[#569CD6]">:</span></span>
+                                            <span className="line"><span className="text-[#d4d4d4]">    Render components with:</span></span>
                                             <br />
                                             <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
                                                 <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
@@ -136,7 +136,7 @@ export function LandingPage() {
                                             <span className="line text-[#333333]">    # </span><span className="text-[#333333]">{`{{`}</span><span className="text-[#001080]"> greeting</span><span className="text-[#333333]"> {`}} `}</span>
                                             <br />
                                             <br />
-                                            <span className="line"><span className="text-[#333333]">    Render components with:</span><span className="text-[#0000ff]">:</span></span>
+                                            <span className="line"><span className="text-[#333333]">    Render components with:</span></span>
                                             <br />
                                             <span className="line"><span className="text-[#800000]">    &lt;@</span><span className="text-[#267f99]">List</span>
                                                 <span className="text-[#001080]"> items</span><span className="text-[#0000ff]">=</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span>
