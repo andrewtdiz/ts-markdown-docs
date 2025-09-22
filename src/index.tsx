@@ -8,7 +8,6 @@ initializeContentManifest();
 
 const server = serve({
   routes: {
-    // Serve index.html for all unmatched routes.
     "/*": index,
 
     "/health": {
@@ -17,71 +16,6 @@ const server = serve({
           message: "OK",
         });
       },
-    },
-
-    "/api/hello": {
-      async GET(req) {
-        return Response.json({
-          message: "Hello, world!",
-          method: "GET",
-        });
-      },
-      async PUT(req) {
-        return Response.json({
-          message: "Hello, world!",
-          method: "PUT",
-        });
-      },
-    },
-
-    "/api/hello/:name": async req => {
-      const name = req.params.name;
-      return Response.json({
-        message: `Hello, ${name}!`,
-      });
-    },
-
-    "/api/content": {
-      async GET(req) {
-        const url = new URL(req.url);
-        const path = url.searchParams.get('path') || '/welcome';
-
-        const content = getContent(path);
-
-        if (!content) {
-          return Response.json({ error: 'Content not found' }, { status: 404 });
-        }
-
-        // Only return raw markdown content and frontmatter
-        return Response.json({
-          frontmatter: content.frontmatter,
-          rawContent: content.rawContent
-        });
-      }
-    },
-
-    "/api/content-metadata": {
-      async GET(req) {
-        const metadata = getAllContentMetadata();
-        return Response.json(metadata);
-      }
-    },
-
-    "/content/:filename": {
-      async GET(req) {
-        const filename = req.params.filename;
-        const content = getContent(`/${filename.replace('.md', '')}`);
-
-        if (!content) {
-          return Response.json({ error: 'Content not found' }, { status: 404 });
-        }
-
-        return new Response(content.rawContent, {
-          headers: {
-            'Content-Type': 'text/markdown',
-          },
-        });
-      }
     },
   },
 
