@@ -44,7 +44,7 @@ export function LandingPage() {
             <Header />
 
             <div className="flex flex-col items-center max-w-7xl">
-                <div className="px-4 py-16">
+                <div className="w-full pl-8 py-16">
                     <div className="grid lg:grid-cols-5 gap-6 items-center">
                         {/* Left side - Title and buttons */}
                         <div className="lg:col-span-2 space-y-8">
