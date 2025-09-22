@@ -102,7 +102,7 @@ export function LandingPage() {
                                             <br />
                                             <span className="line"><span className="text-[#569CD6]">  return</span><span className="text-[#d4d4d4]"> (</span></span>
                                             <br />
-                                            <span className="line text-[#d4d4d4]">    # </span><span className="text-[#d4d4d4]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#d4d4d4]"> {`}} `}</span>
+                                            <span className="line text-[#d4d4d4]">    # </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span>
                                             <br />
                                             <br />
                                             <span className="line"><span className="text-[#d4d4d4]">    Render markdown with</span><span className="text-[#569CD6]">:</span></span>
@@ -247,7 +247,7 @@ export function LandingPage() {
             </div>
 
             {/* Footer */}
-            <div className="w-full px-4 py-6 border-t">
+            <div className="w-full px-4 py-6 border-t border-border/50">
                 <div className="text-center text-muted-foreground">
                     <p className="text-sm">Made with ❤️ by Andrew</p>
                 </div>
