@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Callout } from '../Callout';
 import { markdownComponents as advancedComponents } from './components';
-import { Copy } from 'lucide-react';
+import { Check, ClipboardCheckIcon, Copy } from 'lucide-react';
 
 // Heading Components
 export const Heading1 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -92,17 +92,42 @@ export const Code = ({ children, className, ...props }: React.HTMLAttributes<HTM
     </code>
 );
 
-export const CodeBlock = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
-        className={cn("relative mt-3 mb-3 overflow-x-auto rounded-md border bg-muted/50 p-3", className)}
-        {...props}
-    >
-        <Button variant="ghost" size="sm" className="absolute z-10 top-2 right-2 border h-10 w-10">
-            <Copy className="h-4 w-4" />
-        </Button>
-        {children}
-    </pre>
-);
+export const CodeBlock = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
+    const [clicked, setClicked] = useState(false);
+    const getRawText = (children: React.ReactNode): string => {
+        if (typeof children === 'string') return children;
+        if (Array.isArray(children)) {
+            return children.map(getRawText).join('');
+        }
+        if (React.isValidElement(children)) {
+            return getRawText(children.props?.children);
+        }
+        return '';
+    };
+
+    const rawContent = getRawText(children);
+
+    return (
+        <pre
+            className={cn("relative mt-3 mb-3 overflow-x-auto rounded-md border bg-muted/50 p-3", className)}
+            {...props}
+        >
+            <Button variant="ghost" size="sm" onClick={() => { setClicked(true); navigator.clipboard.writeText(rawContent); setTimeout(() => setClicked(false), 2000); }} className="absolute z-10 top-2 right-2 border h-10">
+                {clicked ? (
+                    <>
+                        <ClipboardCheckIcon className="h-4 w-4 text-green-700 dark:text-green-500" />
+                        <p className="text-green-700 dark:text-green-500">Copied!</p>
+                    </>
+                ) : (
+                    <>
+                        <Copy className="h-4 w-4" />
+                    </>
+                )}
+            </Button>
+            {children}
+        </pre>
+    )
+};
 
 // List Components
 export const UnorderedList = ({ children, className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
@@ -366,6 +391,7 @@ export const markdownComponents = {
             {children}
         </figcaption>
     ),
+    codeBlock: CodeBlock,
 
     // Custom components
     Alert: AlertComponent,

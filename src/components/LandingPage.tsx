@@ -14,18 +14,18 @@ export function LandingPage() {
         },
         {
             icon: FileText,
-            title: "TS Markdown Made Better",
-            description: "Enhanced TS Markdown with better syntax, improved performance, and seamless React integration."
+            title: "Markdown Made Better",
+            description: "Enhances markdown generation with better syntax and seamless integration."
         },
         {
             icon: Component,
-            title: "React Components",
-            description: "Use any React component directly in your TS Markdown files with full TypeScript support."
+            title: "Component-style Architecture",
+            description: "Import TS Markdown files as components, with type-safe props and children."
         },
         {
             icon: Rocket,
             title: "Fast & Modern",
-            description: "Built with Bun for lightning-fast development and deployment experiences."
+            description: "Built with Bun for blazingly fast iterative development and deployment."
         }
     ];
 
@@ -37,104 +37,108 @@ export function LandingPage() {
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen flex flex-col items-center">
             {/* Header */}
             <Header />
 
-            {/* Hero Section */}
-            <div className="w-screen px-4 py-16">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h1 className="text-5xl font-bold tracking-tight mb-6">
-                        TS Markdown
-                    </h1>
-                    <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                        A better markdown experience. <br />
-                        Type-safe, component-based, and fast.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button asChild size="lg" className="text-lg px-8">
-                            <Link to="/quick-start">
-                                Get Started
-                                <ArrowRight className="ml-2 h-5 w-5" />
-                            </Link>
-                        </Button>
-                        <Button asChild variant="outline" size="lg" className="text-lg px-8">
-                            <Link to="/overview">
-                                Learn More
-                            </Link>
-                        </Button>
+            <div className="flex flex-col items-center max-w-7xl">
+                <div className="px-4 py-16">
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="text-5xl font-bold tracking-tight mb-6">
+                            TS Markdown
+                        </h1>
+                        <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                            A type-safe, component based markdown engine. <br />
+
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Button asChild size="lg" className="text-lg px-8">
+                                <Link to="/quick-start">
+                                    Get Started
+                                    <ArrowRight className="ml-2 h-5 w-5" />
+                                </Link>
+                            </Button>
+                            <Button asChild variant="outline" size="lg" className="text-lg px-8">
+                                <Link to="/overview">
+                                    Learn More
+                                </Link>
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Features Section */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold mb-4">Why TS Markdown?</h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Enhanced TS Markdown with powerful features for modern documentation and content creation.
-                    </p>
+                {/* Features Section */}
+                <div className="container mx-auto px-4 py-16">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold mb-4">Why TS Markdown?</h2>
+                        <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
+                            What if writing markdown felt more like TypeScript? <br />
+                        </p>
+                        <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
+                            And less like <code>f"""</code>, <code>$&#123;&#125;</code>, and <code>"\n\n"</code>?
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {features.map((feature, index) => {
+                            const IconComponent = feature.icon;
+                            return (
+                                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                                    <CardHeader>
+                                        <div className="mx-auto mb-4 p-3 rounded-full bg-primary/10 w-fit">
+                                            <IconComponent className="h-6 w-6 text-primary" />
+                                        </div>
+                                        <CardTitle className="text-lg">{feature.title}</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <CardDescription className="text-sm">
+                                            {feature.description}
+                                        </CardDescription>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
+                    </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {features.map((feature, index) => {
-                        const IconComponent = feature.icon;
-                        return (
-                            <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                {/* Quick Links Section */}
+                <div className="container mx-auto px-4 py-16">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold mb-4">Get Started</h2>
+                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                            Jump into TS Markdown with these essential guides and tutorials.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                        {quickLinks.map((link, index) => (
+                            <Card key={index} className="hover:shadow-lg transition-shadow group">
                                 <CardHeader>
-                                    <div className="mx-auto mb-4 p-3 rounded-full bg-primary/10 w-fit">
-                                        <IconComponent className="h-6 w-6 text-primary" />
-                                    </div>
-                                    <CardTitle className="text-lg">{feature.title}</CardTitle>
+                                    <CardTitle className="group-hover:text-primary transition-colors">
+                                        {link.title}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {link.description}
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <CardDescription className="text-sm">
-                                        {feature.description}
-                                    </CardDescription>
+                                    <Button asChild variant="outline" className="w-full">
+                                        <Link to={link.href}>
+                                            Read More
+                                            <ArrowRight className="ml-2 h-4 w-4" />
+                                        </Link>
+                                    </Button>
                                 </CardContent>
                             </Card>
-                        );
-                    })}
-                </div>
-            </div>
-
-            {/* Quick Links Section */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold mb-4">Get Started</h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Jump into TS Markdown with these essential guides and tutorials.
-                    </p>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    {quickLinks.map((link, index) => (
-                        <Card key={index} className="hover:shadow-lg transition-shadow group">
-                            <CardHeader>
-                                <CardTitle className="group-hover:text-primary transition-colors">
-                                    {link.title}
-                                </CardTitle>
-                                <CardDescription>
-                                    {link.description}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <Button asChild variant="outline" className="w-full">
-                                    <Link to={link.href}>
-                                        Read More
-                                        <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-            </div>
-
-            {/* Footer */}
-            <div className="container mx-auto px-4 py-8 border-t">
-                <div className="text-center text-muted-foreground">
-                    <p>Built with TS Markdown • Powered by Bun • Enhanced with React</p>
+                {/* Footer */}
+                <div className="container mx-auto px-4 py-8 border-t">
+                    <div className="text-center text-muted-foreground">
+                        <p className="text-sm">Built with TS Markdown • Powered by Bun • Enhanced with React</p>
+                    </div>
                 </div>
             </div>
         </div>

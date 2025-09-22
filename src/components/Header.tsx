@@ -39,7 +39,7 @@ export function Header({ showNavigation = true }: HeaderProps) {
                             <Button
                                 variant="ghost"
                                 className='text-md text-foreground/80 font-normal'
-                                onClick={() => navigate('/welcome')}
+                                onClick={() => navigate('/overview')}
                             >
                                 Docs
                             </Button>
