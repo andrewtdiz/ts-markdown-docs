@@ -51,13 +51,13 @@ export function Header({ showNavigation = true }: HeaderProps) {
                             >
                                 About
                             </Button>
-                            <Button
+                            {/* <Button
                                 variant="ghost"
                                 className='text-lg rounded-full text-foreground/80 font-normal h-10 w-10'
                                 onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
                             >
                                 {currentTheme === 'dark' ? <SunIcon className='w-6! h-6!' /> : <MoonIcon className='w-6! h-6!' />}
-                            </Button>
+                            </Button> */}
                             <Button
                                 variant="ghost"
                                 className='text-foreground/80 rounded-full font-normal h-10 w-10'

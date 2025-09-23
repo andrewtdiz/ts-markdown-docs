@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Callout } from '../Callout';
 import { markdownComponents as advancedComponents } from './components';
 import { Check, ClipboardCheckIcon, Copy } from 'lucide-react';
-import { createHighlighterCoreSync } from 'shiki';
+import { createHighlighter, createHighlighterCoreSync } from 'shiki';
 
 // Heading Components
 export const Heading1 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -101,6 +101,14 @@ import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 import themeDark from '@shikijs/themes/material-theme-darker'
 import themeLight from '@shikijs/themes/material-theme-lighter'
 import { useTheme } from '../ThemeProvider';
+import { tsmd } from './tsmd';
+import { vsCode } from './vscode';
+
+
+const highlighter = await createHighlighter({
+    langs: [tsmd as any],
+    themes: [vsCode as any],
+})
 
 const shikiDark = createHighlighterCoreSync({
     themes: [themeDark],
@@ -136,7 +144,17 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
     const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
 
     const rawContent = getRawText(children);
-    const html = currentTheme === 'dark' ? shikiDark.codeToHtml(rawContent, { lang: language, theme: 'material-theme-darker' }) : shikiLight.codeToHtml(rawContent, { lang: language, theme: 'material-theme-lighter' });
+
+    // Use custom highlighter for tsmd language
+    let html;
+    if (language === 'tsmd') {
+        html = highlighter.codeToHtml(rawContent, {
+            lang: 'tsmd',
+            theme: 'Default Dark Modern'
+        });
+    } else {
+        html = currentTheme === 'dark' ? shikiDark.codeToHtml(rawContent, { lang: language, theme: 'material-theme-darker' }) : shikiLight.codeToHtml(rawContent, { lang: language, theme: 'material-theme-lighter' });
+    }
     const lineCount = rawContent.split('\n').length - 1;
 
     return (
@@ -145,7 +163,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     {language === "shell" ? (
                         "bash"
-                    ) : language}
+                    ) : language === "tsmd" ? "tsmd" : language}
                 </CardTitle>
                 <Button
                     variant="ghost"
@@ -169,7 +187,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                     dangerouslySetInnerHTML={{ __html: html }}
                     className="bg-transparent! ml-6! p-4"
                 />
-                <pre className="absolute left-1 shiki material-theme-darker">
+                {language !== "bash" && (<pre className="absolute left-1 shiki material-theme-darker">
                     <code className="flex flex-col ">
                         {Array.from({ length: lineCount }).map((_, index) => (
                             <span key={index} className="line text-muted-foreground/25 font-light!">
@@ -177,7 +195,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                             </span>
                         ))}
                     </code>
-                </pre>
+                </pre>)}
 
             </CardContent>
         </Card>

@@ -50,7 +50,8 @@ bun add react react-dom typescript
 
 Create a file called `Welcome.mdx` in your `mdx/` directory:
 
-```mdx
+
+```tsmd
 // mdx/Welcome.mdx
 function Welcome() {
   const name = 'Better-MDX Developer';
@@ -101,7 +102,7 @@ Every Better-MDX file follows this pattern:
 
 Use `{{ expression }}` to inject dynamic content:
 
-```mdx
+```tsmd
 function UserProfile() {
   const user = {
     name: 'Alice Johnson',
@@ -128,7 +129,7 @@ function UserProfile() {
 
 Show different content based on conditions:
 
-```mdx
+```tsmd
 function Dashboard({ user }) {
   const notifications = getNotifications(user.id);
   const hasUnreadMessages = notifications.some(n => !n.read);
@@ -162,7 +163,7 @@ function Dashboard({ user }) {
 
 Pass data to your MDX components:
 
-```mdx
+```tsmd
 function ProductCard({ product, showPrice = true }) {
   const isOnSale = product.salePrice < product.regularPrice;
   const discount = Math.round((1 - product.salePrice / product.regularPrice) * 100);
@@ -195,7 +196,7 @@ function ProductCard({ product, showPrice = true }) {
 
 Use React components within your MDX:
 
-```mdx
+```tsmd
 import { Button, Card, Chart } from '../components';
 import { formatDate } from '../utils';
 
@@ -394,7 +395,7 @@ tester.updateSnapshot('user-profile', userProfileMDX, context);
 
 ### Data Fetching
 
-```mdx
+```tsmd
 function BlogPost() {
   const post = getCurrentPost(); // Your data fetching logic
   const relatedPosts = getRelatedPosts(post.tags);
@@ -421,7 +422,7 @@ function BlogPost() {
 
 ### Error Handling
 
-```mdx
+```tsmd
 function SafeContent() {
   let data;
   let error;
@@ -457,7 +458,7 @@ function SafeContent() {
 
 ### Internationalization
 
-```mdx
+```tsmd
 function MultiLanguageContent() {
   const currentLocale = getCurrentLocale();
   const t = useTranslations();
@@ -489,7 +490,7 @@ function MultiLanguageContent() {
 
 ### 1. Optimize Large Data Sets
 
-```mdx
+```tsmd
 function LargeDataDisplay() {
   const allItems = getLargeDataSet(); // 1000+ items
   const itemsPerPage = 20;
@@ -520,7 +521,7 @@ function LargeDataDisplay() {
 
 ### 2. Lazy Loading Components
 
-```mdx
+```tsmd
 import { LazyComponent } from '../components';
 
 function HomePage() {
@@ -543,7 +544,7 @@ function HomePage() {
 
 ### 3. Memoization for Expensive Calculations
 
-```mdx
+```tsmd
 function ComplexAnalytics() {
   const rawData = getLargeDataSet();
 
@@ -579,19 +580,19 @@ function ComplexAnalytics() {
 #### 1. Compilation Errors
 
 **Problem**: "Unmatched interpolation braces"
-```mdx
+```tsmd
 # Welcome {{ name  // Missing closing brace
 ```
 
 **Solution**: Always close your interpolation braces
-```mdx
+```tsmd
 # Welcome {{ name }}
 ```
 
 #### 2. TypeScript Errors
 
 **Problem**: Variable not defined
-```mdx
+```tsmd
 function Example() {
   return (
     # Hello {{ unknownVariable }}
@@ -600,7 +601,7 @@ function Example() {
 ```
 
 **Solution**: Define all variables used in templates
-```mdx
+```tsmd
 function Example() {
   const unknownVariable = 'World';
 
@@ -613,12 +614,12 @@ function Example() {
 #### 3. Component Import Issues
 
 **Problem**: Component not rendering
-```mdx
+```tsmd
 import { MissingComponent } from './wrong-path';
 ```
 
 **Solution**: Check import paths and ensure components exist
-```mdx
+```tsmd
 import { Button } from '../components/Button';
 ```
 

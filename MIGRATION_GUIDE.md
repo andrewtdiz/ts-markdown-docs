@@ -7,7 +7,7 @@ This guide helps you migrate from other content frameworks to Better-MDX.
 ### Key Differences
 
 **Traditional MDX:**
-```mdx
+```tsmd
 import { Button } from './components';
 
 export const metadata = {
@@ -25,7 +25,7 @@ This is a standard MDX file with JSX mixed in.
 ```
 
 **Better-MDX:**
-```mdx
+```tsmd
 import { Button } from './components';
 
 function MyPost() {
@@ -79,7 +79,7 @@ export default function BlogPost({ post }) {
 ```
 
 **After (Better-MDX):**
-```mdx
+```tsmd
 // mdx/blog/BlogPost.mdx
 function BlogPost({ slug }) {
   const post = getPost(slug);
@@ -129,7 +129,7 @@ export default function BlogPost({ data }) {
 ```
 
 **After (Better-MDX):**
-```mdx
+```tsmd
 function BlogPost({ slug }) {
   const post = getPostBySlug(slug);
 
@@ -173,7 +173,7 @@ Published on {{ page.date | date: "%B %d, %Y" }}
 ```
 
 **After (Better-MDX):**
-```mdx
+```tsmd
 function BlogPost() {
   const page = {
     title: "My Post",
@@ -219,7 +219,7 @@ console.log(greeting);
 ```
 
 **After (Better-MDX):**
-```mdx
+```tsmd
 import { CodeBlock, Figure } from '../components';
 
 function BlogPost() {
@@ -249,7 +249,7 @@ function BlogPost() {
 ### Converting MDX pages
 
 **Before (Docusaurus):**
-```mdx
+```tsmd
 ---
 id: getting-started
 title: Getting Started
@@ -276,7 +276,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 **After (Better-MDX):**
-```mdx
+```tsmd
 import { Tabs, TabItem, CodeBlock } from '../components';
 
 function GettingStarted() {
@@ -428,7 +428,7 @@ better-mdx migrate --report ./migration-report.html
 
 Add type safety to your migrated content:
 
-```mdx
+```tsmd
 interface BlogPost {
   title: string;
   author: string;
@@ -453,7 +453,7 @@ function BlogPost() {
 
 ### 2. Extract Reusable Components
 
-```mdx
+```tsmd
 // Before: Duplicated code
 function PostA() {
   return (
@@ -472,7 +472,7 @@ function PostB() {
 }
 ```
 
-```mdx
+```tsmd
 // After: Reusable components
 import { PostHeader } from '../components';
 
@@ -488,7 +488,7 @@ function PostA() {
 
 Use Better-MDX features for better performance:
 
-```mdx
+```tsmd
 function OptimizedPost() {
   // Lazy load heavy components
   const showChart = useFeatureFlag('charts');

@@ -54,7 +54,7 @@
 }
 
 .dark {
-  --background: rgb(23, 23, 23);
+  --background: #171717;
   --foreground: rgb(229, 229, 229);
   --card: rgb(38, 38, 38);
   --card-foreground: rgb(229, 229, 229);

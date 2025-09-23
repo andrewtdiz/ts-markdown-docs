@@ -19,8 +19,9 @@ Instead of juggling template strings, JSX, or separate markdown files, write you
 
 ## Basic Example
 
-```typescript
-function Profile(user: User) {
+```tsmd
+function Profile({ user }: { user: User }) {
+  
   return (
     # {{ user.name }}'s Profile
 
@@ -39,14 +40,14 @@ This generates clean markdown like:
 ```markdown
 # Alice's Profile
 
-**Role:** Senior Developer
+**Role:** Senior Engineer
 **Experience:** 8 years
 **Status:** Active ✅
 
 **Skills:**
 - React
 - TypeScript
-- Node.js
+- Bun
 ```
 
 ## Key Features

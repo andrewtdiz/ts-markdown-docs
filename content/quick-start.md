@@ -10,32 +10,21 @@ Get started with TS Markdown in 3 simple steps.
 
 ## Step 1: Create Your First TSM File
 
-Create a file called `welcome.tsmd`:
+Create a file called `hello.tsmd`:
 
-```typescript
-import { getUser } from './api.js'
+```tsmd
+import { List } from './List';
 
-async function WelcomeMessage(userId: string) {
-  const user = await getUser(userId)
+export function HelloWorld({features}: Props) {
+  const greeting = "Hello";
 
   return (
-    # Welcome {{ user.isNew ? 'back' : 'aboard' }}, {{ user.name }}! 👋
+    ## {{ greeting }} from TS Markdown!
 
-    {{ user.isNew ? (
-      Thanks for joining us! Let's get you started:
-    ) : (
-      Great to see you again! Here's what's new:
-    ) }}
-
-    - Check out our latest features
-    - Update your profile settings
-    {{ user.isNew ? '- Complete your onboarding' : '- Review recent changes' }}
-
-    <@UserStatus user={user} />
+    Render components with:
+    <@List items={features} />
   )
 }
-
-export default WelcomeMessage
 ```
 
 ## Step 2: Transpile Your Code
@@ -43,34 +32,7 @@ export default WelcomeMessage
 Run the TSMD transpiler:
 
 ```shell
-bun run tsmd welcome.tsmd
-```
-
-This creates `welcome.ts` that produces markdown strings:
-
-```typescript
-// welcome.ts (generated)
-import { getUser } from './api.js'
-import { UserStatus } from './UserStatus.js'
-
-async function WelcomeMessage(userId: string): Promise<string> {
-  const user = await getUser(userId)
-
-  return __tsm([
-    "# Welcome ", (user.isNew ? "back" : "aboard"), ", ", user.name, "! 👋\n",
-    (user.isNew ? __tsm([
-      "Thanks for joining us! Let's get you started:\n"
-    ]) : __tsm([
-      "Great to see you again! Here's what's new:\n"
-    ])),
-    "- Check out our latest features\n",
-    "- Update your profile settings\n",
-    (user.isNew ? "- Complete your onboarding\n" : "- Review recent changes\n"),
-    await UserStatus({ user })
-  ])
-}
-
-export default WelcomeMessage
+bun run tsmd hello.tsmd
 ```
 
 ## Step 3: Use Your Generated Function
@@ -78,25 +40,30 @@ export default WelcomeMessage
 Now use it like any TypeScript function:
 
 ```typescript
-import WelcomeMessage from './welcome.js'
+import HelloWorld from './hello.js'
 
-const markdown = await WelcomeMessage('user123')
+const markdown = await HelloWorld({ 
+  features: ['Type-safety', 'Reusable components', 'Fast development'] 
+})
+
 console.log(markdown)
+```
 
-// Output:
-// # Welcome back, Alice! 👋
-// Great to see you again! Here's what's new:
-// - Check out our latest features
-// - Update your profile settings
-// - Review recent changes
-// [User status rendered by UserStatus component]
+Output:
+```markdown
+## Hello from TS Markdown!
+
+Render components with:
+- Type-safety
+- Reusable components
+- Fast development
 ```
 
 ## Core Syntax
 
 ### Dynamic Content
 
-```typescript
+```tsmd
 function UserProfile(user: User) {
   return (
     # {{ user.name }}'s Profile
@@ -108,7 +75,7 @@ function UserProfile(user: User) {
 
 ### Conditional Rendering
 
-```typescript
+```tsmd
 function StatusMessage(user: User) {
   return (
     {{ user.isActive ? (
@@ -122,7 +89,7 @@ function StatusMessage(user: User) {
 
 ### Components
 
-```typescript
+```tsmd
 function Dashboard(data: Data) {
   return (
     <@UserProfile user={data.user} />
@@ -135,7 +102,7 @@ function Dashboard(data: Data) {
 
 ### Basic Template
 
-```typescript
+```tsmd
 function Hello(name: string) {
   return (
     # Hello {{ name }}!
@@ -146,7 +113,7 @@ function Hello(name: string) {
 
 ### With Data
 
-```typescript
+```tsmd
 function Report(user: User, posts: Post[]) {
   return (
     # Report for {{ user.name }}
@@ -168,7 +135,7 @@ function Report(user: User, posts: Post[]) {
 
 ### Error Handling
 
-```typescript
+```tsmd
 function SafeTemplate(data: Data | null) {
   return (
     {{ data ? (

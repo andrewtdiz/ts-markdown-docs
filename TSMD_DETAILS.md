@@ -2,7 +2,7 @@ Here’s an internal spec for the **TypeScript-Markdown (TSM) → TypeScript** t
 
 # 1) Scope & Goals
 
-* **Input:** `.tsmd` (or `.tsm`) files containing standard TypeScript plus **TSM blocks**: multi-line markdown returns, `{{ ... }}` inline expressions, component tags `<@Comp .../>`, lightweight XML wrappers, and markdown-first ergonomics.
+* **Input:** `.tsmd` files containing standard TypeScript plus **TSM markdown blocks**: multi-line markdown returns, `{{ ... }}` inline expressions, component tags `<@Comp .../>`, and markdown-first ergonomics.
 * **Output:** Valid `.ts` that:
 
   * Preserves author TypeScript (imports, async/await, control flow).
@@ -30,7 +30,7 @@ TSM introduces **embedded render expressions** inside TypeScript:
 
 * **Inline Interpolation:** `{{ expr }}` inside a block.
 
-* **Conditional forms:** `{{cond ? (...) : (...)}}`, `{{cond && (...)}}`, `{{!cond && (...)}}`.
+* **Conditional forms:** `{{cond ? (\n ... \n) : (\n ... \n)}}`, `{{cond && (\n ... \n)}}`, `{{!cond && (\n ... \n)}}`.
 
 * **Falsy compaction:** Falsy evals render nothing and **do not leave placeholder whitespace**.
 
@@ -40,7 +40,7 @@ TSM introduces **embedded render expressions** inside TypeScript:
 
 * **XML wrappers:** `<content>…</content>` are structural (no output) unless bound to a component name; they define grouping for indentation/whitespace.
 
-* **One-line returns:** `return (**API Error**)` is a block with a single line.
+* **One-line returns:** `return (\n **API Error** \n)` is a block with a single line.
 
 # 3) File Processing Pipeline
 
@@ -150,17 +150,12 @@ Implementation:
 
 * Compile to just the children (no wrapper). They exist to group/indent author content.
 
-## 5.10 One-Line Block Returns
-
-* `return (**API Error**)` → `return __tsm(["**API Error**\n"]);`
-* A trailing newline is added if the author placed one; otherwise omit.
-
-## 5.11 Indentation & Empty Lines
+## 5.10 Indentation & Empty Lines
 
 * Preserve author indentation and blank lines verbatim.
 * When nested blocks render, inner lines inherit their own indentation (not auto-reindented).
 
-## 5.12 Streaming (forward-compatible)
+## 5.11 Streaming (forward-compatible)
 
 * When any child yields `Iterable<string>`, `__tsm` can return a `string` (default) or, under a compiler flag `stream: true`, return an `AsyncIterable<string>`.
 * v1: always returns `string`. Keep interfaces ready.
