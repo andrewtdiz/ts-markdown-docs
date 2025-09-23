@@ -53,7 +53,7 @@ export function LandingPage() {
                                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 md:mb-6 text-center lg:text-left">
                                     TS Markdown
                                 </h1>
-                                <p className="text-lg md:text-xl text-foreground/90 md:mb-8 font-light leading-relaxed">
+                                <p className="text-md md:text-xl text-foreground/90 md:mb-8 font-light leading-relaxed">
                                     A type-safe, component based markdown engine. <br />
                                 </p>
                             </div>
@@ -145,69 +145,73 @@ export function LandingPage() {
                 </div>
 
                 {/* Features Section */}
-                <div className="container mx-auto px-0.5 md:px-4 py-16">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
-                        <p className="text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            Imagine if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
-                        </p>
-                        <p className="mt-2 text-lg font-light text-foreground/90 max-w-2xl mx-auto">
-                            And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">`$&#123;&#125;`</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
-                        </p>
-                    </div>
+                <div className="w-full px-4 md:px-6 py-16">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
+                            <p className="text-md md:text-lg font-light text-foreground/90 max-w-2xl mx-auto">
+                                Imagine if writing markdown felt more like <p className="text-lg! inline font-medium text-blue-500 dark:text-blue-300">Typescript</p>, <br />
+                            </p>
+                            <p className="mt-2 text-md md:text-lg font-light text-foreground/90 max-w-2xl mx-auto">
+                                And less like <code className="text-red-400 dark:text-red-300">f"""</code>, <code className="text-red-400 dark:text-red-300">`$&#123;&#125;`</code>, and <code className="text-red-400 dark:text-red-300">"\n\n"</code>?
+                            </p>
+                        </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {features.map((feature, index) => {
-                            const IconComponent = feature.icon;
-                            return (
-                                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                                    <CardHeader>
-                                        <div className="mx-auto mb-4 p-3 rounded-full bg-primary/10 w-fit">
-                                            <IconComponent className="h-6 w-6 text-primary" />
-                                        </div>
-                                        <CardTitle className="text-lg">{feature.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <CardDescription className="text-sm">
-                                            {feature.description}
-                                        </CardDescription>
-                                    </CardContent>
-                                </Card>
-                            );
-                        })}
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                            {features.map((feature, index) => {
+                                const IconComponent = feature.icon;
+                                return (
+                                    <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                                        <CardHeader>
+                                            <div className="mx-auto mb-4 p-3 rounded-full bg-primary/10 w-fit">
+                                                <IconComponent className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <CardTitle className="text-lg">{feature.title}</CardTitle>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <CardDescription className="text-sm">
+                                                {feature.description}
+                                            </CardDescription>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
 
                 {/* Quick Links Section */}
-                <div className="container mx-auto px-4 py-16">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold mb-4">Get Started</h2>
-                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                            Jump into TS Markdown with these essential guides and tutorials.
-                        </p>
-                    </div>
+                <div className="w-full px-4 md:px-6 py-16">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold mb-4">Get Started</h2>
+                            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                                Jump into TS Markdown with these essential guides and tutorials.
+                            </p>
+                        </div>
 
-                    <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                        {quickLinks.map((link, index) => (
-                            <Card key={index} className="hover:shadow-lg transition-shadow group">
-                                <CardHeader>
-                                    <CardTitle className="group-hover:text-primary transition-colors">
-                                        {link.title}
-                                    </CardTitle>
-                                    <CardDescription>
-                                        {link.description}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <Button asChild variant="outline" className="w-full">
-                                        <Link to={link.href}>
-                                            Read More
-                                            <ArrowRight className="ml-2 h-4 w-4" />
-                                        </Link>
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))}
+                        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                            {quickLinks.map((link, index) => (
+                                <Card key={index} className="hover:shadow-lg transition-shadow group">
+                                    <CardHeader>
+                                        <CardTitle className="group-hover:text-primary transition-colors">
+                                            {link.title}
+                                        </CardTitle>
+                                        <CardDescription>
+                                            {link.description}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Button asChild variant="outline" className="w-full">
+                                            <Link to={link.href}>
+                                                Read More
+                                                <ArrowRight className="ml-2 h-4 w-4" />
+                                            </Link>
+                                        </Button>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
                 </div>
 

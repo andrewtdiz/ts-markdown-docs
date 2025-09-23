@@ -128,8 +128,6 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
     const languageDash = nodeChildren.flat().find((cls: any) => cls?.includes('language-'));
     const language = languageDash?.replace('language-', '') || 'tsx';
 
-    const { theme } = useTheme();
-
     const rawContent = getRawText(children);
 
     // Use custom highlighter for tsmd language
@@ -172,12 +170,12 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                     )}
                 </Button>
             </CardHeader>
-            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
+            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-6 md:min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
                 <div
                     dangerouslySetInnerHTML={{ __html: html }}
                     className="bg-transparent! ml-3 md:ml-6! p-4"
                 />
-                {language !== "bash" && (<pre className="absolute left-1 shiki material-theme-darker">
+                {language !== "bash" && (<pre className="absolute left-0 md:left-1 shiki material-theme-darker">
                     <code className="flex flex-col ">
                         {Array.from({ length: lineCount }).map((_, index) => (
                             <span key={index} className="line text-muted-foreground/25 font-light!">
