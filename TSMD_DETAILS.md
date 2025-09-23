@@ -2,7 +2,7 @@ Here’s an internal spec for the **TypeScript-Markdown (TSM) → TypeScript** t
 
 # 1) Scope & Goals
 
-* **Input:** `.tsm.ts` (or `.tsm`) files containing standard TypeScript plus **TSM blocks**: multi-line markdown returns, `{{ ... }}` inline expressions, component tags `<@Comp .../>`, lightweight XML wrappers, and markdown-first ergonomics.
+* **Input:** `.tsmd` (or `.tsm`) files containing standard TypeScript plus **TSM blocks**: multi-line markdown returns, `{{ ... }}` inline expressions, component tags `<@Comp .../>`, lightweight XML wrappers, and markdown-first ergonomics.
 * **Output:** Valid `.ts` that:
 
   * Preserves author TypeScript (imports, async/await, control flow).

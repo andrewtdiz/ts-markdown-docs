@@ -57,7 +57,7 @@ function MyPost() {
 
 Use our migration tool:
 
-```bash
+```shell
 npx better-mdx migrate --from=mdx --input=./content --output=./mdx
 ```
 
@@ -263,12 +263,12 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="npm" label="npm">
-    ```bash
+    ```shell
     npm install my-package
     ```
   </TabItem>
   <TabItem value="yarn" label="Yarn">
-    ```bash
+    ```shell
     yarn add my-package
     ```
   </TabItem>
@@ -371,7 +371,7 @@ function GettingStarted() {
 
 ### Automated Migration CLI
 
-```bash
+```shell
 # Migrate from various formats
 better-mdx migrate --from=mdx --input=./content
 better-mdx migrate --from=jekyll --input=./_posts
@@ -411,7 +411,7 @@ module.exports = {
 
 After migration, validate your content:
 
-```bash
+```shell
 # Validate all migrated files
 better-mdx validate ./mdx
 

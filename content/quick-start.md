@@ -10,10 +10,10 @@ Get started with TS Markdown in 3 simple steps.
 
 ## Step 1: Create Your First TSM File
 
-Create a file called `welcome.tsm.ts`:
+Create a file called `welcome.tsmd`:
 
 ```typescript
-// welcome.tsm.ts
+// welcome.tsmd
 import { getUser } from './api.js'
 
 async function WelcomeMessage(userId: string) {
@@ -43,8 +43,8 @@ export default WelcomeMessage
 
 Run the TSMD transpiler:
 
-```bash
-bun run tsmd welcome.tsm.ts
+```shell
+bun run tsmd welcome.tsmd
 ```
 
 This creates `welcome.ts` that produces markdown strings:

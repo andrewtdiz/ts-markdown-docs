@@ -16,7 +16,7 @@ Before you begin, make sure you have:
 
 Create a new Better-MDX project in seconds:
 
-```bash
+```shell
 # Using npm
 npx better-mdx init my-project
 cd my-project
@@ -34,7 +34,7 @@ bun run dev
 
 If you prefer to add Better-MDX to an existing project:
 
-```bash
+```shell
 # Install Better-MDX
 npm install better-mdx
 # or
@@ -244,7 +244,7 @@ function SalesReport() {
 
 Start the development server with hot reload:
 
-```bash
+```shell
 # Start with default settings
 better-mdx dev
 
@@ -264,7 +264,7 @@ Features included:
 
 Work with individual files during development:
 
-```bash
+```shell
 # Compile a single file to see output
 better-mdx compile my-file.mdx
 
@@ -282,7 +282,7 @@ better-mdx compile my-file.mdx --output ./output.json
 
 When you're ready to deploy:
 
-```bash
+```shell
 # Build all files
 better-mdx build
 
@@ -626,7 +626,7 @@ import { Button } from '../components/Button';
 
 Enable verbose logging for troubleshooting:
 
-```bash
+```shell
 # CLI debug mode
 better-mdx dev --verbose
 

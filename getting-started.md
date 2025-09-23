@@ -14,7 +14,7 @@ This guide will walk you through creating your first TS Markdown project from sc
 
 The fastest way to get started is with the TS Markdown CLI:
 
-```bash
+```shell
 npx tsm init my-first-project
 cd my-first-project
 npm install
@@ -27,7 +27,7 @@ This creates a complete project structure with examples and documentation.
 
 Install TS Markdown in an existing project:
 
-```bash
+```shell
 npm install tsm
 # or
 bun add tsm
@@ -277,7 +277,7 @@ function ContextExample() {
 
 ### Starting Development Server
 
-```bash
+```shell
 tsm dev
 ```
 
@@ -291,7 +291,7 @@ This starts a development server with:
 
 Watch specific files or directories:
 
-```bash
+```shell
 tsm watch ./tsm
 ```
 
@@ -299,7 +299,7 @@ tsm watch ./tsm
 
 Compile TS Markdown files to JSON format:
 
-```bash
+```shell
 tsm compile MyFile.tsm --output compiled.json
 ```
 
@@ -307,7 +307,7 @@ tsm compile MyFile.tsm --output compiled.json
 
 Test TS Markdown execution with mock context:
 
-```bash
+```shell
 tsm execute MyFile.tsm
 ```
 
@@ -315,7 +315,7 @@ tsm execute MyFile.tsm
 
 ### Build Command
 
-```bash
+```shell
 tsm build
 ```
 
@@ -369,7 +369,7 @@ function Welcome() {
 
 ### Running Tests
 
-```bash
+```shell
 tsm-test run
 ```
 

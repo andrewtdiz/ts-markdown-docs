@@ -17,12 +17,12 @@ Install TS Markdown with the npm package `ts-markdown`
 
 TS Markdown works with any package manager. We recommend Bun for the fastest installation:
 
-```bash
+```shell
 bun add tsmarkdown
 ```
 
 Or with npm:
-```bash
+```shell
 npm install tsmarkdown
 ```
 

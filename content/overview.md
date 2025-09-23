@@ -36,7 +36,7 @@ function Profile(user: User) {
 
 This generates clean markdown like:
 
-```md
+```markdown
 # Alice's Profile
 
 **Role:** Senior Developer

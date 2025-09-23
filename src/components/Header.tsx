@@ -38,15 +38,15 @@ export function Header({ showNavigation = true }: HeaderProps) {
                     {showNavigation && (
                         <div className="hidden md:flex items-center space-x-4">
                             <Button
-                                variant="ghost"
-                                className='text-md text-foreground/80 font-normal'
+                                variant="link"
+                                className='text-md text-foreground/90 font-normal'
                                 onClick={() => navigate('/overview')}
                             >
                                 Docs
                             </Button>
                             <Button
-                                variant="ghost"
-                                className='text-md text-foreground/80 font-normal'
+                                variant="link"
+                                className='text-md text-foreground/90 font-normal'
                                 onClick={() => navigate('/about')}
                             >
                                 About

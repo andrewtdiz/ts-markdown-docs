@@ -10,7 +10,7 @@ Let's build a complete TS Markdown application that demonstrates all the core fe
 
 ## Project Setup
 
-```bash
+```shell
 mkdir my-tsm-dashboard
 cd my-tsm-dashboard
 bun init -y
@@ -314,7 +314,7 @@ Create `index.html`:
 
 ## Run Your Application
 
-```bash
+```shell
 bun run index.ts
 ```
 

@@ -16,13 +16,13 @@ A modern full-stack template combining Markdoc for content authoring, Bun for fa
 
 ### Install Dependencies
 
-```bash
+```shell
 bun install
 ```
 
 ### Start Development Server
 
-```bash
+```shell
 bun dev
 ```
 
@@ -30,13 +30,13 @@ The server will start at `http://localhost:3000` with hot reload enabled.
 
 ### Production Build
 
-```bash
+```shell
 bun run build
 ```
 
 ### Run Production Server
 
-```bash
+```shell
 bun start
 ```
 
