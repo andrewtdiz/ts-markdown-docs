@@ -114,7 +114,7 @@ const shikiLight = createHighlighterCoreSync({
     engine: createJavaScriptRegexEngine()
 })
 
-export const CodeBlock = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
+export const CodeBlock = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement> & { node?: any }) => {
     const [clicked, setClicked] = useState(false);
     const getRawText = (children: React.ReactNode): string => {
         if (typeof children === 'string') return children;
@@ -122,54 +122,65 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
             return children.map(getRawText).join('');
         }
         if (React.isValidElement(children)) {
-            return getRawText(children.props?.children);
+            return getRawText((children.props as any)?.children);
         }
         return '';
     };
-    // console.log(JSON.stringify(props, null, 2));
-    const node = props?.node as any;
-    const nodeChildren = node?.children as any;
-    const properties = nodeChildren?.map((property: any) => property?.properties)?.flat()?.[0] as any;
-    const languageDash = properties?.className.filter((property: any) => property.includes('language-'))?.[0] as any;
-    const languageParsed = languageDash?.replace('language-', '') ?? 'tsx';
-    const language = languageParsed;
+
+    const node = props?.node;
+    const nodeChildren = node?.children?.map((child: any) => child?.properties?.className);
+    const languageDash = nodeChildren.flat().find((cls: any) => cls?.includes('language-'));
+    const language = languageDash?.replace('language-', '') || 'tsx';
 
     const { theme } = useTheme();
     const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
 
     const rawContent = getRawText(children);
     const html = currentTheme === 'dark' ? shikiDark.codeToHtml(rawContent, { lang: language, theme: 'material-theme-darker' }) : shikiLight.codeToHtml(rawContent, { lang: language, theme: 'material-theme-lighter' });
+    const lineCount = rawContent.split('\n').length - 1;
 
     return (
-        <div
-            className={cn("flex flex-col justify-center min-h-14 mt-3 mb-3 text-sm overflow-x-auto rounded-md border bg-muted/50 p-3", className)}
-        >
-            <div
-                dangerouslySetInnerHTML={{ __html: html }}
-                className="bg-transparent!"
-            />
-            <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                    setClicked(true);
-                    navigator.clipboard.writeText(rawContent);
-                    setTimeout(() => setClicked(false), 2000);
-                }}
-                className="absolute z-10 top-2 right-2 border h-10"
-            >
-                {clicked ? (
-                    <>
+        <Card className={cn("mt-3 bg-background mb-3 p-1! pb-1! overflow-hidden", className)}>
+            <CardHeader className="py-0! px-3 h-7 flex flex-row items-center justify-between space-y-0">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                    {language === "shell" ? (
+                        "bash"
+                    ) : language}
+                </CardTitle>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                        setClicked(true);
+                        navigator.clipboard.writeText(rawContent);
+                        setTimeout(() => setClicked(false), 2000);
+                    }}
+                    className="h-8 w-8 p-0"
+                >
+                    {clicked ? (
                         <ClipboardCheckIcon className="h-4 w-4 text-green-700 dark:text-green-500" />
-                        <p className="text-green-700 dark:text-green-500">Copied!</p>
-                    </>
-                ) : (
-                    <>
+                    ) : (
                         <Copy className="h-4 w-4" />
-                    </>
-                )}
-            </Button>
-        </div>
+                    )}
+                </Button>
+            </CardHeader>
+            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-14 mt-1 text-sm overflow-x-auto rounded-xl border">
+                <div
+                    dangerouslySetInnerHTML={{ __html: html }}
+                    className="bg-transparent! ml-6! p-4"
+                />
+                <pre className="absolute left-1 shiki material-theme-darker">
+                    <code className="flex flex-col ">
+                        {Array.from({ length: lineCount }).map((_, index) => (
+                            <span key={index} className="line text-muted-foreground/25 font-light!">
+                                <span className="text-xs"> {index + 1}</span>
+                            </span>
+                        ))}
+                    </code>
+                </pre>
+
+            </CardContent>
+        </Card>
     )
 };
 

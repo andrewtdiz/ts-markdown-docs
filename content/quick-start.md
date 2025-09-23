@@ -13,7 +13,6 @@ Get started with TS Markdown in 3 simple steps.
 Create a file called `welcome.tsmd`:
 
 ```typescript
-// welcome.tsmd
 import { getUser } from './api.js'
 
 async function WelcomeMessage(userId: string) {
@@ -79,7 +78,6 @@ export default WelcomeMessage
 Now use it like any TypeScript function:
 
 ```typescript
-// app.ts
 import WelcomeMessage from './welcome.js'
 
 const markdown = await WelcomeMessage('user123')

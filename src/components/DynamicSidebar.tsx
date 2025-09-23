@@ -83,7 +83,7 @@ export function DynamicSidebar({ sections }: DynamicSidebarProps) {
                                         <Button
                                             variant={'ghost'}
                                             className={cn(
-                                                "w-full justify-start duration-0 font-normal text-foreground/80 hover:text-foreground rounded-md text-left h-auto py-1 px-3 font-normal",
+                                                "w-full justify-start duration-0 font-normal text-foreground/80 hover:text-foreground rounded-lg text-left h-auto py-1.5 px-3 font-normal",
                                                 isActive && "text-foreground bg-muted  hover:bg-muted/80!",
                                                 !isActive && "hover:bg-transparent"
                                             )}
