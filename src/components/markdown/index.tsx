@@ -142,7 +142,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
 
     return (
         <div
-            className={cn("relative mt-3 mb-3 text-sm overflow-x-auto rounded-md border bg-muted/50 p-3", className)}
+            className={cn("flex flex-col justify-center min-h-14 mt-3 mb-3 text-sm overflow-x-auto rounded-md border bg-muted/50 p-3", className)}
         >
             <div
                 dangerouslySetInnerHTML={{ __html: html }}
