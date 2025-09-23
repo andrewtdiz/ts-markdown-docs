@@ -48,9 +48,9 @@ export function LandingPage() {
                 <div className="w-full pl-2 md:pl-8 py-16">
                     <div className="grid lg:grid-cols-5 gap-6 items-center">
                         {/* Left side - Title and buttons */}
-                        <div className="lg:col-span-2 space-y-8">
+                        <div className="lg:col-span-2 space-y-8 flex flex-col items-center lg:items-start justify-center">
                             <div>
-                                <h1 className="text-5xl font-bold tracking-tight mb-6">
+                                <h1 className="text-5xl font-bold tracking-tight mb-6 text-center lg:text-left">
                                     TS Markdown
                                 </h1>
                                 <p className="text-xl text-foreground/90 mb-8 font-light leading-relaxed">
