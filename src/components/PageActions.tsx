@@ -47,12 +47,12 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
     };
 
     return (
-        <div className="w-full flex justify-end items-center gap-1 pt-6 pb-1">
+        <div className="w-full flex justify-end items-center gap-1 pt-2 md:pt-6 pb-1">
             <Button
                 variant="ghost"
                 size="sm"
                 onClick={copyAsMarkdown}
-                className="flex items-center rounded-md text-foreground/70 font-normal hover:text-foreground h-6! gap-2"
+                className="flex items-center rounded-md text-xs md:text-sm text-foreground/70 font-normal hover:text-foreground h-6! gap-2"
             >
                 {copied ? (
                     <>
@@ -71,7 +71,7 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
                 variant="ghost"
                 size="sm"
                 onClick={askChatGPT}
-                className="flex items-center rounded-md text-foreground/70 font-normal hover:text-foreground h-6! gap-2"
+                className="flex items-center rounded-md text-xs md:text-sm text-foreground/70 font-normal hover:text-foreground h-6! gap-2"
             >
                 <MessageSquare className="h-4 w-4" />
                 Ask ChatGPT

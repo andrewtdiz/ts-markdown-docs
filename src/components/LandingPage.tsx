@@ -50,10 +50,10 @@ export function LandingPage() {
                         {/* Left side - Title and buttons */}
                         <div className="lg:col-span-2 space-y-8 flex flex-col items-center lg:items-start justify-center">
                             <div>
-                                <h1 className="text-5xl font-bold tracking-tight mb-6 text-center lg:text-left">
+                                <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 md:mb-6 text-center lg:text-left">
                                     TS Markdown
                                 </h1>
-                                <p className="text-xl text-foreground/90 mb-8 font-light leading-relaxed">
+                                <p className="text-lg md:text-xl text-foreground/90 md:mb-8 font-light leading-relaxed">
                                     A type-safe, component based markdown engine. <br />
                                 </p>
                             </div>
@@ -73,10 +73,10 @@ export function LandingPage() {
                         </div>
 
                         {/* Right side - Code blocks */}
-                        <div className="lg:col-span-3 lg:pl-2">
-                            <div className="grid grid-cols-5 gap-4">
+                        <div className="lg:col-span-3 lg:pl-2 mt-8 md:mt-0">
+                            <div className="flex flex-col items-center md:items-end md:grid grid-cols-1 md:grid-cols-5 gap-4">
                                 {/* TS Markdown Source */}
-                                <div className="col-span-3 bg-gray-100/25 dark:bg-[#1e1e1e] rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-900">
+                                <div className="md:col-span-3 bg-gray-100/25 dark:bg-[#1e1e1e] rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-900">
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.tsmd</span>
                                         <div className="flex space-x-1">
@@ -85,73 +85,41 @@ export function LandingPage() {
                                             <div className="w-2 h-2 rounded-full bg-green-500"></div>
                                         </div>
                                     </div>
-                                    {currentTheme === 'dark' ? (
-                                        <pre className="text-xs overflow-x-auto leading-relaxed text-[#d4d4d4]" tabIndex={0}><code>
-                                            <span className="line"><span className="text-[#569CD6]">import</span>
-                                                <span className="text-[#d4d4d4]"> {`{`}</span><span className="text-[#DCDCAA]"> List </span><span className="text-[#d4d4d4]">{`}`}</span>
-                                                <span className="text-[#569CD6]"> from</span><span className="text-[#CE9178]"> './List'</span>
-                                                <span className="text-[#d4d4d4]">;</span></span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#569CD6]">export</span><span className="text-[#569CD6]"> function</span>
-                                                <span className="text-[#DCDCAA]"> HelloWorld</span><span className="text-[#d4d4d4]">(</span><span className="text-[#d4d4d4]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#d4d4d4]">{`}`}</span><span className="text-[#569CD6]">:</span><span className="text-[#4EC9B0]"> Props</span></span><span className="text-[#d4d4d4]">)</span>
-                                            <span className="text-[#d4d4d4]"> {`{`}</span>
-                                            <br />
-                                            <span className="line"><span className="text-[#569CD6]">  const</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> =</span><span className="text-[#CE9178]"> "Hello"</span><span className="text-[#d4d4d4]">;</span></span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#569CD6]">  return</span><span className="text-[#d4d4d4]"> (</span></span>
-                                            <br />
-                                            <span className="line font-bold text-[#569CD6]">    ## </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span><span className="font-bold text-[#569CD6]">from TS Markdown!</span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#d4d4d4]">    Render components with:</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
-                                                <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
-                                                <span className="text-[#808080]"> /&gt;</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#d4d4d4]">  )</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#d4d4d4]">{`}`}</span></span>
-                                            <br /></code>
-                                        </pre>
-                                    ) : (
-                                        <pre className="text-xs overflow-x-auto leading-relaxed text-[#333333]" tabIndex={0}><code>
-                                            <span className="line"><span className="text-[#0000ff]">import</span>
-                                                <span className="text-[#333333]"> {`{`}</span><span className="text-[#267f99]"> List </span><span className="text-[#333333]">{`}`}</span>
-                                                <span className="text-[#0000ff]"> from</span><span className="text-[#a31515]"> './List'</span>
-                                                <span className="text-[#333333]">;</span></span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#0000ff]">export</span><span className="text-[#0000ff]"> function</span>
-                                                <span className="text-[#267f99]"> HelloWorld</span><span className="text-[#333333]">(</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span><span className="text-[#0000ff]">:</span><span className="text-[#0451a5]"> Props</span></span><span className="text-[#333333]">)</span>
-                                            <span className="text-[#333333]"> {`{`}</span>
-                                            <br />
-                                            <span className="line"><span className="text-[#0000ff]">  const</span><span className="text-[#001080]"> greeting</span><span className="text-[#0000ff]"> =</span><span className="text-[#a31515]"> "Hello"</span><span className="text-[#333333]">;</span></span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#0000ff]">  return</span><span className="text-[#333333]"> (</span></span>
-                                            <br />
-                                            <span className="line text-[#333333]">    # </span><span className="text-[#333333]">{`{{`}</span><span className="text-[#001080]"> greeting</span><span className="text-[#333333]"> {`}} `}</span>
-                                            <br />
-                                            <br />
-                                            <span className="line"><span className="text-[#333333]">    Render components with:</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#800000]">    &lt;@</span><span className="text-[#267f99]">List</span>
-                                                <span className="text-[#001080]"> items</span><span className="text-[#0000ff]">=</span><span className="text-[#333333]">{`{`}</span><span className="text-[#001080]">features</span><span className="text-[#333333]">{`}`}</span>
-                                                <span className="text-[#800000]"> /&gt;</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#333333]">  )</span></span>
-                                            <br />
-                                            <span className="line"><span className="text-[#333333]">{`}`}</span></span>
-                                            <br /></code>
-                                        </pre>
-                                    )}
+                                    <pre className="text-xs overflow-x-auto leading-relaxed text-[#d4d4d4]" tabIndex={0}><code>
+                                        <span className="line"><span className="text-[#569CD6]">import</span>
+                                            <span className="text-[#d4d4d4]"> {`{`}</span><span className="text-[#DCDCAA]"> List </span><span className="text-[#d4d4d4]">{`}`}</span>
+                                            <span className="text-[#569CD6]"> from</span><span className="text-[#CE9178]"> './List'</span>
+                                            <span className="text-[#d4d4d4]">;</span></span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className="text-[#569CD6]">export</span><span className="text-[#569CD6]"> function</span>
+                                            <span className="text-[#DCDCAA]"> HelloWorld</span><span className="text-[#d4d4d4]">(</span><span className="text-[#d4d4d4]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#d4d4d4]">{`}`}</span><span className="text-[#569CD6]">:</span><span className="text-[#4EC9B0]"> Props</span></span><span className="text-[#d4d4d4]">)</span>
+                                        <span className="text-[#d4d4d4]"> {`{`}</span>
+                                        <br />
+                                        <span className="line"><span className="text-[#569CD6]">  const</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> =</span><span className="text-[#CE9178]"> "Hello"</span><span className="text-[#d4d4d4]">;</span></span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className="text-[#569CD6]">  return</span><span className="text-[#d4d4d4]"> (</span></span>
+                                        <br />
+                                        <span className="line font-bold text-[#569CD6]">    ## </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span><span className="font-bold text-[#569CD6]">from TS Markdown!</span>
+                                        <br />
+                                        <br />
+                                        <span className="line"><span className="text-[#d4d4d4]">    Render components with:</span></span>
+                                        <br />
+                                        <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
+                                            <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
+                                            <span className="text-[#808080]"> /&gt;</span></span>
+                                        <br />
+                                        <span className="line"><span className="text-[#d4d4d4]">  )</span></span>
+                                        <br />
+                                        <span className="line"><span className="text-[#d4d4d4]">{`}`}</span></span>
+                                        <br /></code>
+                                    </pre>
+
                                 </div>
 
                                 {/* Compiled Output */}
-                                <div className="col-span-2 bg-white dark:bg-neutral-800/90 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-700 animate-float">
+                                <div className="md:col-span-2 bg-white dark:bg-neutral-800/90 rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-700 animate-float">
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-xs text-gray-500 dark:text-gray-400">HelloWorld.md</span>
                                         <div className="flex space-x-1">

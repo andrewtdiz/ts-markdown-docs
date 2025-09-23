@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { DynamicSidebar } from './DynamicSidebar';
@@ -18,12 +18,22 @@ export function DocumentationLayout() {
     const nextPath = currentPathSection?.links[currentPathLinkIndex + 1];
     const nextPathHref = nextPath?.href || '/';
     const divRef = useRef<HTMLDivElement>(null);
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
     useEffect(() => {
         if (divRef.current) {
             divRef.current.scrollTo({ top: 0 });
         }
     }, [currentPath]);
+
+    // Close mobile sidebar when navigating
+    useEffect(() => {
+        setIsMobileSidebarOpen(false);
+    }, [currentPath]);
+
+    const toggleMobileSidebar = () => {
+        setIsMobileSidebarOpen(!isMobileSidebarOpen);
+    };
 
     const renderContent = () => {
         if (currentPath === '/') {
@@ -88,20 +98,20 @@ export function DocumentationLayout() {
     return (
         <div className="h-screen w-screen bg-background flex flex-col">
             {/* Header */}
-            <Header />
+            <Header onMobileMenuToggle={toggleMobileSidebar} />
 
             {/* Content Area */}
             <div className="flex-1 flex overflow-hidden">
                 <div className="flex gap-12 w-full max-w-7xl mx-auto">
-                    {/* Dynamic Sidebar Navigation */}
+                    {/* Desktop Dynamic Sidebar Navigation */}
                     <DynamicSidebar sections={sidebar} />
 
                     {/* Main Content */}
                     <main className="flex-1 overflow-y-auto" ref={divRef}>
-                        <div className="w-[90%]">
+                        <div className="mx-auto md:mx-0! w-[90%]">
                             {renderContent()}
                         </div>
-                        <div className="w-[90%] mt-20 mb-16">
+                        <div className="mx-auto md:mx-0! w-[90%] mt-20 mb-16">
                             {nextPathHref !== '/' && <Link to={nextPathHref}>
                                 <Card className="p-4! bg-transparent hover:bg-muted/25">
                                     <CardContent className="p-0! flex items-center justify-between">
@@ -118,6 +128,14 @@ export function DocumentationLayout() {
                     </main>
                 </div>
             </div>
+
+            {/* Mobile Dynamic Sidebar */}
+            <DynamicSidebar
+                sections={sidebar}
+                isMobile={true}
+                isOpen={isMobileSidebarOpen}
+                onClose={() => setIsMobileSidebarOpen(false)}
+            />
         </div>
     );
 }

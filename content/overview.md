@@ -27,7 +27,7 @@ function Profile({ user }: { user: User }) {
 
     <@ProfileDetailView user={user} />
 
-    **Skills:**
+    Skills:
     {{ user.skills.map(skill => (
       - {{ skill }}
     ))}}
@@ -40,11 +40,11 @@ This generates clean markdown like:
 ```markdown
 # Alice's Profile
 
-**Role:** Senior Engineer
-**Experience:** 8 years
-**Status:** Active ✅
+Role: Senior Engineer
+Experience: 8 years
+Status: Active ✅
 
-**Skills:**
+Skills:
 - React
 - TypeScript
 - Bun

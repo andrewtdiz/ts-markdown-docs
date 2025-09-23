@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useTheme } from './ThemeProvider';
-import { MoonIcon, SunIcon } from 'lucide-react';
+import { MoonIcon, SunIcon, Menu } from 'lucide-react';
 import logo from '../../assets/Icon.png';
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -13,9 +13,10 @@ function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
 
 interface HeaderProps {
     showNavigation?: boolean;
+    onMobileMenuToggle?: () => void;
 }
 
-export function Header({ showNavigation = true }: HeaderProps) {
+export function Header({ showNavigation = true, onMobileMenuToggle }: HeaderProps) {
     const navigate = useNavigate();
 
     const { theme, setTheme } = useTheme();
@@ -31,8 +32,19 @@ export function Header({ showNavigation = true }: HeaderProps) {
                             className="text-2xl font-bold items-center flex gap-2 p-0 h-auto hover:bg-transparent"
                             onClick={() => navigate('/')}
                         >
-                            <img src={logo} className="w-8 h-8" />
-                            <p className="text-2xl font-bold mt-2">TS Markdown</p>
+                            <img src={logo} className="md:w-8 md:h-8 w-7 h-7" />
+                            <p className="text-xl md:text-2xl font-bold mt-2">TS Markdown</p>
+                        </Button>
+                    </div>
+
+                    {/* Mobile menu button */}
+                    <div className="md:hidden">
+                        <Button
+                            variant="ghost"
+                            onClick={onMobileMenuToggle}
+                            className="h-10 w-10 p-0"
+                        >
+                            <Menu className="h-6! w-6!" />
                         </Button>
                     </div>
                     {showNavigation && (

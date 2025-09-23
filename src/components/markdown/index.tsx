@@ -106,21 +106,10 @@ import { vsCode } from './vscode';
 
 
 const highlighter = await createHighlighter({
-    langs: [tsmd as any],
+    langs: [tsmd as any, ts as any, tsx as any, md as any, shell as any],
     themes: [vsCode as any],
 })
 
-const shikiDark = createHighlighterCoreSync({
-    themes: [themeDark],
-    langs: [ts, tsx, md, shell],
-    engine: createJavaScriptRegexEngine()
-})
-
-const shikiLight = createHighlighterCoreSync({
-    themes: [themeLight],
-    langs: [ts, tsx, md, shell],
-    engine: createJavaScriptRegexEngine()
-})
 
 export const CodeBlock = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement> & { node?: any }) => {
     const [clicked, setClicked] = useState(false);
@@ -134,14 +123,12 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
         }
         return '';
     };
-
     const node = props?.node;
     const nodeChildren = node?.children?.map((child: any) => child?.properties?.className);
     const languageDash = nodeChildren.flat().find((cls: any) => cls?.includes('language-'));
     const language = languageDash?.replace('language-', '') || 'tsx';
 
     const { theme } = useTheme();
-    const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
 
     const rawContent = getRawText(children);
 
@@ -153,12 +140,15 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
             theme: 'Default Dark Modern'
         });
     } else {
-        html = currentTheme === 'dark' ? shikiDark.codeToHtml(rawContent, { lang: language, theme: 'material-theme-darker' }) : shikiLight.codeToHtml(rawContent, { lang: language, theme: 'material-theme-lighter' });
+        html = highlighter.codeToHtml(rawContent, {
+            lang: language,
+            theme: 'Default Dark Modern'
+        });
     }
     const lineCount = rawContent.split('\n').length - 1;
 
     return (
-        <Card className={cn("mt-3 bg-background mb-3 p-1! pb-1! overflow-hidden", className)}>
+        <Card className={cn("mt-3 bg-background mb-3 p-0.5! md:p-1! md:pb-1! overflow-hidden rounded-md md:rounded-xl", className)}>
             <CardHeader className="py-0! px-3 h-7 flex flex-row items-center justify-between space-y-0">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     {language === "shell" ? (
@@ -182,10 +172,10 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                     )}
                 </Button>
             </CardHeader>
-            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-14 mt-1 text-sm overflow-x-auto rounded-xl border">
+            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
                 <div
                     dangerouslySetInnerHTML={{ __html: html }}
-                    className="bg-transparent! ml-6! p-4"
+                    className="bg-transparent! ml-3 md:ml-6! p-4"
                 />
                 {language !== "bash" && (<pre className="absolute left-1 shiki material-theme-darker">
                     <code className="flex flex-col ">
@@ -448,7 +438,7 @@ export const markdownComponents = {
 
     // Standard HTML elements - use React components
     strong: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
-        <p className='inline font-semibold' {...props}>{children}</p>
+        <strong className='font-semibold' {...props}>{children}</strong>
     ),
     em: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
         <em {...props}>{children}</em>
