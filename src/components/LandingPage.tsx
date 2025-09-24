@@ -74,7 +74,7 @@ export function LandingPage() {
 
                         {/* Right side - Code blocks */}
                         <div className="lg:col-span-3 lg:pl-2 mt-8 md:mt-0">
-                            <div className="flex flex-col items-center md:items-end md:grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div className="flex flex-col items-center md:items-center md:grid grid-cols-1 md:grid-cols-5 gap-4">
                                 {/* TS Markdown Source */}
                                 <div className="md:col-span-3 bg-gray-100/25 dark:bg-[#1e1e1e] rounded-lg p-4 shadow-2xl border border-gray-200 dark:border-neutral-900">
                                     <div className="flex items-center justify-between mb-4">
@@ -145,8 +145,8 @@ export function LandingPage() {
                 </div>
 
                 {/* Features Section */}
-                <div className="w-full px-4 md:px-6 py-16">
-                    <div className="max-w-4xl mx-auto">
+                <div className="w-full px-4 py-16">
+                    <div className="w-full">
                         <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold mb-4">Why use TS Markdown?</h2>
                             <p className="text-md md:text-lg font-light text-foreground/90 max-w-2xl mx-auto">
@@ -157,7 +157,7 @@ export function LandingPage() {
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                        <div className="grid md:grid-cols-4 gap-6 px-4">
                             {features.map((feature, index) => {
                                 const IconComponent = feature.icon;
                                 return (
@@ -194,7 +194,7 @@ export function LandingPage() {
                             {quickLinks.map((link, index) => (
                                 <Card key={index} className="hover:shadow-lg transition-shadow group">
                                     <CardHeader>
-                                        <CardTitle className="group-hover:text-primary transition-colors">
+                                        <CardTitle className="group-hover:text-foreground ">
                                             {link.title}
                                         </CardTitle>
                                         <CardDescription>

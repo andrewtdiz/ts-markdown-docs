@@ -40,26 +40,25 @@ function userList(users: User[]) {
 
 Pass data to components using props:
 
-```typescript
+```tsmd
 function StatusBadge({ status, type }: { status: string; type?: 'success' | 'warning' | 'error' }) {
-  const color = type === 'success' ? '#4caf50' : type === 'warning' ? '#ff9800' : '#f44336'
 
   return (
-    <span style="background: {{ color }}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
-      {{ status }}
-    </span>
+    {{ type === "success" && "Great job!" }}
+    {{ type === "warning" && "Uh oh" }}
+    {{ type === "error" && (
+        Oops!
+        We made an error
+    ) }}
+    Status: {{ status }}
   )
 }
 
-function dashboard(stats: Stats) {
+function Dashboard({ info }: { info: DashboardInfo }) {
   return (
     # Dashboard
 
-    <@StatusBadge status="Online" type="success" />
-    <@StatusBadge status="Warning" type="warning" />
-    <@StatusBadge status="Offline" type="error" />
-
-    **Server Status:** <@StatusBadge status={stats.serverStatus} type={stats.isHealthy ? 'success' : 'error'} />
+    **Server Status:** <@StatusBadge status={info.serverStatus} type={info.ok ? 'success' : 'error'} />
   )
 }
 ```
@@ -68,14 +67,11 @@ function dashboard(stats: Stats) {
 
 Components can accept child content:
 
-```typescript
+```tsmd
 function Card({ title, children }: { title: string; children: any }) {
   return (
-    <div style="border: 1px solid #ddd; padding: 20px; margin: 10px 0; border-radius: 8px;">
       ## {{ title }}
-
       {{ children }}
-    </div>
   )
 }
 
@@ -99,77 +95,34 @@ function layout() {
 
 ## Best Practices
 
-### Keep Components Focused
-
-```typescript
-// Good - single responsibility
-function UserAvatar({ user }: { user: User }) {
-  return (
-    <img src="{{ user.avatar }}" alt="{{ user.name }}" style="width: 50px; height: 50px; border-radius: 50%;" />
-  )
-}
-
-function UserInfo({ user }: { user: User }) {
-  return (
-    <div>
-      **Name:** {{ user.name }}
-      **Role:** {{ user.role }}
-    </div>
-  )
-}
-
-// Avoid - multiple responsibilities
-function userProfileCard({ user }: { user: User }) {
-  return (
-    <div>
-      <img src="{{ user.avatar }}" alt="{{ user.name }}" style="width: 50px;" />
-      **Name:** {{ user.name }}
-      **Role:** {{ user.role }}
-      **Bio:** {{ user.bio }}
-      **Last Login:** {{ user.lastLogin }}
-      **Theme:** {{ user.preferences.theme }}
-    </div>
-  )
-}
-```
-
 ### Use Descriptive Names
 
-```typescript
+```tsmd
 // Good - clear purpose
 function ProductCard({ product }: { product: Product }) {
   return (
-    <div style="border: 1px solid #ddd; padding: 16px;">
-      **{{ product.name }}** - ${{ product.price }}
-      {{ product.description }}
-    </div>
+    **{{ product.name }}** - ${{ product.price }}
+    Description: {{ product.description }}
   )
-}
-
-// Avoid - unclear purpose
-function PC({ p }: { p: Product }) {
-  return (<div>**{{ p.name }}** - ${{ p.price }}</div>)
 }
 ```
 
 ### Handle Optional Props
 
-```typescript
+```tsmd
 function OptionalCard({ title, subtitle, children }: {
   title: string;
   subtitle?: string;
   children: any
 }) {
   return (
-    <div style="border: 1px solid #ddd; padding: 16px;">
-      ## {{ title }}
+    ## {{ title }}
 
-      {{ subtitle && (
-        **{{ subtitle }}**
-      ) }}
+    {{ subtitle && (
+    **{{ subtitle }}**
+    ) }}
 
-      {{ children }}
-    </div>
+    {{ children }}
   )
 }
 ```
@@ -178,40 +131,34 @@ function OptionalCard({ title, subtitle, children }: {
 
 ### Nested Components
 
-```typescript
+```tsmd
 function Header({ user }: { user: User }) {
   return (
-    <div style="background: #f5f5f5; padding: 20px;">
-      # Welcome {{ user.name }}!
+    # Welcome {{ user.name }}!
 
-      <@UserMenu user={user} />
-    </div>
+    <@UserMenu user={user} />
   )
 }
 
 function UserMenu({ user }: { user: User }) {
   return (
-    <div style="float: right;">
-      <@UserAvatar user={user} />
-      <@UserDropdown user={user} />
-    </div>
+    <@UserAvatar user={user} />
+    <@UserDropdown user={user} />
   )
 }
 
-function pageLayout(user: User, content: any) {
+function PageLayout({ user, content }: { user: User, content: string }) {
   return (
     <@Header user={user} />
 
-    <div style="padding: 20px;">
-      {{ content }}
-    </div>
+    {{ content }}
   )
 }
 ```
 
 ### Dynamic Component Lists
 
-```typescript
+```tsmd
 function FeatureList({ features }: { features: Feature[] }) {
   return (
     ## Features
@@ -230,77 +177,20 @@ function FeatureCard({ feature }: { feature: Feature }) {
       {{ feature.description }}
 
       {{ feature.isNew && (
-        <span style="background: #e3f2fd; padding: 2px 8px; border-radius: 12px; font-size: 12px;">
-          New!
-        </span>
+        New!
       ) }}
     </div>
   )
 }
 ```
 
-### Layout Components
-
-```typescript
-function Grid({ columns, children }: { columns: number; children: any }) {
-  const gridStyle = `display: grid; grid-template-columns: repeat(${columns}, 1fr); gap: 20px;`
-
-  return (
-    <div style="{{ gridStyle }}">
-      {{ children }}
-    </div>
-  )
-}
-
-function dashboard() {
-  return (
-    # Dashboard
-
-    <@Grid columns={3}>
-      <@Card title="Users" content="1,234 active users" />
-      <@Card title="Revenue" content="$12,345 this month" />
-      <@Card title="Growth" content="+15% from last month" />
-    </@Grid>
-  )
-}
-```
-
 ## Performance Considerations
 
-### Component Reuse
-
-```typescript
-// Good - compile once, use many times
-const userCardComponent = compileTSM(parser.parse(UserCard.toString()))
-
-function userList(users: User[]) {
-  return (
-    # Users
-
-    {{ users.map(user => (
-      <div>
-        {{ executeTSMTemplate(userCardComponent, { user }) }}
-      </div>
-    )) }}
-  )
-}
-
-// Avoid - compiling on every render
-function badUserList(users: User[]) {
-  return (
-    # Users
-
-    {{ users.map(user => (
-      <@UserCard user={user} />
-    )) }}
-  )
-}
-```
 
 ### Conditional Components
 
-```typescript
-function optionalComponents(user: User) {
+```tsmd
+function optionalComponents({ user }: { user: User }) {
   return (
     # Dashboard
 
@@ -323,7 +213,7 @@ function optionalComponents(user: User) {
 
 ### Data Display Components
 
-```typescript
+```tsmd
 function DataTable({ data, columns }: { data: any[]; columns: string[] }) {
   return (
     | {{ columns.join(' | ') }} |
@@ -346,94 +236,6 @@ function report(data: ReportData) {
 }
 ```
 
-### Interactive Components
-
-```typescript
-function ActionButton({ label, onClick, variant }: {
-  label: string;
-  onClick: string;
-  variant?: 'primary' | 'secondary'
-}) {
-  const style = variant === 'primary'
-    ? 'background: #007bff; color: white; padding: 8px 16px; border: none; border-radius: 4px;'
-    : 'background: #6c757d; color: white; padding: 8px 16px; border: none; border-radius: 4px;'
-
-  return (
-    <button style="{{ style }}" onclick="{{ onClick }}">
-      {{ label }}
-    </button>
-  )
-}
-
-function toolbar() {
-  return (
-    <div style="display: flex; gap: 10px;">
-      <@ActionButton label="Save" onClick="saveData()" variant="primary" />
-      <@ActionButton label="Cancel" onClick="cancelEdit()" variant="secondary" />
-    </div>
-  )
-}
-```
-
-### Form Components
-
-```typescript
-function InputField({ label, type, value, onChange }: {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: string;
-}) {
-  return (
-    <div style="margin: 10px 0;">
-      <label style="display: block; margin-bottom: 5px;">{{ label }}</label>
-      <input
-        type="{{ type || 'text' }}"
-        value="{{ value }}"
-        onChange="{{ onChange }}"
-        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 100%;"
-      />
-    </div>
-  )
-}
-
-function contactForm() {
-  return (
-    # Contact Form
-
-    <@InputField label="Name" value={formData.name} onChange="updateName()" />
-    <@InputField label="Email" type="email" value={formData.email} onChange="updateEmail()" />
-    <@InputField label="Message" value={formData.message} onChange="updateMessage()" />
-  )
-}
-```
-
-## Error Handling
-
-### Safe Component Usage
-
-```typescript
-function safeComponentUsage(user: User | null) {
-  return (
-    # Dashboard
-
-    {{ user ? (
-      <@UserProfile user={user} />
-      <@UserStats user={user} />
-    ) : (
-      <@ErrorMessage message="User not found" />
-    ) }}
-  )
-}
-
-function ErrorMessage({ message }: { message: string }) {
-  return (
-    <div style="color: red; padding: 20px; background: #ffebee; border-radius: 8px;">
-      **Error:** {{ message }}
-    </div>
-  )
-}
-```
 
 ### Component Fallbacks
 

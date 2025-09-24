@@ -146,7 +146,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
     const lineCount = rawContent.split('\n').length - 1;
 
     return (
-        <Card className={cn("mt-3 bg-background mb-3 p-0.5! md:p-1! md:pb-1! overflow-hidden rounded-md md:rounded-xl", className)}>
+        <Card className={cn("mt-3 bg-background mb-3 p-0.5! md:p-1! md:pb-1! overflow-hidden rounded-md md:rounded-xl!", className)}>
             <CardHeader className="py-0! px-3 h-7 flex flex-row items-center justify-between space-y-0">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     {language === "shell" ? (
@@ -170,7 +170,7 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
                     )}
                 </Button>
             </CardHeader>
-            <CardContent className="relative p-0! bg-muted/75 overflow-x-auto flex flex-col justify-center min-h-6 md:min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
+            <CardContent className="relative p-0! bg-[#1F1F1F] overflow-x-auto flex flex-col justify-center min-h-6 md:min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
                 <div
                     dangerouslySetInnerHTML={{ __html: html }}
                     className="bg-transparent! ml-3 md:ml-6! p-4"

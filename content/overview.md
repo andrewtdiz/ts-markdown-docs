@@ -12,7 +12,7 @@ Instead of juggling template strings, JSX, or separate markdown files, write you
 
 ## Why TS Markdown?
 
-- **Saves Time**: Write markdown content directly in TypeScript
+- **Develop faster**: Write markdown content with TypeScript
 - **Type Safe**: Full TypeScript integration with autocomplete
 - **Dynamic Content**: Insert variables, conditionally render sections, and use components
 - **No Build Step**: Works at runtime, perfect for dynamic content generation, APIs, and backend services.
