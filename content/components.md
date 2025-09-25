@@ -16,11 +16,9 @@ Define a component function and use it in your markdown:
 // Define a component
 function UserCard({ user }: { user: User }) {
   return (
-    <div style="border: 1px solid #ddd; padding: 16px; margin: 10px 0; border-radius: 8px;">
-      **Name:** {{ user.name }}
-      **Email:** {{ user.email }}
-      **Status:** {{ user.isActive ? '✅ Active' : '⏸️ Inactive' }}
-    </div>
+    **Name:** {{ user.name }}
+    **Email:** {{ user.email }}
+    **Status:** {{ user.isActive ? '✅ Active' : '⏸️ Inactive' }}
   )
 }
 

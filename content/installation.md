@@ -18,12 +18,12 @@ Install TS Markdown with the npm package `ts-markdown`
 TS Markdown works with any package manager. We recommend Bun for the fastest installation:
 
 ```shell
-bun add tsmarkdown
+bun add typescriptmd
 ```
 
 Or with npm:
 ```shell
-npm install tsmarkdown
+npm install typescriptmd
 ```
 
 That's it! TS Markdown has zero dependencies and works right out of the box.

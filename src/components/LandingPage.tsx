@@ -1,10 +1,12 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, FileText, Component, Rocket } from 'lucide-react';
+import { ArrowRight, Zap, FileText, Component, Rocket, ClipboardCheckIcon, Copy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
 import { useTheme } from './ThemeProvider';
+import { CodeBlock } from './markdown';
+import { cn } from '@/lib/utils';
 
 export function LandingPage() {
     const { theme } = useTheme();
@@ -48,7 +50,7 @@ export function LandingPage() {
                 <div className="w-full pl-2 md:pl-8 py-16">
                     <div className="grid lg:grid-cols-5 gap-6 items-center">
                         {/* Left side - Title and buttons */}
-                        <div className="lg:col-span-2 space-y-8 flex flex-col items-center lg:items-start justify-center">
+                        <div className="lg:col-span-2 space-y-1 flex flex-col items-center lg:items-start justify-center">
                             <div>
                                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 md:mb-6 text-center lg:text-left">
                                     TS Markdown
@@ -70,6 +72,37 @@ export function LandingPage() {
                                     </Link>
                                 </Button>
                             </div>
+                            {/* <Card className={cn("mt-3  mb-3 p-0.5! md:p-1! md:pb-1! overflow-hidden rounded-md md:rounded-xl!")}>
+                                <CardHeader className="py-0! px-3 h-6 flex flex-row items-center justify-between space-y-0">
+                                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                                        bash
+                                    </CardTitle>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => {
+                                            navigator.clipboard.writeText("bun add typescriptmd");
+                                        }}
+                                        className="h-7! w-7! p-0"
+                                    >
+                                        {false ? (
+                                            <ClipboardCheckIcon className="h-4 w-4 text-green-700 dark:text-green-500" />
+                                        ) : (
+                                            <Copy className="h-4 w-4" />
+                                        )}
+                                    </Button>
+                                </CardHeader>
+                                <CardContent className="relative p-0! bg-[#1F1F1F] overflow-x-auto flex flex-col justify-center min-h-6 md:min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
+                                    <div
+                                        className="bg-transparent! w-64 p-4"
+                                    >
+                                        <code>
+                                            <pre>bun add typescriptmd</pre>
+                                        </code>
+                                    </div>
+
+                                </CardContent>
+                            </Card> */}
                         </div>
 
                         {/* Right side - Code blocks */}

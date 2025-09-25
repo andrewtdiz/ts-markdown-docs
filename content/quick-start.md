@@ -40,11 +40,11 @@ bun run tsmd hello.tsmd
 Now use it like any TypeScript function:
 
 ```typescript
-import HelloWorld from './hello.js'
+import HelloWorld from './HelloWorld.ts'
 
-const markdown = await HelloWorld({ 
-  features: ['Type-safety', 'Reusable components', 'Fast development'] 
-})
+const features = ["Type-safety", "Reusable components", "Fast development"]
+
+const markdown = HelloWorld({ features })
 
 console.log(markdown)
 ```

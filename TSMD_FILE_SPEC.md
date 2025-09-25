@@ -4,7 +4,7 @@
 tsmd extends TypeScript with markdown first literals called TSM blocks. Files contain regular TypeScript code plus blocks that produce markdown strings. A TSM block is a parenthesized markdown segment that can appear wherever an expression is valid, most commonly as the operand of `return`.
 
 ## 2. TSM blocks
-- Start with `(` and end with `)`; the body is parsed line by line using markdown rules plus the tsmd constructs described below.
+- Start with `return (\n` or arrow notation and end with `)`; the body is parsed line by line using markdown rules plus the tsmd constructs described below.
 - Blocks may span multiple lines or be single line statements such as `return (**API Error**)`.
 - Blocks can be used in any expression position (function returns, variable assignments, conditional branches, ternaries).
 - Content inside a block is evaluated in order from top to bottom.
