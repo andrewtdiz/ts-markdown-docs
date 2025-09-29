@@ -73,7 +73,7 @@ export function Header({ showNavigation = true, onMobileMenuToggle }: HeaderProp
                             <Button
                                 variant="ghost"
                                 className='text-foreground/80 rounded-full font-normal h-10 w-10'
-                                onClick={() => window.open('https://github.com', '_blank')}
+                                onClick={() => window.open('https://github.com/andrewtdiz/tsmarkdown')}
                             >
                                 <GithubIcon className='w-6! h-6!' />
                             </Button>
