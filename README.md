@@ -1,16 +1,14 @@
 # Markdoc + Bun + React + shadcn/ui Template
 
-A modern full-stack template combining Markdoc for content authoring, Bun for fast development, React for the frontend, and shadcn/ui for beautiful components.
+A type-safe, component based markdown engine for embedding markdown content with TypeScript.
+Create dynamic, template-driven markdown with full type support.
 
-## Features
+## ✨ Features
 
-- **Markdoc Integration**: Parse and render Markdoc content with custom components
-- **Bun Runtime**: Fast JavaScript runtime for both server and build processes
-- **React 19**: Latest React with modern features
-- **shadcn/ui Components**: Beautiful, accessible UI components
-- **Tailwind CSS**: Utility-first CSS framework with typography plugin
-- **TypeScript**: Full TypeScript support
-- **Hot Reload**: Fast development with HMR
+1. **TypeScript Integration** - Full TypeScript support with type checking and IntelliSense
+2. **Template Interpolation** - Dynamic content with `{{ expression }}` syntax
+3. **Conditional Rendering** - Smart conditional blocks with ternary operators and logical AND
+4. **Developer Tools** - Comprehensive CLI, VS Code extension, and testing utilities
 
 ## Quick Start
 
@@ -40,54 +38,6 @@ bun run build
 bun start
 ```
 
-## Project Structure
-
-```
-├── content/                 # Markdoc content files
-│   ├── welcome.md
-│   └── about.md
-├── schema/                  # Markdoc schema definitions
-│   ├── Callout.markdoc.js
-│   └── heading.markdoc.js
-├── src/
-│   ├── components/          # React components
-│   │   ├── ui/             # shadcn/ui components
-│   │   └── Callout.tsx     # Markdoc component
-│   ├── lib/                # Utility functions
-│   │   ├── utils.ts
-│   │   └── content-manifest.ts
-│   ├── App.tsx             # Main React app
-│   └── index.tsx           # Bun server
-└── package.json
-```
-
-## Markdoc Integration
-
-### Content Files
-
-Create `.md` files in the `content/` directory. Use Markdoc syntax with custom tags:
-
-```markdown
-# Welcome to Markdoc
-
-This is a note callout with custom styling.
-
-This is a warning callout.
-```
-
-### Custom Components
-
-Add new Markdoc components by:
-
-1. Creating a schema file in `schema/`
-2. Creating a React component in `src/components/`
-3. Adding the component to the server config
-4. Registering it in the client renderer
-
-### API Endpoints
-
-- `GET /api/markdoc?path=/welcome` - Get transformed Markdoc content
-- `GET /api/hello` - Example API endpoint
 
 ## Available Scripts
 

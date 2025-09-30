@@ -10,10 +10,21 @@ Get started with TS Markdown in 3 simple steps.
 
 ## Step 1: Create Your First TSM File
 
-Create a file called `hello.tsmd`:
+Create a directory in your project root named `tsmd`:
+Create your first `.tsmd` file: `tsmd/hello.tsmd`:
 
 ```tsmd
-import { List } from './List';
+function List({ items }: { items: string[] }) {
+  return (
+    {{ items.map(item => (
+      - {{ item }}
+    )) }}
+  )
+}
+
+interface Props {
+  features: string[]
+}
 
 export function HelloWorld({features}: Props) {
   const greeting = "Hello";
@@ -32,7 +43,7 @@ export function HelloWorld({features}: Props) {
 Run the TSMD transpiler:
 
 ```shell
-bun run tsmd hello.tsmd
+bun run index.ts
 ```
 
 ## Step 3: Use Your Generated Function
