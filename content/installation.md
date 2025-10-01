@@ -6,12 +6,11 @@ author: TS Markdown Team
 tags: [installation, setup, getting-started]
 ---
 
-Install TS Markdown with the npm package `ts-markdown`
+Install TS Markdown with the npm package `typescriptmd`
 
 ## Prerequisites
 
 - **Node.js** 18+ or **Bun** 1.0+ (Bun recommended for best performance)
-- **TypeScript** (optional, but recommended for type safety)
 
 ## Installation
 

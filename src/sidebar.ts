@@ -19,8 +19,7 @@ export const sidebar = [
   {
     title: 'Advanced',
     links: [
-      { href: '/syntax-guide', children: 'Complete Syntax Guide', icon: 'BookOpen' },
-      { href: '/best-practices', children: 'Best Practices', icon: 'CheckCircle' }
+      { href: '/syntax-guide', children: 'Complete Syntax Guide', icon: 'BookOpen' }
     ]
   }
 ];

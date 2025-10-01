@@ -127,11 +127,10 @@ function complexLogic(user: User, data: Data) {
 
 ```typescript
 function MyComponent({ title }: { title: string }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="padding: 20px;">
-      ## {{ title }}
-      Component content here.
-    </div>
+    ## {{ title }}
+    Component content here.
   )
 }
 
@@ -148,11 +147,10 @@ function page() {
 
 ```typescript
 function Card({ title, children }: { title: string; children: any }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="border: 1px solid #ddd; padding: 16px;">
-      ## {{ title }}
-      {{ children }}
-    </div>
+    ## {{ title }}
+    {{ children }}
   )
 }
 ```
@@ -161,7 +159,7 @@ function Card({ title, children }: { title: string; children: any }) {
 
 ```typescript
 function Icon({ name }: { name: string }) {
-  return (<span>{{ name }}</span>)
+  return ({{ name }})
 }
 ```
 
@@ -244,10 +242,9 @@ function filteredTable(items: Item[]) {
 
 ```typescript
 function styledContent(user: User) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="background: {{ user.isActive ? '#e8f5e8' : '#ffebee' }}; padding: 20px;">
-      **Status:** {{ user.isActive ? 'Active' : 'Inactive' }}
-    </div>
+    **Status:** {{ user.isActive ? 'Active' : 'Inactive' }}
   )
 }
 ```
@@ -256,12 +253,9 @@ function styledContent(user: User) {
 
 ```typescript
 function dynamicStyling(percentage: number) {
-  const color = percentage > 80 ? '#4caf50' : percentage > 50 ? '#ff9800' : '#f44336'
-
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="background: {{ color }}; color: white; padding: 10px;">
-      Progress: {{ percentage }}%
-    </div>
+    Progress: {{ percentage }}%
   )
 }
 ```
@@ -359,330 +353,3 @@ function formattedText() {
   )
 }
 ```
-
-## Advanced Patterns
-
-### Higher-Order Components
-
-```typescript
-function withLayout(WrappedComponent: any) {
-  return function LayoutComponent({ title, ...props }: { title: string; [key: string]: any }) {
-    return (
-      # {{ title }}
-
-      <@WrappedComponent {...props} />
-
-      ---
-      Generated on {{ new Date().toISOString() }}
-    )
-  }
-}
-```
-
-### Template Composition
-
-```typescript
-function composeTemplates(templates: any[], data: any) {
-  return (
-    # Composed Content
-
-    {{ templates.map(template => (
-      {{ executeTSMTemplate(template, data) }}
-    )) }}
-  )
-}
-```
-
-### Recursive Components
-
-```typescript
-function TreeNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
-  return (
-    {{ '#'.repeat(level + 1) }} {{ node.name }}
-
-    {{ node.children?.map(child => (
-      <@TreeNode node={child} level={level + 1} />
-    )) }}
-  )
-}
-```
-
-## Error Handling
-
-### Safe Access
-
-```typescript
-function safeTemplate(data: Data | null) {
-  return (
-    {{ data?.title || 'Untitled' }}
-
-    **Items:** {{ data?.items?.length || 0 }}
-
-    {{ data?.items?.map(item => (
-      - {{ item?.name || 'Unknown' }}
-    )) || 'No items' }}
-  )
-}
-```
-
-### Try-Catch in Templates
-
-```typescript
-function withErrorBoundary(data: Data) {
-  try {
-    const result = riskyCalculation(data)
-
-    return (
-      # Result: {{ result }}
-    )
-  } catch (error) {
-    return (
-      # Error
-      Something went wrong: {{ error.message }}
-    )
-  }
-}
-```
-
-## Performance Patterns
-
-### Memoization
-
-```typescript
-const memoizedTemplates = new Map()
-
-function getMemoizedTemplate(key: string) {
-  if (!memoizedTemplates.has(key)) {
-    memoizedTemplates.set(key, compileTSM(parser.parse(getTemplate(key))))
-  }
-  return memoizedTemplates.get(key)
-}
-```
-
-### Lazy Loading
-
-```typescript
-function lazyComponent(name: string) {
-  const component = loadComponent(name)
-
-  return (
-    <@DynamicComponent component={component} />
-  )
-}
-```
-
-## Real-World Examples
-
-### Blog Post
-
-```typescript
-function blogPost(post: BlogPost) {
-  return (
-    ---
-    title: {{ post.title }}
-    author: {{ post.author }}
-    date: {{ post.publishedAt }}
-    tags: [{{ post.tags.join(', ') }}]
-    ---
-
-    # {{ post.title }}
-
-    **By {{ post.author }}** • {{ post.publishedAt }} • {{ post.readTime }} min read
-
-    {{ post.content }}
-
-    ## Tags
-    {{ post.tags.map(tag => (
-      `{{ tag }}`
-    )).join(' • ') }}
-
-    ---
-    Thanks for reading!
-  )
-}
-```
-
-### Dashboard
-
-```typescript
-function dashboard(user: User, metrics: Metrics) {
-  return (
-    # Dashboard - {{ user.name }}
-
-    <@Grid columns={3}>
-      <@MetricCard title="Users" value={metrics.users} change={metrics.userChange} />
-      <@MetricCard title="Revenue" value={metrics.revenue} change={metrics.revenueChange} />
-      <@MetricCard title="Orders" value={metrics.orders} change={metrics.orderChange} />
-    </@Grid>
-
-    {{ metrics.alerts.length > 0 && (
-      ## Alerts
-      {{ metrics.alerts.map(alert => (
-        <@Alert type={alert.type} message={alert.message} />
-      )) }}
-    ) }}
-
-    <@Chart data={metrics.chartData} />
-  )
-}
-```
-
-### Email Template
-
-```typescript
-function emailTemplate(user: User, content: EmailContent) {
-  return (
-    # {{ content.subject }}
-
-    Hello {{ user.name }}!
-
-    {{ content.body }}
-
-    {{ content.callToAction && (
-      <@Button href={content.callToAction.url}>
-        {{ content.callToAction.text }}
-      </@Button>
-    ) }}
-
-    Best regards,
-    The Team
-  )
-}
-```
-
-## Best Practices
-
-### Code Organization
-
-```typescript
-// Group related functions
-const templates = {
-  header: function(data: Data) { return (...) },
-  footer: function(data: Data) { return (...) },
-  sidebar: function(data: Data) { return (...) }
-}
-
-// Use in main template
-function page(data: Data) {
-  return (
-    {{ templates.header(data) }}
-
-    # Main Content
-
-    {{ templates.sidebar(data) }}
-
-    {{ templates.footer(data) }}
-  )
-}
-```
-
-### Type Safety
-
-```typescript
-interface User {
-  name: string
-  email: string
-  isActive: boolean
-  preferences: {
-    theme: 'light' | 'dark'
-    notifications: boolean
-  }
-}
-
-function userProfile(user: User) {
-  return (
-    # {{ user.name }}
-
-    **Email:** {{ user.email }}
-    **Theme:** {{ user.preferences.theme }}
-    **Notifications:** {{ user.preferences.notifications ? 'Enabled' : 'Disabled' }}
-  )
-}
-```
-
-### Testing
-
-```typescript
-function testTemplate(user: User) {
-  const result = executeTSMTemplate(compiledTemplate, { user })
-
-  // Test assertions
-  expect(result).toContain(user.name)
-  expect(result).toContain(user.email)
-
-  return result
-}
-```
-
-## Common Mistakes
-
-### Unescaped Special Characters
-
-```typescript
-// Avoid - special chars not escaped
-function badTemplate() {
-  return (
-    # Title with "quotes" and 'apostrophes'
-  )
-}
-
-// Better - escape when needed
-function goodTemplate(title: string) {
-  return (
-    # {{ title }}
-  )
-}
-```
-
-### Overly Complex Expressions
-
-```typescript
-// Avoid - hard to read
-function complex() {
-  return (
-    {{ data.items.filter(i => i.value > 10).map(i => i.name).sort().join(', ') }}
-  )
-}
-
-// Better - break it down
-function readable() {
-  const filtered = data.items.filter(i => i.value > 10)
-  const names = filtered.map(i => i.name)
-  const sorted = names.sort()
-  const result = sorted.join(', ')
-
-  return (
-    {{ result }}
-  )
-}
-```
-
-### Missing Null Checks
-
-```typescript
-// Avoid - potential null errors
-function risky(data: Data | null) {
-  return (
-    # {{ data.title }}
-    **Items:** {{ data.items.length }}
-  )
-}
-
-// Better - safe access
-function safe(data: Data | null) {
-  return (
-    # {{ data?.title || 'Untitled' }}
-    **Items:** {{ data?.items?.length || 0 }}
-  )
-}
-```
-
-## Next Steps
-
-Now that you have the complete syntax reference:
-
-1. **[Best Practices](best-practices)** - Learn optimization techniques
-2. **Start Building** - Create your own templates and components
-3. **Experiment** - Try combining different features
-
-**Pro Tip**: Start with simple templates and gradually add complexity. The key is finding the right balance between functionality and readability.

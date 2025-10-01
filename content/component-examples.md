@@ -13,19 +13,11 @@ function Alert({ type, title, children }: {
   title: string;
   children: any;
 }) {
-  const colors = {
-    info: '#e3f2fd',
-    warning: '#fff3e0',
-    error: '#ffebee',
-    success: '#e8f5e8'
-  }
-
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="border-left: 4px solid {{ colors[type] }}; padding: 16px; background: {{ colors[type] }}20; margin: 16px 0;">
-      ## {{ title }}
+    ## {{ title }}
 
-      {{ children }}
-    </div>
+    {{ children }}
   )
 }
 
@@ -57,22 +49,20 @@ function page() {
 
 ```typescript
 function Card({ title, children }: { title: string; children: any }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 16px 0; background: white;">
-      ## {{ title }}
+    ## {{ title }}
 
-      {{ children }}
-    </div>
+    {{ children }}
   )
 }
 
 function FeatureCard({ feature }: { feature: { name: string; description: string; icon: string } }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin: 12px 0;">
-      ### {{ feature.icon }} {{ feature.name }}
+    ### {{ feature.icon }} {{ feature.name }}
 
-      {{ feature.description }}
-    </div>
+    {{ feature.description }}
   )
 }
 
@@ -102,81 +92,7 @@ function layout() {
 }
 ```
 
-## Interactive Components
 
-### Button Components
-
-```typescript
-function Button({ label, onClick, variant }: {
-  label: string;
-  onClick: string;
-  variant?: 'primary' | 'secondary';
-}) {
-  const colors = {
-    primary: '#007bff',
-    secondary: '#6c757d'
-  }
-
-  return (
-    <button
-      style="background: {{ colors[variant || 'primary'] }}; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 4px;"
-      onClick="{{ onClick }}"
-    >
-      {{ label }}
-    </button>
-  )
-}
-
-function toolbar() {
-  return (
-    # Actions
-
-    <@Button label="Save" onClick="handleSave()" variant="primary" />
-    <@Button label="Cancel" onClick="handleCancel()" variant="secondary" />
-    <@Button label="Delete" onClick="handleDelete()" />
-  )
-}
-```
-
-### Form Components
-
-```typescript
-function Input({ label, type, value, onChange }: {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: string;
-}) {
-  return (
-    <div style="margin: 12px 0;">
-      <label style="display: block; margin-bottom: 4px; font-weight: bold;">
-        {{ label }}
-      </label>
-      <input
-        type="{{ type || 'text' }}"
-        value="{{ value }}"
-        onChange="{{ onChange }}"
-        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
-      />
-    </div>
-  )
-}
-
-function contactForm() {
-  return (
-    # Contact Form
-
-    <@Input label="Name" value={formData.name} onChange="updateName()" />
-    <@Input label="Email" type="email" value={formData.email} onChange="updateEmail()" />
-    <@Input label="Message" value={formData.message} onChange="updateMessage()" />
-
-    <div style="margin-top: 16px;">
-      <@Button label="Submit" onClick="handleSubmit()" variant="primary" />
-      <@Button label="Cancel" onClick="handleCancel()" variant="secondary" />
-    </div>
-  )
-}
-```
 
 ## Data Display Components
 
@@ -216,23 +132,17 @@ function userTable(users: User[]) {
 ```typescript
 function Header({ user }: { user: User }) {
   return (
-    <div style="background: #f8f9fa; padding: 20px; border-bottom: 1px solid #ddd;">
-      # Welcome {{ user.name }}!
+    # Welcome {{ user.name }}!
 
-      <div style="float: right;">
-        <@UserMenu user={user} />
-      </div>
-    </div>
+    <@UserMenu user={user} />
   )
 }
 
 function UserMenu({ user }: { user: User }) {
   return (
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <@Badge variant="outline">{{ user.role }}</@Badge>
-      <@Button label="Profile" onClick="showProfile()" variant="secondary" />
-      <@Button label="Logout" onClick="handleLogout()" variant="primary" />
-    </div>
+    <@Badge variant="outline">{{ user.role }}</@Badge>
+    <@Button label="Profile" onClick="showProfile()" variant="secondary" />
+    <@Button label="Logout" onClick="handleLogout()" variant="primary" />
   )
 }
 
@@ -240,13 +150,9 @@ function pageLayout(user: User, content: any) {
   return (
     <@Header user={user} />
 
-    <div style="padding: 20px;">
-      {{ content }}
-    </div>
+    {{ content }}
 
-    <div style="background: #f8f9fa; padding: 16px; text-align: center; border-top: 1px solid #ddd;">
-      © {{ new Date().getFullYear() }} MyApp
-    </div>
+    © {{ new Date().getFullYear() }} MyApp
   )
 }
 ```

@@ -1,17 +1,15 @@
-# Test TSMD Language
+# TS Markdown Docs
 
-Here's a simple TypeScript code block:
+A type-safe, component based markdown engine for embedding markdown content with TypeScript.
+Create dynamic, template-driven markdown with full type support.
 
-```typescript
-function hello(name: string): string {
-  return `Hello, ${name}!`;
-}
+## ✨ Features
 
-const result = hello("World");
-console.log(result);
-```
-
-Now let's test the TSMD language:
+1. **TypeScript Integration** - Full TypeScript support with type checking and IntelliSense
+2. **Template Interpolation** - Dynamic content with `{{ expression }}` syntax
+3. **Conditional Rendering** - Smart conditional blocks with ternary operators and logical AND
+4. **Developer Tools** - Comprehensive CLI, VS Code extension, and testing utilities
+Now let's test the TS Markdown language:
 
 ```tsmd
 function createGreeting(name: string) {

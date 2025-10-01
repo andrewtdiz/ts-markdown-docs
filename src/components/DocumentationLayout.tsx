@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { DynamicSidebar } from './DynamicSidebar';
 import { PageActions } from './PageActions';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { OnThisPageSidebar } from './OnThisPageSidebar';
 import { sidebar } from '../sidebar';
 import { loadMarkdownContent } from '../lib/content-loader';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
@@ -102,12 +103,13 @@ export function DocumentationLayout() {
 
             {/* Content Area */}
             <div className="flex-1 flex overflow-hidden">
-                <div className="flex gap-12 w-full max-w-7xl mx-auto">
+                <div className="flex w-full max-w-7xl mx-auto">
                     {/* Desktop Dynamic Sidebar Navigation */}
                     <DynamicSidebar sections={sidebar} />
+                    <div className="w-12 md:block hidden"></div>
 
                     {/* Main Content */}
-                    <main className="flex-1 overflow-y-auto" ref={divRef}>
+                    <main className="flex-1 overflow-y-auto" style={{ scrollbarColor: 'rgba(107, 114, 128, 0.3) transparent' }} ref={divRef}>
                         <div className="mx-auto md:mx-0! w-[90%]">
                             {renderContent()}
                         </div>
@@ -126,6 +128,17 @@ export function DocumentationLayout() {
                         </div>
                         <Separator className='mb-16' />
                     </main>
+
+                    <div className="w-2 md:block hidden"></div>
+
+                    {currentPath !== '/' && (() => {
+                        try {
+                            const { rawContent } = loadMarkdownContent(currentPath);
+                            return <OnThisPageSidebar content={rawContent} />;
+                        } catch {
+                            return null;
+                        }
+                    })()}
                 </div>
             </div>
 

@@ -10,160 +10,44 @@ Get started with TS Markdown in 3 simple steps.
 
 ## Step 1: Create Your First TSM File
 
-Create a directory in your project root named `tsmd`:
-Create your first `.tsmd` file: `tsmd/hello.tsmd`:
+Create a file in `/tsmd` named `greeting.ts`:
 
-```tsmd
-function List({ items }: { items: string[] }) {
-  return (
-    {{ items.map(item => (
-      - {{ item }}
-    )) }}
-  )
-}
+```ts
+import { TSM } from 'ts-markdown';
 
-interface Props {
-  features: string[]
-}
+function Greeting({ name }: { name: string }) {
+  return TSM`
+    # Hello, ${name}!
 
-export function HelloWorld({features}: Props) {
-  const greeting = "Hello";
-
-  return (
-    ## {{ greeting }} from TS Markdown!
-
-    Render components with:
-    <@List items={features} />
-  )
+    Welcome to your first TS Markdown document.
+  `;
 }
 ```
 
-## Step 2: Transpile Your Code
+## Step 2: Use Your TSM Function
 
-Run the TSMD transpiler:
+Now you can use the `Greeting` function just like any other TypeScript function:
+
+```ts
+const markdown = Greeting({ name: 'World' });
+
+console.log(markdown);
+```
+
+## Step 3: Run Your Code
+
+Since TS Markdown is just TypeScript, you can run your code directly with Bun, Node, or any other TypeScript runtime:
 
 ```shell
-bun run index.ts
-```
-
-## Step 3: Use Your Generated Function
-
-Now use it like any TypeScript function:
-
-```typescript
-import HelloWorld from './HelloWorld.ts'
-
-const features = ["Type-safety", "Reusable components", "Fast development"]
-
-const markdown = HelloWorld({ features })
-
-console.log(markdown)
+bun run hello.ts
 ```
 
 Output:
+
 ```markdown
-## Hello from TS Markdown!
+# Hello, World!
 
-Render components with:
-- Type-safety
-- Reusable components
-- Fast development
+Welcome to your first TS Markdown document.
 ```
 
-## Core Syntax
-
-### Dynamic Content
-
-```tsmd
-function UserProfile(user: User) {
-  return (
-    # {{ user.name }}'s Profile
-    **Role:** {{ user.role }}
-    **Location:** {{ user.city }}, {{ user.country }}
-  )
-}
-```
-
-### Conditional Rendering
-
-```tsmd
-function StatusMessage(user: User) {
-  return (
-    {{ user.isActive ? (
-      You're all set! ✅
-    ) : (
-      Please activate your account first.
-    ) }}
-  )
-}
-```
-
-### Components
-
-```tsmd
-function Dashboard(data: Data) {
-  return (
-    <@UserProfile user={data.user} />
-    <@RecentActivity items={data.activity} />
-  )
-}
-```
-
-## Simple Examples
-
-### Basic Template
-
-```tsmd
-function Hello(name: string) {
-  return (
-    # Hello {{ name }}!
-    How are you today?
-  )
-}
-```
-
-### With Data
-
-```tsmd
-function Report(user: User, posts: Post[]) {
-  return (
-    # Report for {{ user.name }}
-
-    **Posts:** {{ posts.length }}
-    **Last Active:** {{ user.lastActive }}
-
-    {{ posts.length > 0 ? (
-      ## Recent Posts:
-      {{ posts.slice(0, 5).map(post => (
-        - {{ post.title }} ({{ post.date }})
-      )) }}
-    ) : (
-      No posts yet.
-    ) }}
-  )
-}
-```
-
-### Error Handling
-
-```tsmd
-function SafeTemplate(data: Data | null) {
-  return (
-    {{ data ? (
-      # Welcome {{ data.user.name }}!
-      Content based on data...
-    ) : (
-      # Error
-      Unable to load user data. Please try again.
-    ) }}
-  )
-}
-```
-
-## Next Steps
-
-1. **[Syntax Guide](syntax-guide)** - Learn all TSMD features
-2. **[Components](components)** - Create reusable components
-3. **[Best Practices](best-practices)** - Write clean TSM code
-
-**Quick Start Complete!** You can now write markdown in TypeScript functions.
+That's it! You've created your first dynamic markdown document using TS Markdown. No special compilers or build steps are needed.

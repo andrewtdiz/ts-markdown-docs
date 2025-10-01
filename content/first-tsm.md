@@ -117,119 +117,85 @@ import { TSMParser, compileTSM, executeTSMTemplate } from 'tsm'
 
 // Weather Card Component
 function WeatherCard({ weather }: { weather: { temperature: number; condition: string; location: string } }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="padding: 16px; background: #e3f2fd; border-radius: 8px; border: 1px solid #bbdefb;">
-      ## 🌤️ Weather
+    ## 🌤️ Weather
 
-      **{{ weather.location }}**
-      {{ weather.temperature }}°C - {{ weather.condition }}
-    </div>
+    **{{ weather.location }}**
+    {{ weather.temperature }}°C - {{ weather.condition }}
   )
 }
 
 // Stats Card Component
 function StatsCard({ stats }: { stats: { completedTodos: number; totalTodos: number; completionRate: number } }) {
+  // Note: Styling has been removed as it relies on HTML.
   return (
-    <div style="padding: 16px; background: #f3e5f5; border-radius: 8px; border: 1px solid #ce93d8;">
-      ## 📊 Progress
+    ## 📊 Progress
 
-      {{ stats.completedTodos }} of {{ stats.totalTodos }} todos completed
-      **Completion rate:** {{ stats.completionRate.toFixed(1) }}%
-    </div>
+    {{ stats.completedTodos }} of {{ stats.totalTodos }} todos completed
+    **Completion rate:** {{ stats.completionRate.toFixed(1) }}%
   )
 }
 
 // Todo Item Component
 function TodoItem({ todo, onToggle }: { todo: Todo; onToggle: (id: string) => void }) {
+  // Note: Styling and interactivity have been removed as they rely on HTML.
   return (
-    <div style="display: flex; align-items: center; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin: 4px 0; background: {{ todo.completed ? '#f0f8f0' : '#fff' }};">
-      <input type="checkbox" checked={todo.completed} onChange={() => onToggle(todo.id)} style="margin-right: 12px;" />
-      <span style="flex: 1; text-decoration: {{ todo.completed ? 'line-through' : 'none' }};">
-        {{ todo.text }}
-      </span>
-      <span style="font-size: 12px; color: {{ todo.priority === 'high' ? '#ff4444' : todo.priority === 'medium' ? '#ffaa00' : '#44ff44' }};">
-        {{ todo.priority.toUpperCase() }}
-      </span>
-    </div>
+    - [{{ todo.completed ? 'x' : ' ' }}] {{ todo.text }} ({{ todo.priority.toUpperCase() }})
   )
 }
 
 // Todo List Component
 function TodoList({ todos, onToggleTodo }: { todos: Todo[]; onToggleTodo: (id: string) => void }) {
   return (
-    <div>
-      ## Your Todos
+    ## Your Todos
 
-      {{ todos.map(todo => (
-        <@TodoItem todo={todo} onToggle={onToggleTodo} />
-      )) }}
-    </div>
+    {{ todos.map(todo => (
+      <@TodoItem todo={todo} onToggle={onToggleTodo} />
+    )) }}
   )
 }
 
 // Main Dashboard Function
 function createDashboard(data: DashboardData) {
+  // Note: Styling and interactivity have been removed as they rely on HTML.
   return (
     # Welcome {{ data.user.isOnline ? 'back' : 'aboard' }}, {{ data.user.name }}! 👋
 
     ## Today's Overview
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-      <@WeatherCard weather={data.weather} />
-      <@StatsCard stats={data.stats} />
-    </div>
+    <@WeatherCard weather={data.weather} />
+    <@StatsCard stats={data.stats} />
 
     ## Your Profile
 
-    <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px; margin: 10px 0;">
-      **Name:** {{ data.user.name }}
-      **Email:** {{ data.user.email }}
-      **Status:** {{ data.user.isOnline ? '🟢 Online' : '🔴 Offline' }}
-      **Theme:** {{ data.user.preferences.theme }}
-    </div>
+    **Name:** {{ data.user.name }}
+    **Email:** {{ data.user.email }}
+    **Status:** {{ data.user.isOnline ? '🟢 Online' : '🔴 Offline' }}
+    **Theme:** {{ data.user.preferences.theme }}
 
     ## Quick Actions
 
-    <div style="display: flex; gap: 12px; margin: 20px 0;">
-      <button
-        style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
-        onClick={() => alert('Hello {{ data.user.name }}!')}
-      >
-        Say Hello
-      </button>
-
-      <button
-        style="padding: 8px 16px; background: {{ data.user.preferences.theme === 'dark' ? '#FFC107' : '#424242' }}; color: white; border: none; border-radius: 4px; cursor: pointer;"
-        onClick={() => console.log('Theme toggled!')}
-      >
-        Toggle Theme
-      </button>
-    </div>
+    *Note: Buttons removed as they are HTML elements.*
 
     <@TodoList todos={data.todos} onToggleTodo={(id) => console.log('Toggle todo:', id)} />
 
     ## Recent Activity
 
     {{ data.user.isOnline ? (
-      <div style="padding: 16px; background: #e8f5e8; border-radius: 8px; border: 1px solid #4caf50;">
-        ✅ You're currently online and active
-        **Last seen:** {{ new Date(data.user.lastSeen).toLocaleString() }}
-      </div>
+      '✅ You\'re currently online and active\n' +
+      '**Last seen:** ' + new Date(data.user.lastSeen).toLocaleString()
     ) : (
-      <div style="padding: 16px; background: #fff3e0; border-radius: 8px; border: 1px solid #ff9800;">
-        ⏰ You were last online at {{ new Date(data.user.lastSeen).toLocaleString() }}
-      </div>
+      '⏰ You were last online at ' + new Date(data.user.lastSeen).toLocaleString()
     ) }}
 
     ## Settings
 
-    <div style="padding: 16px; background: #f5f5f5; border-radius: 8px; margin-top: 20px;">
-      ### Preferences
+    ### Preferences
 
-      - **Theme:** {{ data.user.preferences.theme }}
-      - **Language:** {{ data.user.preferences.language }}
-      - **Notifications:** {{ data.user.preferences.notifications ? 'Enabled' : 'Disabled' }}
-    </div>
+    - **Theme:** {{ data.user.preferences.theme }}
+    - **Language:** {{ data.user.preferences.language }}
+    - **Notifications:** {{ data.user.preferences.notifications ? 'Enabled' : 'Disabled' }}
   )
 }
 
@@ -276,73 +242,10 @@ function main() {
 main()
 ```
 
-## HTML Output
-
-Create `index.html`:
-
-```html
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TS Markdown Dashboard</title>
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        /* Add some basic styling for buttons and interactive elements */
-        button {
-            cursor: pointer;
-        }
-        input[type="checkbox"] {
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div id="dashboard"></div>
-    <script type="module" src="./src/index.ts"></script>
-</body>
-</html>
-```
-
-## Run Your Application
-
-```shell
-bun run index.ts
-```
-
-You'll see output like:
 
 ```
-=== TSM Dashboard Demo ===
 
-# Welcome back, Sarah Johnson! 👋
 
-## Today's Overview
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-  <div style="padding: 16px; background: #e3f2fd; border-radius: 8px; border: 1px solid #bbdefb;">
-    ## 🌤️ Weather
-
-    **San Francisco**
-    22°C - Sunny
-  </div>
-  <div style="padding: 16px; background: #f3e5f5; border-radius: 8px; border: 1px solid #ce93d8;">
-    ## 📊 Progress
-
-    1 of 3 todos completed
-    **Completion rate:** 33.3%
-  </div>
-</div>
-
-... (more content)
-```
 
 🎉 **Congratulations!** You've built a complete TS Markdown application!
 
@@ -380,9 +283,9 @@ function createDashboard(data: DashboardData) {
 ### 3. **Conditional Rendering**
 ```typescript
 {{ data.user.isOnline ? (
-  <div>Online content</div>
+  'Online content'
 ) : (
-  <div>Offline content</div>
+  'Offline content'
 )}}
 ```
 
@@ -390,11 +293,6 @@ function createDashboard(data: DashboardData) {
 ```typescript
 <@WeatherCard weather={data.weather} />
 <@TodoList todos={data.todos} onToggleTodo={handleToggle} />
-```
-
-### 5. **Dynamic Styling**
-```typescript
-<div style="background: {{ data.user.isOnline ? '#e8f5e8' : '#fff3e0' }};">
 ```
 
 ## Next Steps

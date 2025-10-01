@@ -20,50 +20,105 @@ export const Heading1 = ({ children, className, ...props }: React.HTMLAttributes
     </h1>
 );
 
-export const Heading2 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2
-        className={cn("scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight text-foreground mt-5 mb-2 first:mt-0", className)}
-        {...props}
-    >
-        {children}
-    </h2>
-);
+export const Heading2 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = typeof children === 'string' ? children : '';
+    const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
 
-export const Heading3 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-        className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-5 mb-2", className)}
-        {...props}
-    >
-        {children}
-    </h3>
-);
+    return (
+        <h2
+            id={id}
+            className={cn("scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight text-foreground mt-5 mb-2 first:mt-0", className)}
+            {...props}
+        >
+            {children}
+        </h2>
+    );
+};
 
-export const Heading4 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h4
-        className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
-        {...props}
-    >
-        {children}
-    </h4>
-);
+export const Heading3 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = typeof children === 'string' ? children : '';
+    const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
 
-export const Heading5 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h5
-        className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
-        {...props}
-    >
-        {children}
-    </h5>
-);
+    return (
+        <h3
+            id={id}
+            className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-5 mb-2", className)}
+            {...props}
+        >
+            {children}
+        </h3>
+    );
+};
 
-export const Heading6 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h6
-        className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
-        {...props}
-    >
-        {children}
-    </h6>
-);
+export const Heading4 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = typeof children === 'string' ? children : '';
+    const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    return (
+        <h4
+            id={id}
+            className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
+            {...props}
+        >
+            {children}
+        </h4>
+    );
+};
+
+export const Heading5 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = typeof children === 'string' ? children : '';
+    const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    return (
+        <h5
+            id={id}
+            className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
+            {...props}
+        >
+            {children}
+        </h5>
+    );
+};
+
+export const Heading6 = ({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = typeof children === 'string' ? children : '';
+    const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    return (
+        <h6
+            id={id}
+            className={cn("scroll-m-20 text-lg font-semibold tracking-tight text-foreground mt-2 mb-1", className)}
+            {...props}
+        >
+            {children}
+        </h6>
+    );
+};
 
 // Text Components
 export const Paragraph = ({ children, className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
