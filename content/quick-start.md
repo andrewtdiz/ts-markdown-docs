@@ -16,11 +16,11 @@ Create a file in `/tsmd` named `greeting.ts`:
 import { TSM } from 'ts-markdown';
 
 function Greeting({ name }: { name: string }) {
-  return TSM`
+  return (
     # Hello, ${name}!
 
     Welcome to your first TS Markdown document.
-  `;
+  )
 }
 ```
 
