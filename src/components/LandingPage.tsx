@@ -137,7 +137,7 @@ export function LandingPage() {
                                         <span className="line font-bold text-[#569CD6]">    ## </span><span className="text-[#569CD6]">{`{{`}</span><span className="text-[#9CDCFE]"> greeting</span><span className="text-[#569CD6]"> {`}} `}</span><span className="font-bold text-[#569CD6]">from TS Markdown!</span>
                                         <br />
                                         <br />
-                                        <span className="line"><span className="text-[#d4d4d4]">    Render components with:</span></span>
+                                        <span className="line"><span className="text-[#d4d4d4]">    Create markdown with:</span></span>
                                         <br />
                                         <span className="line"><span className="text-[#808080]">    &lt;@</span><span className="text-[#DCDCAA]">List</span>
                                             <span className="text-[#9CDCFE]"> items</span><span className="text-[#569CD6]">=</span><span className="text-[#569CD6]">{`{`}</span><span className="text-[#9CDCFE]">features</span><span className="text-[#569CD6]">{`}`}</span>
@@ -164,7 +164,7 @@ export function LandingPage() {
                                     <div className="text-sm text-gray-900 dark:text-gray-100 overflow-x-auto leading-relaxed prose prose-sm dark:prose-invert max-w-none">
                                         <p className="font-bold text-lg">Hello from TS Markdown!</p>
                                         <br />
-                                        <p>Render components with:</p>
+                                        <p>Create markdown with:</p>
                                         <ul>
                                             <li>- Type-safety</li>
                                             <li>- Reusable components</li>
