@@ -109,7 +109,7 @@ export function DocumentationLayout() {
                     <div className="w-12 md:block hidden"></div>
 
                     {/* Main Content */}
-                    <main className="flex-1 overflow-y-auto" style={{ scrollbarColor: 'rgba(107, 114, 128, 0.3) transparent' }} ref={divRef}>
+                    <main className="flex-1 overflow-y-auto" style={{ scrollbarColor: 'var(--muted) transparent' }} ref={divRef}>
                         <div className="mx-auto md:mx-0! w-[90%]">
                             {renderContent()}
                         </div>
