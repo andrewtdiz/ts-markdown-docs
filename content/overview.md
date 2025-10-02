@@ -59,7 +59,7 @@ Skills:
 
 ## Use Cases
 
-TS Markdown can be used for for:
+TS Markdown can be used for:
 - **LLM API calls** with dynamic content
 - **MCP Servers** 
 - **Tool call responses**
