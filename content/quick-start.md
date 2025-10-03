@@ -13,8 +13,6 @@ Get started with TS Markdown in 3 simple steps.
 Create a file in `/tsmd` named `greeting.ts`:
 
 ```tsmd
-import { TSM } from 'ts-markdown';
-
 function Greeting({ name }: { name: string }) {
   return (
     # Hello, {{ name }}

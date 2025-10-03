@@ -24,8 +24,6 @@ function Profile({ user }: { user: User }) {
   return (
     # {{ user.name }}'s Profile
 
-    // Comments are ignored
-
     <@ProfileDetailView user={user} />
 
     Skills:
