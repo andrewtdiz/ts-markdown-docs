@@ -20,18 +20,27 @@ export const tsmd = {
       ]
     },
       "tsmd-function": {
-        "begin": "(?:(export)(?:\\s+(default))?\\s+)?(?:(async)\\s+)?(function)\\s+(?:([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*)?\\([\\s\\S]*?\\)\\s*\\{",
+        "begin": "(?:(export)(?:\\s+(default))?\\s+)?(?:(async)\\s+)?(function)\\s+(?:([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*)?(\\()([\\s\\S]*?)(\\))\\s*\\{",
         "end": "\\}",
         "beginCaptures": {
           "1": { "name": "keyword.control.export.ts" },
           "2": { "name": "keyword.control.default.ts" },
           "3": { "name": "storage.modifier.async.ts" },
           "4": { "name": "storage.type.function.ts" },
-          "5": { "name": "entity.name.function.ts" }
+          "5": { "name": "entity.name.function.ts" },
+          "6": { "name": "punctuation.definition.parameters.begin.ts" },
+          "7": {
+            "name": "meta.parameters.ts",
+            "patterns": [{ "include": "source.ts" }]
+          },
+          "8": { "name": "punctuation.definition.parameters.end.ts" }
         },
       "patterns": [
         {
           "include": "#tsmd-return-statement"
+        },
+        {
+          "include": "#tsmd-if-block"
         },
         {
           "include": "source.ts"
@@ -39,22 +48,33 @@ export const tsmd = {
       ]
     },
       "tsmd-return-statement": {
-        "begin": "\\breturn\\s*\\(\\s*\\n",
+        "begin": "\\breturn\\s*\\(\\s*(?:(\/\/[^\\n]*))?\\n",
         "end": "^\\s*\\)",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.flow.tsmd"
-        }
+        "beginCaptures": {
+          "0": { "name": "keyword.control.flow.tsmd" },
+          "1": { "name": "comment.line.double-slash.tsmd" }
+        },
+        "patterns": [
+          { "include": "#markdown-content" }
+        ]
       },
+    "tsmd-if-block": {
+      "begin": "\\bif\\b\\s*\\([\\s\\S]*?\\)\\s*\\{",
+      "end": "\\}",
       "patterns": [
-        {
-          "include": "#markdown-content"
-        }
+        { "include": "#tsmd-return-statement" },
+        { "include": "source.ts" }
       ]
     },
     "markdown-content": {
       "name": "meta.embedded.block.markdown",
       "patterns": [
+        {
+          "include": "#markdown-comment"
+        },
+        {
+          "include": "#markdown-heading"
+        },
         {
           "include": "#interpolation"
         },
@@ -62,10 +82,13 @@ export const tsmd = {
           "include": "#component-tag"
         },
         {
-          "include": "#markdown-heading"
+          "include": "#xml-tag"
         },
         {
           "include": "#markdown-list"
+        },
+        {
+          "include": "#markdown-blockquote"
         },
         {
           "include": "#markdown-bold"
@@ -80,6 +103,10 @@ export const tsmd = {
           "include": "#markdown-link"
         }
       ]
+    },
+    "markdown-comment": {
+      "name": "comment.line.double-slash.tsmd",
+      "match": "^[ \\t]*//.*$"
     },
     "interpolation": {
       "name": "meta.embedded.expression.tsmd",
@@ -110,7 +137,7 @@ export const tsmd = {
           "name": "punctuation.definition.tag.begin.tsmd"
         },
         "1": {
-          "name": "entity.name.tag.component.tsmd"
+          "name": "entity.name.function.tsmd"
         }
       },
       "endCaptures": {
@@ -123,6 +150,25 @@ export const tsmd = {
           "include": "#jsx-attributes"
         }
       ]
+    },
+    "xml-tag": {
+      "name": "meta.tag.xml.tsmd",
+      "match": "<(/?)(?!@)([a-zA-Z0-9_:-]+)([^>]*)?>",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.xml.tsmd"
+        },
+        "2": {
+          "name": "entity.name.tag.xml.tsmd"
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#jsx-attributes"
+            }
+          ]
+        }
+      }
     },
     "jsx-attributes": {
       "patterns": [
@@ -155,25 +201,36 @@ export const tsmd = {
       ]
     },
       "markdown-heading": {
-        "match": "^(?:\\s{0,3})(#{1,6})\\s+(.*)$",
-      "name": "markup.heading.markdown",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.heading.markdown"
+        "name": "markup.heading.markdown",
+        "begin": "(^[ \\t]*)(#{1,6}[ \\t]+)",
+        "end": "(?=\\n|$)",
+        "contentName": "entity.name.section.markdown",
+        "beginCaptures": {
+          "1": { "name": "punctuation.whitespace.leading.markdown" },
+          "2": { "name": "punctuation.definition.heading.markdown" }
         },
-        "2": {
-          "name": "entity.name.section.markdown",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            }
-          ]
-        }
-      }
-    },
+        "patterns": [
+          {
+            "include": "#interpolation"
+          },
+          {
+            "match": "[ \\t]+#+[ \\t]*$",
+            "name": "punctuation.definition.heading.end.markdown"
+          }
+        ]
+      },
     "markdown-list": {
       "match": "^\\s*(-|\\*|\\+|\\d+\\.)\\s+",
       "name": "punctuation.definition.list.begin.markdown"
+    },
+    "markdown-blockquote": {
+      "name": "markup.quote.markdown",
+      "match": "^\\s*(>+)\\s?",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.quote.markdown"
+        }
+      }
     },
     "markdown-bold": {
       "match": "(\\*\\*|__)([^*_]+)(\\*\\*|__)",
