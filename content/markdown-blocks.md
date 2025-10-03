@@ -12,7 +12,7 @@ The core feature of TS Markdown is the ability to write **multi-line markdown di
 
 A markdown block is created using a `return` statement with parentheses containing your markdown:
 
-```typescript
+```tsmd
 function simpleMessage() {
   return (
     # Hello World
