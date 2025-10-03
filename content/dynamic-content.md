@@ -12,7 +12,7 @@ TS Markdown makes it easy to insert **dynamic values** into your markdown using 
 
 Insert variables directly into your markdown:
 
-```typescript
+```tsmd
 function userGreeting(user: { name: string; title: string }) {
   return (
     # Welcome {{ user.name }}!
@@ -26,7 +26,7 @@ function userGreeting(user: { name: string; title: string }) {
 
 TS Markdown handles different variable types automatically:
 
-```typescript
+```tsmd
 function mixedTypes(user: User) {
   return (
     # {{ user.name }}
@@ -43,7 +43,7 @@ function mixedTypes(user: User) {
 
 Use any valid TypeScript expression within `{{ }}`:
 
-```typescript
+```tsmd
 function withExpressions(data: Data) {
   return (
     # Report for {{ data.title.toUpperCase() }}
@@ -59,7 +59,7 @@ function withExpressions(data: Data) {
 
 Combine static text with dynamic content:
 
-```typescript
+```tsmd
 function formattedContent(user: User, stats: Stats) {
   return (
     # Hello {{ user.name }}!

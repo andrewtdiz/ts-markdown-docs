@@ -12,7 +12,7 @@ TS Markdown's conditional rendering lets you **show or hide content** based on d
 
 The most common pattern is the **ternary operator**:
 
-```typescript
+```tsmd
 function statusMessage(user: User) {
   return (
     # Welcome {{ user.name }}!
@@ -30,7 +30,7 @@ function statusMessage(user: User) {
 
 Use `condition ? trueContent : falseContent` to choose between two options:
 
-```typescript
+```tsmd
 function userProfile(user: User) {
   return (
     # {{ user.name }}'s Profile
@@ -57,7 +57,7 @@ function userProfile(user: User) {
 
 Show content only when a condition is true:
 
-```typescript
+```tsmd
 function optionalContent(user: User) {
   return (
     # Dashboard
@@ -85,7 +85,7 @@ function optionalContent(user: User) {
 
 Show content when either condition is true (less common but useful):
 
-```typescript
+```tsmd
 function flexibleMessage(user: User) {
   return (
     # Hello {{ user.name }}!
@@ -103,7 +103,7 @@ function flexibleMessage(user: User) {
 
 Combine multiple conditions for complex logic:
 
-```typescript
+```tsmd
 function complexLayout(user: User, data: Data) {
   return (
     # {{ user.name }}

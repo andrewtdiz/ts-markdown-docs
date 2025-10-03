@@ -202,8 +202,8 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
 
     return (
         <Card className={cn("mt-3 bg-background mb-3 p-0.5! md:p-1! md:pb-1! overflow-hidden rounded-md md:rounded-xl!", className)}>
-            <CardHeader className="py-0! px-3 h-7 flex flex-row items-center justify-between space-y-0">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardHeader className="py-0! px-3 h-6 flex flex-row items-center justify-between space-y-0">
+                <CardTitle className="text-xs font-medium text-muted-foreground">
                     {language === "shell" ? (
                         "bash"
                     ) : language === "tsmd" ? "tsmd" : language}
@@ -228,13 +228,13 @@ export const CodeBlock = ({ children, className, ...props }: React.HTMLAttribute
             <CardContent className="relative p-0! bg-[#1F1F1F] overflow-x-auto flex flex-col justify-center min-h-6 md:min-h-14 mt-1 text-xs md:text-sm overflow-x-auto rounded-md md:rounded-xl border">
                 <div
                     dangerouslySetInnerHTML={{ __html: html }}
-                    className="bg-transparent! ml-3 md:ml-6! p-4"
+                    className="bg-transparent! text-[0.75rem] ml-3 md:ml-6! p-4"
                 />
                 {language !== "bash" && (<pre className="absolute left-0 md:left-1 shiki material-theme-darker">
                     <code className="flex flex-col ">
                         {Array.from({ length: lineCount }).map((_, index) => (
-                            <span key={index} className="line text-muted-foreground/25 font-light!">
-                                <span className="text-xs"> {index + 1}</span>
+                            <span key={index} className="line  text-[0.75rem] text-right text-muted-foreground/25 font-light!">
+                                <span className=""> {index + 1}</span>
                             </span>
                         ))}
                     </code>

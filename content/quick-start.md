@@ -8,12 +8,12 @@ tags: [quick-start, tutorial, getting-started]
 
 Get started with TS Markdown in 3 simple steps.
 
-## Step 1: Create Your First TSM File
+## Step 1: Create Your First TS Markdown File
 
-Create a file in `/tsmd` named `greeting.ts`:
+Create a file in `/tsmd`. For example `/tsmd/Greeting.ts`:
 
 ```tsmd
-function Greeting({ name }: { name: string }) {
+export function Greeting({ name }: { name: string }) {
   return (
     # Hello, {{ name }}
 
@@ -22,22 +22,24 @@ function Greeting({ name }: { name: string }) {
 }
 ```
 
-## Step 2: Use Your TSM Function
+## Step 2: Transpile into TS
+
+Since TS Markdown outputs plain TypeScript, you can run your code directly with Bun, Node, or any other TypeScript runtime:
+
+```shell
+npm run tsmd
+```
+
+## Step 3: Call the TS Markdown Function
 
 Now you can use the `Greeting` function just like any other TypeScript function:
 
 ```ts
+import { Greeting } from "./tsmd-generated/Greeting"
+
 const markdown = Greeting({ name: 'World' });
 
 console.log(markdown);
-```
-
-## Step 3: Run Your Code
-
-Since TS Markdown is just TypeScript, you can run your code directly with Bun, Node, or any other TypeScript runtime:
-
-```shell
-bun run hello.ts
 ```
 
 Output:
@@ -48,4 +50,4 @@ Output:
 Welcome to your first TS Markdown document.
 ```
 
-That's it! You've created your first dynamic markdown document using TS Markdown. No special compilers or build steps are needed.
+That's it! You've created your first dynamic markdown document using TS Markdown.

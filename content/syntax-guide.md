@@ -14,7 +14,7 @@ This guide covers all TS Markdown syntax, from basic markdown blocks to advanced
 
 TS Markdown content is written in **markdown blocks** using `return ( ... )`:
 
-```typescript
+```tsmd
 function simpleContent() {
   return (
     # Hello World
@@ -29,7 +29,7 @@ function simpleContent() {
 
 Insert variables using `{{ variable }}`:
 
-```typescript
+```tsmd
 function userProfile(user: User) {
   return (
     # {{ user.name }}
@@ -44,7 +44,7 @@ function userProfile(user: User) {
 
 Use any valid TypeScript expression:
 
-```typescript
+```tsmd
 function calculations(data: Data) {
   return (
     # Results
@@ -58,7 +58,7 @@ function calculations(data: Data) {
 
 ### String Methods
 
-```typescript
+```tsmd
 function stringOperations(text: string) {
   return (
     # String Operations
@@ -75,7 +75,7 @@ function stringOperations(text: string) {
 
 ### Ternary Operator
 
-```typescript
+```tsmd
 function conditionalContent(user: User) {
   return (
     # Status
@@ -91,7 +91,7 @@ function conditionalContent(user: User) {
 
 ### Logical AND
 
-```typescript
+```tsmd
 function optionalContent(user: User) {
   return (
     # Dashboard
@@ -105,7 +105,7 @@ function optionalContent(user: User) {
 
 ### Nested Conditions
 
-```typescript
+```tsmd
 function complexLogic(user: User, data: Data) {
   return (
     {{ user.isPremium ? (
@@ -125,7 +125,7 @@ function complexLogic(user: User, data: Data) {
 
 ### Basic Components
 
-```typescript
+```tsmd
 function MyComponent({ title }: { title: string }) {
   // Note: Styling has been removed as it relies on HTML.
   return (
@@ -145,7 +145,7 @@ function page() {
 
 ### Components with Props
 
-```typescript
+```tsmd
 function Card({ title, children }: { title: string; children: any }) {
   // Note: Styling has been removed as it relies on HTML.
   return (
@@ -157,7 +157,7 @@ function Card({ title, children }: { title: string; children: any }) {
 
 ### Self-Closing Components
 
-```typescript
+```tsmd
 function Icon({ name }: { name: string }) {
   return ({{ name }})
 }
@@ -167,7 +167,7 @@ function Icon({ name }: { name: string }) {
 
 ### Array Mapping
 
-```typescript
+```tsmd
 function itemList(items: Item[]) {
   return (
     ## Items:
@@ -180,7 +180,7 @@ function itemList(items: Item[]) {
 
 ### Filtered Lists
 
-```typescript
+```tsmd
 function activeItems(items: Item[]) {
   return (
     ## Active Items:
@@ -193,7 +193,7 @@ function activeItems(items: Item[]) {
 
 ### Nested Lists
 
-```typescript
+```tsmd
 function nestedList(data: Data) {
   return (
     {{ data.categories.map(category => (
@@ -210,7 +210,7 @@ function nestedList(data: Data) {
 
 ### Dynamic Tables
 
-```typescript
+```tsmd
 function dataTable(data: Data[]) {
   return (
     | Name | Value | Status |
@@ -224,7 +224,7 @@ function dataTable(data: Data[]) {
 
 ### Conditional Table Rows
 
-```typescript
+```tsmd
 function filteredTable(items: Item[]) {
   return (
     | Name | Value |
@@ -240,7 +240,7 @@ function filteredTable(items: Item[]) {
 
 ### Inline Styles
 
-```typescript
+```tsmd
 function styledContent(user: User) {
   // Note: Styling has been removed as it relies on HTML.
   return (
@@ -251,7 +251,7 @@ function styledContent(user: User) {
 
 ### Dynamic Styles
 
-```typescript
+```tsmd
 function dynamicStyling(percentage: number) {
   // Note: Styling has been removed as it relies on HTML.
   return (
@@ -264,7 +264,7 @@ function dynamicStyling(percentage: number) {
 
 ### Dynamic Code
 
-```typescript
+```tsmd
 function codeExample(language: string, code: string) {
   return (
     Here's some {{ language }} code:
@@ -278,7 +278,7 @@ function codeExample(language: string, code: string) {
 
 ### Code with Variables
 
-```typescript
+```tsmd
 function apiExample(endpoint: string, method: string) {
   return (
     ```javascript
@@ -295,7 +295,7 @@ function apiExample(endpoint: string, method: string) {
 
 ### Dynamic Links
 
-```typescript
+```tsmd
 function linkGenerator(user: User) {
   return (
     # Profile
@@ -312,7 +312,7 @@ function linkGenerator(user: User) {
 
 ### External Links
 
-```typescript
+```tsmd
 function socialLinks(user: User) {
   return (
     [GitHub]({{ user.githubUrl }})
@@ -325,7 +325,7 @@ function socialLinks(user: User) {
 
 ### Comments in Markdown
 
-```typescript
+```tsmd
 function documentedContent() {
   return (
     # My Content
@@ -344,7 +344,7 @@ function documentedContent() {
 
 ### Line Breaks
 
-```typescript
+```tsmd
 function formattedText() {
   return (
     Line 1

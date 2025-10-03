@@ -15,7 +15,7 @@ This guide will walk you through creating your first TS Markdown project from sc
 The fastest way to get started is with the TS Markdown CLI:
 
 ```shell
-npx tsm init my-first-project
+npx tsmd init my-first-project
 cd my-first-project
 npm install
 npm run dev
@@ -278,7 +278,7 @@ function ContextExample() {
 ### Starting Development Server
 
 ```shell
-tsm dev
+npm run tsmd
 ```
 
 This starts a development server with:
@@ -289,108 +289,15 @@ This starts a development server with:
 
 ### File Watching
 
-Watch specific files or directories:
-
-```shell
-tsm watch ./tsm
-```
-
-### Compilation
-
-Compile TS Markdown files to JSON format:
-
-```shell
-tsm compile MyFile.tsm --output compiled.json
-```
-
-### Execution
-
-Test TS Markdown execution with mock context:
-
-```shell
-tsm execute MyFile.tsm
-```
-
-## Building for Production
-
-### Build Command
-
-```shell
-tsm build
-```
-
-This creates optimized builds in the `dist/` directory.
-
-### Build Configuration
-
-Customize build settings in `package.json`:
-
-```json
-{
-  "scripts": {
-    "build": "tsm build --output ./dist --verbose",
-    "build:watch": "tsm build --watch"
-  }
-}
-```
+TS Markdown natively supports file watching within the target `/tsmd` directory
 
 ## Testing Your TS Markdown
-
-### Test Setup
-
-Create test files using the testing utilities:
-
-```typescript
-// test/content.test.ts
-import { test, expect } from 'bun:test';
-import { TSMTestRunner, createTSMTest } from 'tsm/testing';
-
-const runner = new TSMTestRunner();
-
-test('Welcome page renders correctly', async () => {
-  const testCase = createTSMTest(
-    'Welcome page',
-    `
-function Welcome() {
-  const appName = 'My App';
-  return (
-    # Welcome to {{ appName }}!
-  )
-}
-    `.trim()
-  )
-  .expectContent('# Welcome to My App!')
-  .build();
-
-  const result = await runner.runTestCase(testCase);
-  expect(result.passed).toBe(true);
-});
-```
-
-### Running Tests
-
-```shell
-tsm-test run
-```
-
-### Snapshot Testing
-
-```typescript
-import { TSMSnapshotTester } from 'tsm/testing';
-
-const snapshots = new TSMSnapshotTester();
-
-test('Homepage snapshot', () => {
-  const matches = snapshots.matchSnapshot('homepage', homepageContent);
-  expect(matches).toBe(true);
-});
-```
 
 ## VS Code Integration
 
 ### Install Extension
 
-1. Open VS Code
+1. Open VS Code or Cursor
 2. Go to Extensions (Ctrl+Shift+X)
 3. Search for "TS Markdown"
 4. Click Install

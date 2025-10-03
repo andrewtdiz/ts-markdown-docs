@@ -12,7 +12,7 @@ TS Markdown components let you create **reusable pieces of content** using the `
 
 Define a component function and use it in your markdown:
 
-```typescript
+```tsmd
 // Define a component
 function UserCard({ user }: { user: User }) {
   return (

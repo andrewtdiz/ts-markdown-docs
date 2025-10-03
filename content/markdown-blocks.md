@@ -32,7 +32,7 @@ function simpleMessage() {
 
 ### Headings
 
-```typescript
+```tsmd
 function documentHeader(title: string, level: number) {
   return (
     {{ level === 1 ? '#' : level === 2 ? '##' : '###' }} {{ title }}
@@ -44,7 +44,7 @@ function documentHeader(title: string, level: number) {
 
 ### Lists
 
-```typescript
+```tsmd
 function todoList(items: string[]) {
   return (
     ## Todo List
@@ -57,7 +57,7 @@ function todoList(items: string[]) {
 
 ### Code Blocks
 
-```typescript
+```tsmd
 function codeExample(language: string, code: string) {
   return (
     Here's some {{ language }} code:
@@ -71,7 +71,7 @@ function codeExample(language: string, code: string) {
 
 ### Tables
 
-```typescript
+```tsmd
 function dataTable(rows: Array<{ name: string; value: string }>) {
   return (
     | Name | Value |
@@ -87,7 +87,7 @@ function dataTable(rows: Array<{ name: string; value: string }>) {
 
 Here's a complete example of a markdown block in action:
 
-```typescript
+```tsmd
 interface BlogPost {
   title: string
   author: string
