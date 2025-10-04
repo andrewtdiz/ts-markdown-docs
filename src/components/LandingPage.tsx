@@ -6,32 +6,35 @@ import { Link } from 'react-router-dom';
 import { Header } from './Header';
 import { useTheme } from './ThemeProvider';
 import { CodeBlock } from './markdown';
-import { cn } from '@/lib/utils';
+
+
+const LANDING_TITLE = "A Type-Safe Markdown Engine";
+
+const features = [
+    {
+        icon: Zap,
+        title: "Dynamic Content",
+        description: "Create dynamic content with variable interpolation and conditional rendering."
+    },
+    {
+        icon: FileText,
+        title: "Markdown Made Better",
+        description: "Syntax highlighting for a premier development experience."
+    },
+    {
+        icon: Component,
+        title: "Component-based",
+        description: "Import TS Markdown files as type-safe components."
+    },
+    {
+        icon: Rocket,
+        title: "Accelerated Development",
+        description: "Built with Bun for blazingly fast iterative development and deployment."
+    }
+];
 
 export function LandingPage() {
     const { theme } = useTheme();
-    const features = [
-        {
-            icon: Zap,
-            title: "Dynamic Content",
-            description: "Create dynamic content with variable interpolation and conditional rendering."
-        },
-        {
-            icon: FileText,
-            title: "Markdown Made Better",
-            description: "Syntax highlighting for a premier development experience."
-        },
-        {
-            icon: Component,
-            title: "Component-based",
-            description: "Import TS Markdown files as type-safe components."
-        },
-        {
-            icon: Rocket,
-            title: "Accelerated Development",
-            description: "Built with Bun for blazingly fast iterative development and deployment."
-        }
-    ];
     const currentTheme = theme === "system" ? (window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light') : theme === 'dark' ? 'dark' : 'light';
 
     const quickLinks = [
@@ -53,10 +56,10 @@ export function LandingPage() {
                         <div className="lg:col-span-2 space-y-1 flex flex-col items-center lg:items-start justify-center">
                             <div>
                                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 md:mb-6 text-center lg:text-left">
-                                    TS Markdown
+                                    {LANDING_TITLE}
                                 </h1>
-                                <p className="text-md md:text-xl text-foreground/90 md:mb-8 font-light leading-relaxed">
-                                    A type-safe, component based markdown engine. <br />
+                                <p className="text-md leading-tight md:text-xl text-foreground/90 md:mb-8 font-light">
+                                    Write dynamic markdown for agents and LLMs
                                 </p>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-4">
