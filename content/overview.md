@@ -19,7 +19,7 @@ It allows you to write markdown using TypeScript functions and components, ensur
 ## Basic Example
 
 ```tsmd
-function Profile({ user }: { user: User }) {
+function Profile({ user }: ProfileProps) {
   
   return (
     # {{ user.name }}'s Profile
