@@ -16,5 +16,3 @@ export function HelloWorld({ features }: Props) {
   lang: 'typescript',
   theme: 'min-dark'
 })
-
-console.log(html)

@@ -50,7 +50,7 @@ export function LandingPage() {
             <Header />
 
             <div className="flex flex-col items-center max-w-7xl">
-                <div className="w-full pl-2 md:pl-8 py-16">
+                <div className="w-full py-16 px-2">
                     <div className="grid lg:grid-cols-5 gap-6 items-center">
                         {/* Left side - Title and buttons */}
                         <div className="lg:col-span-2 space-y-1 flex flex-col items-center lg:items-start justify-center">
@@ -58,15 +58,15 @@ export function LandingPage() {
                                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 md:mb-6 text-center lg:text-left">
                                     {LANDING_TITLE}
                                 </h1>
-                                <p className="text-md leading-tight md:text-xl text-foreground/90 md:mb-8 font-light">
+                                <p className="text-md leading-tight text-center md:text-left md:text-xl text-foreground/90 mb-4 md:mb-8 font-light">
                                     Write dynamic markdown for agents and LLMs
                                 </p>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Button asChild size="lg" className="text-lg px-8">
-                                    <Link to="/quick-start" className="flex items-center justify-center">
+                                    <Link to="/quick-start" className="flex items-center justify-center group">
                                         Get Started
-                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-150" />
                                     </Link>
                                 </Button>
                                 <Button asChild variant="outline" size="lg" className="text-lg px-8">

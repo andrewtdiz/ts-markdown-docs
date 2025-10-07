@@ -80,9 +80,10 @@ export function DocumentationLayout() {
                         </div>
                     )}
 
-
-                    {/* Render markdown with ReactMarkdown */}
-                    <MarkdownRenderer content={rawContent} />
+                    <div className='w-[90%]'>
+                        {/* Render markdown with ReactMarkdown */}
+                        <MarkdownRenderer content={rawContent} />
+                    </div>
                 </div>
             );
         } catch (err) {
@@ -98,19 +99,15 @@ export function DocumentationLayout() {
 
     return (
         <div className="h-screen w-screen bg-background flex flex-col">
-            {/* Header */}
             <Header onMobileMenuToggle={toggleMobileSidebar} />
 
-            {/* Content Area */}
             <div className="flex-1 flex overflow-hidden">
                 <div className="flex w-full max-w-7xl mx-auto">
-                    {/* Desktop Dynamic Sidebar Navigation */}
                     <DynamicSidebar sections={sidebar} />
                     <div className="w-12 md:block hidden"></div>
 
-                    {/* Main Content */}
                     <main className="flex-1 overflow-y-auto" style={{ scrollbarColor: 'var(--muted) transparent' }} ref={divRef}>
-                        <div className="mx-auto md:mx-0! w-[90%]">
+                        <div className="mx-auto md:mx-0! w-full">
                             {renderContent()}
                         </div>
                         <div className="mx-auto md:mx-0! w-[90%] mt-20 mb-16">
@@ -142,7 +139,6 @@ export function DocumentationLayout() {
                 </div>
             </div>
 
-            {/* Mobile Dynamic Sidebar */}
             <DynamicSidebar
                 sections={sidebar}
                 isMobile={true}

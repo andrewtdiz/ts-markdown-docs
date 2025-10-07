@@ -1,0 +1,8 @@
+tunnel: test             # name OR UUID of the tunnel
+credentials-file: /root/.cloudflared/cert.pem
+
+ingress:
+  - hostname: test.tsmarkdown.dev       # optional: only if you mapped a DNS name to the tunnel
+    service: http://127.0.0.1:8080
+  # fallback (return 404 for unmatched requests)
+  - service: http_status:404
