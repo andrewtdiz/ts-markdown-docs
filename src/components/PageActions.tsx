@@ -47,7 +47,7 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
     };
 
     return (
-        <div className="w-full flex pr-2 justify-end items-center gap-1 pt-2 md:pt-6 pb-1">
+        <div className="w-full flex pr-4 justify-end items-center gap-1 pt-2 md:pt-6 pb-1">
             <Button
                 variant="ghost"
                 size="sm"
